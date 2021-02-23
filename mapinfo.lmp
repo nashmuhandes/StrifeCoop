@@ -1,0 +1,12 @@
+GameInfo
+{
+	DefaultConversationMenuClass = "StrifeCoopConversationMenu"
+	AddEventHandlers = "StrifeCoopHandler", "GYPHandler"
+}
+
+ConversationIDs
+{
+	// Override stamina upgrades given from the base game's conversations
+	306 = StrifeCoopUpgradeStamina
+	307 = StrifeCoopUpgradeAccuracy
+}

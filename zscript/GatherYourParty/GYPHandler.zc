@@ -1,0 +1,160 @@
+// Copyright 2020 Nash Muhandes
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+//
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. The name of the author may not be used to endorse or promote products
+//    derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+class GYPHandler : EventHandler
+{
+	const PARTY_DISTANCE = 200.0;
+
+	Array<Line> savedLines;
+
+	override void WorldLoaded(WorldEvent e)
+	{
+	}
+
+	override void WorldTick(void)
+	{
+		// restore the exit lines
+		for (int i = 0; i < savedLines.Size(); i++)
+		{
+			if (savedLines[i] && savedLines[i].special == 0)
+			{
+				savedLines[i].special = ACS_ExecuteAlways;
+
+				// remove the blocking flag if it was set
+				if (savedLines[i].flags & Line.ML_BLOCKING)
+				{
+					savedLines[i].flags &= ~Line.ML_BLOCKING;
+				}
+			}
+		}
+	}
+
+	override void WorldLinePreActivated(WorldEvent e)
+	{
+		if (e.Thing is "PlayerPawn")
+		{
+			// check if you triggered an exit line
+			if (e.ActivationType == SPAC_Cross || e.ActivationType == SPAC_Use)
+			{
+				if (e.ActivatedLine.special == ACS_ExecuteAlways && e.ActivatedLine.args[2] == 145)
+				{
+					// save this line for later
+					if (savedLines.Find(e.ActivatedLine) == savedLines.Size())
+					{
+						savedLines.Push(e.ActivatedLine);
+					}
+
+					// don't allow exit if you're not gathered
+					if (!PartyGathered())
+					{
+						// temporarily clear the special
+						e.ActivatedLine.special = 0;
+
+						// temporarily set to blocking
+						e.ActivatedLine.flags |= Line.ML_BLOCKING;
+
+						// push the player back
+						double ang = atan2(e.ActivatedLine.delta.Y, e.ActivatedLine.delta.X) + 90;
+						ang += 180.0;
+
+						e.Thing.Vel.XY = (0, 0);
+						e.Thing.Thrust(7.8125, ang);
+
+						if (players[consoleplayer].mo == e.Thing)
+						{
+							Console.MidPrint(SmallFont, StringTable.Localize("$GYP_MUSTGATHERPARTY"));
+							S_StartSound("misc/chat", CHAN_VOICE, CHANF_MAYBE_LOCAL | CHANF_UI, 1, ATTN_NONE);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	bool PartyGathered(void)
+	{
+		bool gathered = true;
+
+		Array<PlayerPawn> allPlayers;
+		allPlayers.Clear();
+
+		// store all online players in the array
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				let pmo = players[i].mo;
+				if (pmo)
+				{
+					allPlayers.Push(pmo);
+					//Console.Printf("%s added into allPlayers", pmo.player.GetUserName());
+				}
+			}
+		}
+
+		// check distance between each player
+		// if even one player fails the distance check, consider party not gathered
+		for (int i = 0; i < allPlayers.Size(); i++)
+		{
+			let currentPlayer = allPlayers[i];
+
+			// check the next player, but the last player must check against the first player
+			let otherPlayer = i < (allPlayers.Size() - 1) ? allPlayers[i + 1] : allPlayers[0];
+
+			if (currentPlayer && otherPlayer)
+			{
+				//Console.Printf("%s is checking against %s...", currentPlayer.player.GetUserName(), otherPlayer.player.GetUserName());
+
+				// too far! abort the search
+				if (currentPlayer.Distance3D(otherPlayer) > PARTY_DISTANCE)
+				{
+					//Console.Printf("%s is too far from %s", currentPlayer.player.GetUserName(), otherPlayer.player.GetUserName());
+					gathered = false;
+					break;
+				}
+				else
+				{
+					//Console.Printf("%s is close to %s", currentPlayer.player.GetUserName(), otherPlayer.player.GetUserName());
+					continue;
+				}
+			}
+		}
+
+		return gathered;
+	}
+}

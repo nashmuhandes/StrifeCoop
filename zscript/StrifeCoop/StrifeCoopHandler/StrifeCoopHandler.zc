@@ -1,0 +1,443 @@
+// Copyright 2021 Nash Muhandes
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+//
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. The name of the author may not be used to endorse or promote products
+//    derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+//===========================================================================
+//
+// StrifeCoopHandler
+//
+//===========================================================================
+
+class StrifeCoopHandler : EventHandler
+{
+	// keep a global record of QuestItems acquired throughout the journey
+	Array< class<Inventory> > retrievedQuestItems;
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	override void PlayerEntered(PlayerEvent e)
+	{
+		let pmo = players[e.PlayerNumber].mo;
+		if (pmo)
+		{
+			// Enable quest log tracking and synchronization
+			pmo.A_GiveInventory("StrifeCoopLogTextTracker");
+		}
+	}
+
+	override void PlayerRespawned(PlayerEvent e)
+	{
+	}
+
+	override void PlayerDied(PlayerEvent e)
+	{
+	}
+
+	override void PlayerDisconnected(PlayerEvent e)
+	{
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	override void WorldLoaded(WorldEvent e)
+	{
+	}
+
+	override void WorldTick(void)
+	{
+		HandleQuestItems();
+	}
+
+	override void WorldUnloaded(WorldEvent e)
+	{
+	}
+
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		// Inject custom logic into all NPCs
+		if (e.Thing && e.Thing.bIsMonster)
+		{
+			Actor npc = e.Thing;
+			npc.A_GiveInventory("StrifeCoopNPCPlugin", 1);
+		}
+	}
+
+	override void WorldThingDied(WorldEvent e)
+	{
+		// AlienSpectre5 (the Loremaster's spectre) is hardcoded to only give upgrades when killed in single player.
+		// We deal with that here.
+		if (e.Thing && e.Thing is "AlienSpectre5")
+		{
+			PlayerPawn plr = NULL;
+			for (int i = 0; i < MAXPLAYERS; ++i)
+			{
+				if (playeringame[i] && players[i].health > 0)
+				{
+					plr = players[i].mo;
+					break;
+				}
+			}
+
+			if (plr)
+			{
+				plr.A_GiveInventory("StrifeCoopUpgradeStamina", 1);
+				plr.A_GiveInventory("StrifeCoopUpgradeAccuracy", 1);
+			}
+		}
+	}
+
+	override void WorldLinePreActivated(WorldEvent e)
+	{
+		if (e.Thing is "PlayerPawn")
+		{
+			PlayerPawn pmo = PlayerPawn(e.Thing);
+			if (!pmo) return;
+
+			// According to Strife's XLAT in gzdoom.pk3, there are 3 "walk" uses and 1 "pressed use" uses.
+			if (e.ActivationType == SPAC_Cross || e.ActivationType == SPAC_Use)
+			{
+				if (e.ActivatedLine.special == SendToCommunicator)
+				{
+					// already have the Communicator, so assume this line will fire its script
+					let comm = pmo.FindInventory("Communicator", true);
+					if (comm)
+					{
+						Line ln = e.ActivatedLine;
+						int voc_id = ln.args[0];
+						int front_only = ln.args[1];
+						int identify = ln.args[2];
+						int nolog = ln.args[3];
+
+						// broadcast to other players
+						StrifeCoopHandler.BroadcastToCommunicators(pmo, voc_id, front_only, identify, nolog, skipCaller: true);
+					}
+				}
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	override void NetworkProcess(ConsoleEvent e)
+	{
+		PlayerPawn pmo = PlayerPawn(players[e.Player].mo);
+		if (!pmo) return;
+		if (pmo && !pmo.player) return;
+		bool isConsolePlayer = (pmo == PlayerPawn(players[consoleplayer].mo));
+
+		//===========================================================================
+		//
+		// EV_ClearConversationStuff
+		//
+		//===========================================================================
+		if (e.Name == 'EV_ClearConversationStuff')
+		{
+			pmo.player.ConversationNPC = NULL;
+			pmo.player.ConversationPC = NULL;
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	override void RenderOverlay(RenderEvent e)
+	{
+		PlayerInfo plr;
+
+		if (e.Camera is "PlayerPawn" && e.Camera == players[consoleplayer].camera && e.Camera.player)
+		{
+			plr = e.Camera.player;
+		}
+
+		if (!plr) return;
+
+		int debugMode = CVar.GetCVar("strifecoop_debug", plr).GetInt();
+		if (debugMode <= 0) return;
+
+		DrawDebugText(plr, debugMode);
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void HandleQuestItems(void)
+	{
+		// No, there really isn't a better way to do this for the vanilla quest items.
+		// Actor replacement doesn't work because too many parts of the game checks for the
+		// original items directly by class name.
+
+		// First, collect all of the items each player has
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				PlayerInfo plr = players[i];
+				let pmo = players[i].mo;
+
+				if (pmo && plr)
+				{
+					for (Inventory item = pmo.Inv; item != NULL; item = item.Inv)
+					{
+						if (item is "QuestItem" || item is "Communicator" || item is "StrifeKey" || item is "PrisonPass")
+						{
+							class<Inventory> cls = item.GetClass();
+							if (cls)
+							{
+								if (retrievedQuestItems.Find(cls) == retrievedQuestItems.Size())
+								{
+									//Console.Printf("Found %s on player %d", cls.GetClassName(), pmo.PlayerNumber() + 1);
+									retrievedQuestItems.Push(cls);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// Then, distribute the items to all players
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				PlayerInfo plr = players[i];
+				let pmo = players[i].mo;
+
+				if (pmo && plr)
+				{
+					for (int j = 0; j < retrievedQuestItems.Size(); j++)
+					{
+						let a = pmo.FindInventory(retrievedQuestItems[j], true);
+						if (!a)
+						{
+							//Console.Printf("Giving %s to player %d", retrievedQuestItems[j].GetClassName(), pmo.PlayerNumber() + 1);
+							pmo.A_GiveInventory(retrievedQuestItems[j], 1);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	static void BroadcastToCommunicators(Actor activator, int voc_id, int front_only, int identify, int nolog, bool skipCaller = false)
+	{
+		// the player who activated the line will always get a message
+		if (!skipCaller) activator.ACS_NamedExecuteAlways('StrifeCoop_SendToCommunicator', 0, voc_id, front_only, identify);
+
+		// broadcast to other players
+		PlayerPawn pmo = PlayerPawn(activator);
+		if (pmo)
+		{
+			for (int i = 0; i < MAXPLAYERS; i++)
+			{
+				if (playeringame[i])
+				{
+					PlayerPawn currentPlayer = players[i].mo;
+
+					// skip self
+					if (currentPlayer == pmo)
+					{
+						continue;
+					}
+
+					if (currentPlayer.CheckLocalView())
+					{
+						// Other players get the non-logged version (to prevent console spam)
+						// I think this should be OK, because the preceeding quest log update should cover it.
+						// Needs more testing.
+						currentPlayer.ACS_NamedExecuteAlways('StrifeCoop_SendToCommunicatorNoLog', 0, voc_id, front_only, identify);
+					}
+				}
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	static void GiveItemToOtherPlayers(class<Inventory> itm, PlayerPawn pmo)
+	{
+		if (!pmo) return;
+
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				PlayerPawn currentPlayer = players[i].mo;
+
+				// skip self
+				if (currentPlayer == pmo)
+				{
+					continue;
+				}
+
+				currentPlayer.A_GiveInventory(itm, 1);
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	static clearscope void DrawDebugText(PlayerInfo plr, int debugMode)
+	{
+		int vw = 512,
+			vh = 384;
+
+		String debugText = GetDebugText(plr, debugMode);
+		Screen.DrawText(NewConsoleFont, Font.CR_WHITE,
+			0, 0,
+			debugText,
+			DTA_Clean, true, DTA_VirtualWidth, vw, DTA_VirtualHeight, vh);
+	}
+
+	static clearscope String GetDebugText(PlayerInfo plr, int debugTextMode)
+	{
+		String s;
+
+		if (debugTextMode == 1)
+		{
+			if (plr && plr.mo)
+			{
+				//===========================================================================
+				//
+				// Basic player info
+				//
+				//===========================================================================
+
+				s = s .. String.Format("%s (Player %d)", plr.GetUserName(), plr.mo.PlayerNumber() + 1);
+				s = s .. "\n";
+
+				//===========================================================================
+				//
+				// ConversationNPC info
+				//
+				//===========================================================================
+
+				String ConversationNPCName = "<none>";
+				String ConversationNPCPtrAdr = "";
+				bool hasConversationNPC = false;
+				if (plr.ConversationNPC)
+				{
+					ConversationNPCName = plr.ConversationNPC.GetTag();
+					ConversationNPCPtrAdr = String.Format("%p", plr.ConversationNPC);
+					hasConversationNPC = true;
+				}
+				s = s .. String.Format
+				(
+					"%s %s %s",
+					"ConversationNPC: ", ConversationNPCName, hasConversationNPC ? "[" .. ConversationNPCPtrAdr .. "]" : ""
+				);
+				s = s .. "\n";
+
+				//===========================================================================
+				//
+				// ConversationPC info
+				//
+				//===========================================================================
+
+				String ConversationPCName = "<none>";
+				String ConversationPCPtrAdr = "";
+				bool hasConversationPC = false;
+				if (plr.ConversationPC)
+				{
+					ConversationPCName = plr.ConversationPC.GetTag();
+					ConversationPCPtrAdr = String.Format("%p", plr.ConversationPC);
+					hasConversationPC = true;
+				}
+				s = s .. String.Format
+				(
+					"%s %s %s",
+					"ConversationPC: ", ConversationPCName, hasConversationPC ? "[" .. ConversationPCPtrAdr .. "]" : ""
+				);
+			}
+		}
+		else if (debugTextMode == 2)
+		{
+			//===========================================================================
+			//
+			// Retrieved Quest Items info
+			//
+			//===========================================================================
+
+			s = "Retrieved Quest Items:" .. "\n\n";
+
+			let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+
+			if (eh)
+			{
+				if (eh.retrievedQuestItems.Size() > 0)
+				{
+					for (int i = 0; i < eh.retrievedQuestItems.Size(); i++)
+					{
+						s = s .. eh.retrievedQuestItems[i].GetClassName() .. "\n";
+					}
+				}
+			}
+		}
+		else if (debugTextMode == 3)
+		{
+			//===========================================================================
+			//
+			// Quest Log info
+			//
+			//===========================================================================
+
+			s = "Quest Log" .. "\n\n";
+		}
+
+		return s;
+	}
+}
