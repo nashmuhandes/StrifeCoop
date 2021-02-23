@@ -1,1 +1,2 @@
 user int strifecoop_debug = 0;
+server bool strifecoop_gatherparty = true;

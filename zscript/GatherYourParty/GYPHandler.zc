@@ -108,6 +108,8 @@ class GYPHandler : EventHandler
 
 	bool PartyGathered(void)
 	{
+		if (!strifecoop_gatherparty) return true;
+
 		bool gathered = true;
 
 		Array<PlayerPawn> allPlayers;
