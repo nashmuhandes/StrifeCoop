@@ -149,16 +149,7 @@ class StrifeCoopHandler : EventHandler
 					}
 					else if (is211)
 					{
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
-						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						for (int i = 0; i < 10; i++) { Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!!\nLine number %d in %s", e.ActivatedLine.Index(), level.MapName); }
 					}
 
 					// broadcast to all players
