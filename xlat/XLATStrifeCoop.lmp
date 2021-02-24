@@ -1,0 +1,6 @@
+include "xlat/strife_base.txt"
+
+201 = WALK,		SendToCommunicator(tag, 1, 0)
+202 = WALK,		SendToCommunicator(tag, 0, 0)
+210 = WALK,		SendToCommunicator(tag, 0, 1)
+211 = USE|REP,	SendToCommunicator(tag, 0, 2, 1)

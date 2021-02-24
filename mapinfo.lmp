@@ -2,6 +2,7 @@ GameInfo
 {
 	DefaultConversationMenuClass = "StrifeCoopConversationMenu"
 	AddEventHandlers = "StrifeCoopHandler", "GYPHandler"
+	//Translator = "xlat/XLATStrifeCoop.lmp"
 }
 
 ConversationIDs
