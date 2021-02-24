@@ -126,21 +126,44 @@ class StrifeCoopHandler : EventHandler
 			// According to Strife's XLAT in gzdoom.pk3, there are 3 "walk" uses and 1 "pressed use" uses.
 			if (e.ActivationType == SPAC_Cross || e.ActivationType == SPAC_Use)
 			{
-				if (e.ActivatedLine.special == SendToCommunicator)
+				// already have the Communicator, so assume this line will fire its script
+				let comm = pmo.FindInventory("Communicator", true);
+				if (e.ActivatedLine.special == SendToCommunicator && comm)
 				{
-					// already have the Communicator, so assume this line will fire its script
-					let comm = pmo.FindInventory("Communicator", true);
-					if (comm)
-					{
-						Line ln = e.ActivatedLine;
-						int voc_id = ln.args[0];
-						int front_only = ln.args[1];
-						int identify = ln.args[2];
-						int nolog = ln.args[3];
+					Line ln = e.ActivatedLine;
+					int voc_id = ln.args[0];
+					int front_only = ln.args[1];
+					int identify = ln.args[2];
+					int nolog = ln.args[3];
 
-						// broadcast to other players
-						StrifeCoopHandler.BroadcastToCommunicators(pmo, voc_id, front_only, identify, nolog, skipCaller: true);
+					// handle each of the Strife-specific line types
+					bool is201 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 1 && identify == 0);
+					bool is202 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 0 && identify == 0);
+					bool is210 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 0 && identify == 0);
+					bool is211 = e.ActivationType == SPAC_Use	&& (voc_id != 0 && front_only == 1 && identify == 2 && nolog == 1);
+
+					// prevent the original SendToCommunicator call
+					if (is201 || is202 || is210)
+					{
+						e.ActivatedLine.special = 0;
 					}
+					else if (is211)
+					{
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+						Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!! Line number %d in %s", e.ActivatedLine.Index(), level.MapName);
+					}
+
+					// broadcast to all players
+					// (FIX ME: is211 will double-trigger for the player who activated it)
+					StrifeCoopHandler.BroadcastToCommunicators(pmo, voc_id, front_only, identify, nolog);
 				}
 			}
 		}
@@ -203,7 +226,7 @@ class StrifeCoopHandler : EventHandler
 	void HandleQuestItems(void)
 	{
 		// No, there really isn't a better way to do this for the vanilla quest items.
-		// Actor replacement doesn't work because too many parts of the game checks for the
+		// Actor replacement doesn't work because too many parts of the game check for the
 		// original items directly by class name.
 
 		// First, collect all of the items each player has
@@ -265,32 +288,23 @@ class StrifeCoopHandler : EventHandler
 	//
 	//===========================================================================
 
-	static void BroadcastToCommunicators(Actor activator, int voc_id, int front_only, int identify, int nolog, bool skipCaller = false)
+	// From ACS you were sent...
+	static void BroadcastToCommunicators(Actor activator, int voc_id, int front_only, int identify, int nolog)
 	{
-		// the player who activated the line will always get a message
-		if (!skipCaller) activator.ACS_NamedExecuteAlways('StrifeCoop_SendToCommunicator', 0, voc_id, front_only, identify);
-
-		// broadcast to other players
-		PlayerPawn pmo = PlayerPawn(activator);
-		if (pmo)
+		for (int i = 0; i < MAXPLAYERS; i++)
 		{
-			for (int i = 0; i < MAXPLAYERS; i++)
+			if (playeringame[i])
 			{
-				if (playeringame[i])
+				PlayerPawn currentPlayer = players[i].mo;
+				if (currentPlayer.CheckLocalView())
 				{
-					PlayerPawn currentPlayer = players[i].mo;
-
-					// skip self
-					if (currentPlayer == pmo)
+					// ... and to ACS you shall return :P
+					if (nolog == 0)
 					{
-						continue;
+						currentPlayer.ACS_NamedExecuteAlways('StrifeCoop_SendToCommunicator', 0, voc_id, front_only, identify);
 					}
-
-					if (currentPlayer.CheckLocalView())
+					else if (nolog == 1)
 					{
-						// Other players get the non-logged version (to prevent console spam)
-						// I think this should be OK, because the preceeding quest log update should cover it.
-						// Needs more testing.
 						currentPlayer.ACS_NamedExecuteAlways('StrifeCoop_SendToCommunicatorNoLog', 0, voc_id, front_only, identify);
 					}
 				}
