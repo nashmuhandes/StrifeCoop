@@ -46,13 +46,17 @@ class StrifeCoopHandler : EventHandler
 		let pmo = players[e.PlayerNumber].mo;
 		if (pmo)
 		{
-			// Enable quest log tracking and synchronization
-			pmo.A_GiveInventory("StrifeCoopLogTextTracker");
+			SetupPlayer(pmo);
 		}
 	}
 
 	override void PlayerRespawned(PlayerEvent e)
 	{
+		let pmo = players[e.PlayerNumber].mo;
+		if (pmo)
+		{
+			SetupPlayer(pmo);
+		}
 	}
 
 	override void PlayerDied(PlayerEvent e)
@@ -61,6 +65,7 @@ class StrifeCoopHandler : EventHandler
 
 	override void PlayerDisconnected(PlayerEvent e)
 	{
+		TransferQuestItems(e);
 	}
 
 	//===========================================================================
@@ -71,19 +76,7 @@ class StrifeCoopHandler : EventHandler
 
 	override void WorldLoaded(WorldEvent e)
 	{
-		// Wake the guards up in the first room immediately, target a random player
-		if (level.totaltime == 0 && level.levelnum == 2)
-		{
-			int totalPlayers = 0;
-			for (int i = 0; i < MAXPLAYERS; i++)
-			{
-				if (playeringame[i]) totalPlayers++;
-			}
-
-			int p = random(0, totalPlayers - 1);
-
-			players[p].mo.SoundAlert(players[p].mo, false);
-		}
+		WakeStartingEnemiesInTown();
 	}
 
 	override void WorldTick(void)
@@ -97,80 +90,17 @@ class StrifeCoopHandler : EventHandler
 
 	override void WorldThingSpawned(WorldEvent e)
 	{
-		// Inject custom logic into all NPCs
-		if (e.Thing && e.Thing.bIsMonster)
-		{
-			Actor npc = e.Thing;
-			npc.A_GiveInventory("StrifeCoopNPCPlugin", 1);
-		}
+		SetupNPCs(e);
 	}
 
 	override void WorldThingDied(WorldEvent e)
 	{
-		// AlienSpectre5 (the Loremaster's spectre) is hardcoded to only give upgrades when killed in single player.
-		// We deal with that here.
-		if (e.Thing && e.Thing is "AlienSpectre5")
-		{
-			PlayerPawn plr = NULL;
-			for (int i = 0; i < MAXPLAYERS; ++i)
-			{
-				if (playeringame[i] && players[i].health > 0)
-				{
-					plr = players[i].mo;
-					break;
-				}
-			}
-
-			if (plr)
-			{
-				plr.A_GiveInventory("StrifeCoopUpgradeStamina", 1);
-				plr.A_GiveInventory("StrifeCoopUpgradeAccuracy", 1);
-			}
-		}
+		HandleAlienSpectre5Death(e);
 	}
 
 	override void WorldLinePreActivated(WorldEvent e)
 	{
-		if (e.Thing is "PlayerPawn")
-		{
-			PlayerPawn pmo = PlayerPawn(e.Thing);
-			if (!pmo) return;
-
-			// According to Strife's XLAT in gzdoom.pk3, there are 3 "walk" uses and 1 "pressed use" uses.
-			if (e.ActivationType == SPAC_Cross || e.ActivationType == SPAC_Use)
-			{
-				// already have the Communicator, so assume this line will fire its script
-				let comm = pmo.FindInventory("Communicator", true);
-				if (e.ActivatedLine.special == SendToCommunicator && comm)
-				{
-					Line ln = e.ActivatedLine;
-					int voc_id = ln.args[0];
-					int front_only = ln.args[1];
-					int identify = ln.args[2];
-					int nolog = ln.args[3];
-
-					// handle each of the Strife-specific line types
-					bool is201 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 1 && identify == 0);
-					bool is202 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 0 && identify == 0);
-					bool is210 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 0 && identify == 0);
-					bool is211 = e.ActivationType == SPAC_Use	&& (voc_id != 0 && front_only == 1 && identify == 2 && nolog == 1);
-
-					// prevent the original SendToCommunicator call
-					if (is201 || is202 || is210)
-					{
-						e.ActivatedLine.special = 0;
-					}
-					else if (is211)
-					{
-						for (int i = 0; i < 10; i++) { Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!!\nLine number %d in %s", e.ActivatedLine.Index(), level.MapName); }
-					}
-
-					// broadcast to all players
-					// (FIX ME: is211 will double-trigger for the player who activated it)
-					StrifeCoopHandler.BroadcastToCommunicators(pmo, voc_id, front_only, identify, nolog);
-				}
-			}
-		}
+		HandleCommunicatorLines(e);
 	}
 
 	//===========================================================================
@@ -219,6 +149,55 @@ class StrifeCoopHandler : EventHandler
 		if (debugMode <= 0) return;
 
 		DrawDebugText(plr, debugMode);
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void SetupPlayer(PlayerPawn pmo)
+	{
+		// Enable quest log tracking and synchronization
+		let a = pmo.FindInventory("StrifeCoopLogTextTracker", true);
+		if (!a)
+		{
+			pmo.A_GiveInventory("StrifeCoopLogTextTracker");
+		}
+	}
+
+	void SetupNPCs(WorldEvent e)
+	{
+		// Inject custom logic into all NPCs
+		if (e.Thing && e.Thing.bIsMonster)
+		{
+			Actor npc = e.Thing;
+			npc.A_GiveInventory("StrifeCoopNPCPlugin", 1);
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void WakeStartingEnemiesInTown(void)
+	{
+		// Wake the Acolytes up in the first room immediately, targetting a random player
+		if (level.totaltime == 0 && level.levelnum == 2)
+		{
+			int totalPlayers = 0;
+			for (int i = 0; i < MAXPLAYERS; i++)
+			{
+				if (playeringame[i]) totalPlayers++;
+			}
+
+			int p = random(0, totalPlayers - 1);
+
+			players[p].mo.SoundAlert(players[p].mo, false);
+		}
 	}
 
 	//===========================================================================
@@ -286,15 +265,95 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
+	void TransferQuestItems(PlayerEvent e)
+	{
+		// TO DO: when a player disconnects, transfer the pickup-able quest item
+		// (Beldin's ring, power coupling etc) to the next online player.
+	}
+
 	//===========================================================================
 	//
 	//
 	//
 	//===========================================================================
 
-	// From ACS you were sent...
+	void HandleAlienSpectre5Death(WorldEvent e)
+	{
+		// AlienSpectre5 (the Loremaster's spectre) is hardcoded to only give upgrades when killed in single player.
+		// We deal with that here.
+		if (e.Thing && e.Thing is "AlienSpectre5")
+		{
+			PlayerPawn plr = NULL;
+			for (int i = 0; i < MAXPLAYERS; ++i)
+			{
+				if (playeringame[i] && players[i].health > 0)
+				{
+					plr = players[i].mo;
+					break;
+				}
+			}
+
+			if (plr)
+			{
+				plr.A_GiveInventory("StrifeCoopUpgradeStamina", 1);
+				plr.A_GiveInventory("StrifeCoopUpgradeAccuracy", 1);
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void HandleCommunicatorLines(WorldEvent e)
+	{
+		if (e.Thing is "PlayerPawn")
+		{
+			PlayerPawn pmo = PlayerPawn(e.Thing);
+			if (!pmo) return;
+
+			// According to Strife's XLAT in gzdoom.pk3, there are 3 "walk" uses and 1 "pressed use" uses.
+			if (e.ActivationType == SPAC_Cross || e.ActivationType == SPAC_Use)
+			{
+				// already have the Communicator, so assume this line will fire its script
+				let comm = pmo.FindInventory("Communicator", true);
+				if (e.ActivatedLine.special == SendToCommunicator && comm)
+				{
+					Line ln = e.ActivatedLine;
+					int voc_id = ln.args[0];
+					int front_only = ln.args[1];
+					int identify = ln.args[2];
+					int nolog = ln.args[3];
+
+					// handle each of the Strife-specific line types
+					bool is201 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 1 && identify == 0);
+					bool is202 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 0 && identify == 0);
+					bool is210 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 0 && identify == 0);
+					bool is211 = e.ActivationType == SPAC_Use	&& (voc_id != 0 && front_only == 1 && identify == 2 && nolog == 1);
+
+					// prevent the original SendToCommunicator call
+					if (is201 || is202 || is210)
+					{
+						e.ActivatedLine.special = 0;
+					}
+					else if (is211)
+					{
+						for (int i = 0; i < 10; i++) { Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!!\nLine number %d in %s", e.ActivatedLine.Index(), level.MapName); }
+					}
+
+					// broadcast to all players
+					// (FIX ME: is211 will double-trigger for the player who activated it)
+					StrifeCoopHandler.BroadcastToCommunicators(pmo, voc_id, front_only, identify, nolog);
+				}
+			}
+		}
+	}
+
 	static void BroadcastToCommunicators(Actor activator, int voc_id, int front_only, int identify, int nolog)
 	{
+		// From ACS you were sent...
 		for (int i = 0; i < MAXPLAYERS; i++)
 		{
 			if (playeringame[i])
