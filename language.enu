@@ -1,7 +1,4 @@
 [enu default]
 
 TXT_LOGUPDATED = "Quest log updated.";
-TXT_STAMINAUPGRADED = "You feel stronger.";
-TXT_ACCURACYUPGRADED = "You learn a little more about firearms.";
-
 GYP_MUSTGATHERPARTY = "You must gather your party before venturing forth.";

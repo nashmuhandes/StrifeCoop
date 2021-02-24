@@ -46,7 +46,6 @@ class StrifeCoopUpgradeStamina : DummyStrifeItem
 		{
 			if (playeringame[i])
 			{
-				//if (players[i].mo.CheckLocalView()) Console.MidPrint(NULL, "$TXT_STAMINAUPGRADED");
 				players[i].mo.A_GiveInventory("UpgradeStamina", 10);
 			}
 		}
@@ -66,7 +65,6 @@ class StrifeCoopUpgradeAccuracy : DummyStrifeItem
 		{
 			if (playeringame[i])
 			{
-				//if (players[i].mo.CheckLocalView()) Console.MidPrint(NULL, "$TXT_ACCURACYUPGRADED");
 				players[i].mo.A_GiveInventory("UpgradeAccuracy", 1);
 			}
 		}
