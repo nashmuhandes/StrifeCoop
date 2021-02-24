@@ -65,7 +65,7 @@ class StrifeCoopLogTextTracker : Inventory
 			if (pmo)
 			{
 				// Don't run this at the start of the level
-				if (level.time == 0)
+				if (level.maptime == 0)
 				{
 					oldLogText = newLogText = pmo.player.LogText;
 					return;
