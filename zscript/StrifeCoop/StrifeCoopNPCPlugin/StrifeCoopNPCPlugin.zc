@@ -62,31 +62,27 @@ class StrifeCoopNPCPlugin : Inventory
 			return;
 		}
 
-		// Check if NPC was attacked, so that conversations can be cancelled immediately
-		// TO DO: find a better way to do this
-		bool shouldStopTalking =
-		(
-			Owner.bInConversation &&
-			(
-				Owner.InStateSequence(Owner.CurState, Owner.ResolveState('Pain')) ||
-				Owner.InStateSequence(Owner.CurState, Owner.ResolveState('Death')) ||
-				Owner.InStateSequence(Owner.CurState, Owner.ResolveState('XDeath')) ||
-				Owner.Health <= 0
-			)
-		);
-
-		if (shouldStopTalking)
-		{
-			Owner.bInConversation = false;
-			Owner.A_StopSound(CHAN_VOICE);
-			talkingWasInterrupted = 2;
-		}
-
 		if (talkingWasInterrupted > 0)
 		{
 			talkingWasInterrupted--;
 		}
 
 		Super.DoEffect();
+	}
+
+	override void AbsorbDamage(int damage, Name damageType, out int newdamage, Actor inflictor, Actor source, int flags)
+	{
+		Super.AbsorbDamage(damage, damageType, newdamage, inflictor, source, flags);
+		if (newdamage > 0)
+		{
+			// Check if NPC was attacked, so that conversations can be cancelled immediately
+			if (Owner.bInConversation)
+			{
+				Console.Printf("%s was attacked while in conversation!", Owner.GetTag());
+				Owner.bInConversation = false;
+				Owner.A_StopSound(CHAN_VOICE);
+				talkingWasInterrupted = 2;
+			}
+		}
 	}
 }
