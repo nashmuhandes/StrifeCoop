@@ -123,8 +123,10 @@ class StrifeCoopHandler : EventHandler
 		//===========================================================================
 		if (e.Name == 'EV_ClearConversationStuff')
 		{
+			pmo.player.ConversationFaceTalker = false;
 			pmo.player.ConversationNPC = NULL;
 			pmo.player.ConversationPC = NULL;
+			pmo.player.ConversationNPCAngle = 0.;
 		}
 	}
 
