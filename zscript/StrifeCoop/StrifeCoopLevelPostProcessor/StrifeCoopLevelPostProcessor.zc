@@ -941,6 +941,56 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'D8B1AB710958A1205098FE224B9189DE': // strife1.wad map20 - Factory: Receiving
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(4, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+
+			// Add missing player starts
+			int p = 0;
+			p = AddThing(2, (-304, -486, 0), 270); SetThingArgument(p, 0, 1);
+			p = AddThing(3, (-178, -486, 0), 270); SetThingArgument(p, 0, 1);
+			p = AddThing(4, (-353, -487, 0), 270); SetThingArgument(p, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Factory: Manufacturing entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(5, 0);
+			t = AddThing(1, (-256, -3900, 0), 90); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (-208, -3893, 0), 90); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (-338, -3915, 0), 90); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (-149, -3916, 0), 90); SetThingArgument(t, 0, 2);
+
+			// Mines entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(7, 0);
+			t = AddThing(1, (-3160, -2304, 0), 0); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (-3119, -2268, 0), 0); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (-3125, -2344, 0), 0); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (-3084, -2308, 0), 0); SetThingArgument(t, 0, 3);
+
+			// Factory: Conversion Chapel entrance
+			// (Teleport New Map Spot 4)
+			SetThingEdNum(203, 0);
+			t = AddThing(1, (-2912, -1152, 0), 180); SetThingArgument(t, 0, 4);
+			t = AddThing(2, (-2960, -1152, 0), 180); SetThingArgument(t, 0, 4);
+			t = AddThing(3, (-2912, -1216, 0), 180); SetThingArgument(t, 0, 4);
+			t = AddThing(4, (-2912, -1088, 0), 180); SetThingArgument(t, 0, 4);
+
 			break;
 
 		case 'D5FD90FA7A8133E7BFED682D3D313962': // strife1.wad map21 - Factory: Manufacturing
