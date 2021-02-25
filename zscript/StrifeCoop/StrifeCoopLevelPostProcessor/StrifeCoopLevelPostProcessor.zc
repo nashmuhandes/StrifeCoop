@@ -1179,6 +1179,57 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '85D7183042B90FCC7CCC820FE2FA7B77': // strife1.wad map26 - Proving Grounds
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(333, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(1, 0, 1);
+			SetThingArgument(2, 0, 1);
+			SetThingArgument(3, 0, 1);
+
+			// Move the player starts
+			SetThingXY(0, 1824, 32);
+			SetThingXY(1, 1773, 26);
+			SetThingXY(2, 1870, 19);
+			SetThingXY(3, 1822, -10);
+
+			// Adjust player start angles
+			SetThingAngle(0, 90);
+			SetThingAngle(1, 90);
+			SetThingAngle(2, 90);
+			SetThingAngle(3, 90);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Lab entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(177, 0);
+			t = AddThing(1, (1824, 3344, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (1784, 3313, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (1865, 3360, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (1782, 3359, 0), 270); SetThingArgument(t, 0, 2);
+
+			// Temple of the Oracle teleporter entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(177, 0);
+			t = AddThing(1, (1632, -32, 0), 90); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (1566, -11, 0), 90); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (1697, -11, 0), 90); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (1559, -65, 0), 90); SetThingArgument(t, 0, 3);
+
 			break;
 
 		case 'BAF651138A21FB03AB920FA626F6E64D': // strife1.wad map27 - The Lab
