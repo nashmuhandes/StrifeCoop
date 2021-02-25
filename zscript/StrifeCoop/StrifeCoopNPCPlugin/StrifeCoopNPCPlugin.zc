@@ -82,6 +82,8 @@ class StrifeCoopNPCPlugin : Inventory
 	{
 		Super.AbsorbDamage(damage, damageType, newdamage, inflictor, source, flags);
 
+		if (!multiplayer) return;
+
 		if (newdamage > 0)
 		{
 			// Check if NPC was attacked, so that conversations can be cancelled immediately

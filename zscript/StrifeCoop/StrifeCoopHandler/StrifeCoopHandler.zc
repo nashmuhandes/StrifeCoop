@@ -193,6 +193,8 @@ class StrifeCoopHandler : EventHandler
 
 	void WakeStartingEnemiesInTown(void)
 	{
+		if (!multiplayer) return;
+
 		// Wake the Acolytes up in the first room immediately, targetting a random player
 		if (level.totaltime == 0 && level.levelnum == 2)
 		{
@@ -216,6 +218,8 @@ class StrifeCoopHandler : EventHandler
 
 	void HandleQuestItems(void)
 	{
+		if (!multiplayer) return;
+
 		// No, there really isn't a better way to do this for the vanilla quest items.
 		// Actor replacement doesn't work because too many parts of the game check for the
 		// original items directly by class name.
@@ -287,6 +291,8 @@ class StrifeCoopHandler : EventHandler
 
 	void HandleAlienSpectre5Death(WorldEvent e)
 	{
+		if (!multiplayer) return;
+
 		// AlienSpectre5 (the Loremaster's spectre) is hardcoded to only give upgrades when killed in single player.
 		// We deal with that here.
 		if (e.Thing && e.Thing is "AlienSpectre5")
