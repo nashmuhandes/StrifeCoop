@@ -1233,6 +1233,40 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'BAF651138A21FB03AB920FA626F6E64D': // strife1.wad map27 - The Lab
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(23, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+
+			// Add missing player starts
+			int p = 0;
+			p = AddThing(2, (2497, -698, 0), 90); SetThingArgument(p, 0, 1);
+			p = AddThing(3, (2456, -663, 0), 90); SetThingArgument(p, 0, 1);
+			p = AddThing(4, (2535, -667, 0), 90); SetThingArgument(p, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Alien Ship entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(88, 0);
+			t = AddThing(1, (2496, 2496, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (2498, 2392, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (2436, 2437, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (2437, 2449, 0), 270); SetThingArgument(t, 0, 2);
+
 			break;
 
 		case '840DE1C6C218D9C367E930C89EBDC40A': // strife1.wad map28 - Alien Ship
