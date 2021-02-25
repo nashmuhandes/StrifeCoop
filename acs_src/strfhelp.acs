@@ -94,6 +94,7 @@ script << 0 >> (int type, int tag)
 		break;
 
 	case 228:
+		// [Nash] TO DO: fix this so that all players can hear it
 		if (CheckInventory ("QuestItem24"))
 		{
 			if (CheckInventory ("QuestItem28"))
@@ -402,7 +403,7 @@ script << 0 >> (int type, int tag)
 		SetResultValue (i);
 		if (type == 233 && i)
 		{
-			// [Nash] this plays after flipping the switch in MAP15
+			// [Nash] this is supposed to play after flipping the switch that reveals the computer core in MAP15
 			BroadcastToCommunicators(70, 0, 0, 0);
 		}
 		break;
