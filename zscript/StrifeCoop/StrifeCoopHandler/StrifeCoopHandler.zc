@@ -335,14 +335,25 @@ class StrifeCoopHandler : EventHandler
 					bool is210 = e.ActivationType == SPAC_Cross	&& (voc_id != 0 && front_only == 0 && identify == 0);
 					bool is211 = e.ActivationType == SPAC_Use	&& (voc_id != 0 && front_only == 1 && identify == 2 && nolog == 1);
 
-					// prevent the original SendToCommunicator call
-					if (is201 || is202 || is210)
+					// remove the original SendToCommunicator call
+					ln.special = 0;
+
+					// handle the mysterious line type 211... does it even exist?
+					if (is211)
 					{
-						e.ActivatedLine.special = 0;
-					}
-					else if (is211)
-					{
-						for (int i = 0; i < 10; i++) { Console.Printf("THIS IS THE ONE YOU'RE LOOKING FOR!!!!!\nLine number %d in %s", e.ActivatedLine.Index(), level.MapName); }
+						// Print it 10 times so that I won't miss it. :P
+						for (int i = 0; i < 10; i++) { Console.Printf("MYSTERY LINE TYPE 211 FOUND!!!!!\nLine number %d in %s", ln.Index(), level.MapName); }
+
+						// Turn it into an ACS line
+						ln.special = ACS_ExecuteAlways;
+						ln.args[0] = -int('StrifeCoop_SendToCommunicatorNoLog');
+						ln.args[1] = 0;
+						ln.args[2] = voc_id;
+						ln.args[3] = front_only;
+						ln.args[4] = identify;
+
+						// return early
+						return;
 					}
 
 					// broadcast to all players
