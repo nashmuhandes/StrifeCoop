@@ -1149,6 +1149,33 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '08A5B44623FFF504462EDC1CA36B1997': // strife1.wad map25 - Catacombs: Ruined Temple
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(7, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(3, 0, 1);
+			SetThingArgument(4, 0, 1);
+			SetThingArgument(5, 0, 1);
+
+			// Move the player starts
+			SetThingXY(0, 4032, 2248);
+			SetThingXY(3, 3967, 2225);
+			SetThingXY(4, 3912, 2233);
+			SetThingXY(5, 3844, 2279);
+
+			// Adjust player start angles
+			SetThingAngle(0, 180);
+			SetThingAngle(3, 90);
+			SetThingAngle(4, 180);
+			SetThingAngle(5, 225);
+
 			break;
 
 		case '85D7183042B90FCC7CCC820FE2FA7B77': // strife1.wad map26 - Proving Grounds
