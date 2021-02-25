@@ -526,6 +526,77 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '28CB8D6614024C51C8DB00C7ADBFD857': // strife1.wad map11 - Borderlands
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(44, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(325, 0, 1);
+			SetThingArgument(326, 0, 1);
+			SetThingArgument(327, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Temple of the Oracle main entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(26, 0);
+			t = AddThing(1, (-1376, 5112, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (-1401, 5075, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (-1353, 5075, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (-1377, 5036, 0), 270); SetThingArgument(t, 0, 2);
+
+			// Temple of the Oracle water entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(41, 0);
+			t = AddThing(1, (-1880, 5072, 0), 180); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (-1935, 5092, 0), 225); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (-1949, 5036, 0), 225); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (-1992, 5050, 0), 270); SetThingArgument(t, 0, 3);
+
+			// Temple of the Oracle (inner sanctum) teleporter entrance
+			// (Teleport New Map Spot 4)
+			SetThingEdNum(43, 0);
+			t = AddThing(1, (1880, 5072, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(2, (1935, 5092, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(3, (1949, 5036, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(4, (1992, 5050, 0), 270); SetThingArgument(t, 0, 4);
+
+			// Commons entrance
+			// (Teleport New Map Spot 5)
+			SetThingEdNum(66, 0);
+			t = AddThing(1, (2556, 3015, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(2, (2550, 2967, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(3, (2515, 3043, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(4, (2511, 2992, 0), 180); SetThingArgument(t, 0, 5);
+
+			// New Front Base (Macil's HQ) teleporter entrance
+			// (Teleport New Map Spot 6)
+			SetThingEdNum(68, 0);
+			t = AddThing(1, (858, 2560, 0), 180); SetThingArgument(t, 0, 6);
+			t = AddThing(2, (800, 2584, 0), 180); SetThingArgument(t, 0, 6);
+			t = AddThing(3, (800, 2536, 0), 180); SetThingArgument(t, 0, 6);
+			t = AddThing(4, (706, 2562, 0), 180); SetThingArgument(t, 0, 6);
+
+			// The Bailey entrance
+			// (Teleport New Map Spot 7)
+			SetThingEdNum(111, 0);
+			t = AddThing(1, (704, 6880, 0), 270); SetThingArgument(t, 0, 7);
+			t = AddThing(2, (768, 6848, 0), 270); SetThingArgument(t, 0, 7);
+			t = AddThing(3, (640, 6848, 0), 270); SetThingArgument(t, 0, 7);
+			t = AddThing(4, (704, 6816, 0), 270); SetThingArgument(t, 0, 7);
+
 			break;
 
 		case '66375224D5815F4FFCB1AEB9D39DFA8C': // strife1.wad map12 - The Temple of the Oracle
