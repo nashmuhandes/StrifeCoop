@@ -797,6 +797,39 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'E3E6ABE44B1C034F19385AD1B19BEC97': // strife1.wad map16 - Fortress: Bishop's Tower
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(1, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(93, 0, 1);
+			SetThingArgument(90, 0, 1);
+			SetThingArgument(91, 0, 1);
+
+			// Move the player starts
+			SetThingXY(0, 640, 488);
+			SetThingXY(93, 600, 456);
+			SetThingXY(90, 680, 456);
+			SetThingXY(91, 640, 448);
+
+			// Make the player starts all face north
+			SetThingAngle(0, 90);
+			SetThingAngle(93, 90);
+			SetThingAngle(90, 90);
+			SetThingAngle(91, 90);
+
+			// Remove useless player 5 - 8 starts LOL
+			SetThingEdNum(105, 0);
+			SetThingEdNum(106, 0);
+			SetThingEdNum(107, 0);
+			SetThingEdNum(108, 0);
+
 			break;
 
 		case 'F61264F1BCEC279E03BEF14CC45D98AB': // strife1.wad map17 - Fortress: The Bailey
