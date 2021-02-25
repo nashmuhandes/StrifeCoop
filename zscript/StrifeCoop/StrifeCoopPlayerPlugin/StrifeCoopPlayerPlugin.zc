@@ -1,0 +1,106 @@
+// Copyright 2021 Nash Muhandes
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+//
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. The name of the author may not be used to endorse or promote products
+//    derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+//===========================================================================
+//
+// StrifeCoopPlayerPlugin
+//
+//===========================================================================
+
+class StrifeCoopPlayerPlugin : Inventory
+{
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	Default
+	{
+		Inventory.MaxAmount 1;
+		+Inventory.UNDROPPABLE
+		+Inventory.UNTOSSABLE
+		+Inventory.AUTOACTIVATE
+		-Inventory.INVBAR
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	override void DoEffect(void)
+	{
+		if (!Owner) return;
+		if (!(Owner is "PlayerPawn")) return;
+
+		CheckForTalkableNPCs();
+
+		Super.DoEffect();
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void CheckForTalkableNPCs(void)
+	{
+		bool pressedUse = ((Owner.GetPlayerInput(MODINPUT_BUTTONS) & BT_USE && !(Owner.GetPlayerInput(MODINPUT_OLDBUTTONS) & BT_USE)));
+		if (pressedUse)
+		{
+			static const double angleofs[] = { 0, 90.0 / 16, -90.0 / 16 };
+			FTranslatedLineTarget t;
+
+			for (int i = 0; i < angleofs.Size (); i++)
+			{
+				double ang = angleofs[i];
+
+				Owner.AimLineAttack(Owner.Angle + ang, 128.0, t, 35.0, ALF_FORCENOSMART | ALF_CHECKCONVERSATION | ALF_PORTALRESTRICT);
+
+				if (t.linetarget != NULL)
+				{
+					if (t.linetarget.health > 0 && // Dead things can't talk.
+						!(t.linetarget.bInCombat) && // Fighting things don't talk either.
+						//t.linetarget.Conversation != NULL)
+						t.linetarget.bInConversation)
+					{
+						if (Owner.CheckLocalView())
+						{
+							String txt = StringTable.Localize("$TXT_NPCBUSY");
+							Owner.A_Log(txt);
+						}
+						break;
+					}
+					break;
+				}
+			}
+		}
+	}
+}

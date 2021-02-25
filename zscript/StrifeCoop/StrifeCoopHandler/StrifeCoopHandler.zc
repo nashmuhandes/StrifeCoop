@@ -167,6 +167,12 @@ class StrifeCoopHandler : EventHandler
 		{
 			pmo.A_GiveInventory("StrifeCoopLogTextTracker");
 		}
+
+		let plugin = pmo.FindInventory("StrifeCoopPlayerPlugin", true);
+		if (!plugin)
+		{
+			pmo.A_GiveInventory("StrifeCoopPlayerPlugin");
+		}
 	}
 
 	void SetupNPCs(WorldEvent e)
