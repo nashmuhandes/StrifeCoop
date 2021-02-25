@@ -91,7 +91,7 @@ class StrifeCoopPlayerPlugin : Inventory
 						//t.linetarget.Conversation != NULL)
 						t.linetarget.bInConversation)
 					{
-						if (Owner.CheckLocalView())
+						if (Owner == players[consoleplayer].mo)
 						{
 							String txt = StringTable.Localize("$TXT_NPCBUSY");
 							Owner.A_Log(txt);

@@ -387,7 +387,7 @@ class StrifeCoopHandler : EventHandler
 			if (playeringame[i])
 			{
 				PlayerPawn currentPlayer = players[i].mo;
-				if (currentPlayer.CheckLocalView())
+				if (currentPlayer == players[consoleplayer].mo)
 				{
 					// ... and to ACS you shall return :P
 					if (nolog == 0)

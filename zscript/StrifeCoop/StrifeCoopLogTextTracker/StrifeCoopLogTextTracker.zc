@@ -85,7 +85,7 @@ class StrifeCoopLogTextTracker : Inventory
 							// skip self
 							if (currentPlayer == pmo)
 							{
-								if (currentPlayer.CheckLocalView())
+								if (currentPlayer == players[consoleplayer].mo)
 								{
 									Console.MidPrint(NULL, "$TXT_LOGUPDATED");
 								}
@@ -96,7 +96,7 @@ class StrifeCoopLogTextTracker : Inventory
 							String txt = newLogText;
 							int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
 
-							if (currentPlayer.CheckLocalView())
+							if (currentPlayer == players[consoleplayer].mo)
 							{
 								currentPlayer.player.SetLogNumber(num);
 
