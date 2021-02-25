@@ -9,6 +9,7 @@
 #define VDOORWAIT   150
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+global int 62: travelCooldown;
 global int 63: GYPCooldown;
 
 str QuestItems[32] =
@@ -236,8 +237,13 @@ script << 0 >> (int type, int tag)
 		}
 		else
 		{
+			if (travelCooldown != 0) break;
 			if (ScriptCall("StrifeCoopHandler", "PartyGathered"))
 			{
+				// Wait a few seconds before letting players travel again
+				// This is so that players don't accidentally bump into the wrong travel direction at map start
+				// which can happen if a player is confused with their orientation
+				travelCooldown = (35 * 3);
 				Teleport_NewMap (tag/100, tag%100, TRUE);
 			}
 			else
@@ -446,14 +452,12 @@ script << 0 >> (int type, int tag)
 //
 //===========================================================================
 
-script "StrifeCoop_GYPCooldownScript" OPEN
+script "StrifeCoop_GlobalCooldownScript" OPEN
 {
 	while(1)
 	{
-		if (GYPCooldown > 0)
-		{
-			GYPCooldown--;
-		}
+		if (GYPCooldown > 0) GYPCooldown--;
+		if (travelCooldown > 0) travelCooldown--;
 		Delay(1);
 	}
 }
