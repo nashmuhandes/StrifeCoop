@@ -1331,6 +1331,37 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '252AF75417C87B680AD2CA48E52DC716': // strife1.wad map30 - Abandoned Front Base
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(1, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(9, 0, 1);
+			SetThingArgument(10, 0, 1);
+			SetThingArgument(11, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Prison teleporter entrance (not sure if this actually works?)
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(16, 0);
+			t = AddThing(1, (-5432, 2400, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (-5561, 2393, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (-5528, 2436, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (-5506, 2370, 0), 180); SetThingArgument(t, 0, 2);
+
 			break;
 
 		case 'BA63176C687188C5C847306B3F516D3A': // strife1.wad map31 - Training Facility
