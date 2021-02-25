@@ -833,6 +833,75 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'F61264F1BCEC279E03BEF14CC45D98AB': // strife1.wad map17 - Fortress: The Bailey
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(35, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(55, 0, 1);
+			SetThingArgument(56, 0, 1);
+			SetThingArgument(57, 0, 1);
+
+			// Move the player starts
+			SetThingXY(0, -1472, -1216);
+			SetThingXY(55, -1514, -1196);
+			SetThingXY(56, -1431, -1202);
+			SetThingXY(57, -1472, -1175);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Fortress: Bishop's Tower entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(40, 0);
+			t = AddThing(1, (-608, 2976, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (-648, 2992, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (-568, 2992, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (-608, 3024, 0), 270); SetThingArgument(t, 0, 2);
+
+			// Fortress: Administration entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(39, 0);
+			t = AddThing(1, (896, 2832, 0), 270); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (896, 2792, 0), 270); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (856, 2816, 0), 270); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (936, 2816, 0), 270); SetThingArgument(t, 0, 3);
+
+			// Fortress: Security Complex entrance
+			// (Teleport New Map Spot 4)
+			SetThingEdNum(140, 0);
+			t = AddThing(1, (1664, 360, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(2, (1624, 376, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(3, (1704, 376, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(4, (1664, 400, 0), 270); SetThingArgument(t, 0, 4);
+
+			// Fortress: Stores (warehouse) entrance
+			// (Teleport New Map Spot 5)
+			SetThingEdNum(36, 0);
+			t = AddThing(1, (2320, -1600, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(2, (2360, -1600, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(3, (2320, -1640, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(4, (2320, -1560, 0), 180); SetThingArgument(t, 0, 5);
+
+			// Catacombs entrance
+			// (Teleport New Map Spot 6)
+			SetThingEdNum(36, 0);
+			t = AddThing(1, (-1208, 2976, 0), 0); SetThingArgument(t, 0, 6);
+			t = AddThing(2, (-1144, 2968, 0), 270); SetThingArgument(t, 0, 6);
+			t = AddThing(3, (-1168, 3016, 0), 315); SetThingArgument(t, 0, 6);
+			t = AddThing(4, (-1176, 2920, 0), 15); SetThingArgument(t, 0, 6);
+
 			break;
 
 		case 'E6D6F6266DCB70D2792006D740F43473': // strife1.wad map18 - Fortress: Stores
