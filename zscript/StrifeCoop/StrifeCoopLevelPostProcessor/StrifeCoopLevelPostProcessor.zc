@@ -994,6 +994,53 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'D5FD90FA7A8133E7BFED682D3D313962': // strife1.wad map21 - Factory: Manufacturing
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(1, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(2, 0, 1);
+			SetThingArgument(3, 0, 1);
+			SetThingArgument(4, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Factory: Forge entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(5, 0);
+			t = AddThing(1, (-1472, 4592, 0), 270); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (-1472, 4512, 0), 315); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (-1512, 4456, 0), 0); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (-1448, 4440, 0), 0); SetThingArgument(t, 0, 3);
+
+			// Proving Grounds entrance
+			// (Teleport New Map Spot 4)
+			SetThingEdNum(54, 0);
+			t = AddThing(1, (972, 2055, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(2, (1009, 2052, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(3, (933, 2052, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(4, (1052, 2056, 0), 270); SetThingArgument(t, 0, 4);
+
+			// Catacombs entrance
+			// (Teleport New Map Spot 5)
+			SetThingEdNum(38, 0);
+			t = AddThing(1, (-2960, 4288, 0), 0); SetThingArgument(t, 0, 5);
+			t = AddThing(2, (-2919, 4288, 0), 0); SetThingArgument(t, 0, 5);
+			t = AddThing(3, (-2837, 4317, 0), 0); SetThingArgument(t, 0, 5);
+			t = AddThing(4, (-2842, 4277, 0), 0); SetThingArgument(t, 0, 5);
+
 			break;
 
 		case '088F331310F54154443B15EE81AF8BFD': // strife1.wad map22 - Factory: Forge
