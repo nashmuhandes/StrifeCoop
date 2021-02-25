@@ -325,6 +325,8 @@ class StrifeCoopHandler : EventHandler
 
 	void HandleCommunicatorLines(WorldEvent e)
 	{
+		// This is for handling all of the lines that were directly given the "Sound Activate Comm Unit" lines,
+		// instead of the ACS-based one
 		if (e.Thing is "PlayerPawn")
 		{
 			PlayerPawn pmo = PlayerPawn(e.Thing);
@@ -371,7 +373,6 @@ class StrifeCoopHandler : EventHandler
 					}
 
 					// broadcast to all players
-					// (FIX ME: is211 will double-trigger for the player who activated it)
 					StrifeCoopHandler.BroadcastToCommunicators(pmo, voc_id, front_only, identify, nolog);
 				}
 			}

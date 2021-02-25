@@ -143,6 +143,7 @@ script << 0 >> (int type, int tag)
 		break;
 
 	case 11:
+		// [Nash] note: line type 11 is the exit switches for deathmatch
 		if (tag == 0)
 		{
 			Exit_Normal (0);
@@ -154,6 +155,7 @@ script << 0 >> (int type, int tag)
 		break;
 
 	case 52:
+		// [Nash] TO DO: find out where this is used?
 		tag /= 100;
 		if (tag == 0)
 		{
@@ -192,6 +194,7 @@ script << 0 >> (int type, int tag)
 		break;
 
 	case 215:
+		// [Nash] note: line type 215 is used for most of the lines that trigger a transmission from Blackbird
 		i = (tag % 100) & 31;
 		if (CheckInventory (QuestItems[i]) || gametype() == GAME_NET_DEATHMATCH)
 		{
@@ -224,6 +227,7 @@ script << 0 >> (int type, int tag)
 		if (lineside() != LINE_FRONT)
 			break;
 	case 145:
+		// [Nash] note: line type 145 is the normal travel (level exit) lines
 		if (gametype() == GAME_NET_DEATHMATCH)
 		{
 			Floor_RaiseByValue (tag, 128, 64);
@@ -398,6 +402,7 @@ script << 0 >> (int type, int tag)
 		SetResultValue (i);
 		if (type == 233 && i)
 		{
+			// [Nash] this plays after flipping the switch in MAP15
 			BroadcastToCommunicators(70, 0, 0, 0);
 		}
 		break;
