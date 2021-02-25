@@ -8,6 +8,9 @@
 #define VDOORSPEED  16
 #define VDOORWAIT   150
 
+// [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+global int 63: GYPCooldown;
+
 str QuestItems[32] =
 {
 	"QuestItemThatDoesNotExist",
@@ -228,7 +231,19 @@ script << 0 >> (int type, int tag)
 		}
 		else
 		{
-			Teleport_NewMap (tag/100, tag%100, TRUE);
+			if (ScriptCall("StrifeCoopHandler", "PartyGathered"))
+			{
+				Teleport_NewMap (tag/100, tag%100, TRUE);
+			}
+			else
+			{
+				if (GYPCooldown == 0)
+				{
+					Print(l: "GYP_MUSTGATHERPARTY");
+					LocalAmbientSound("misc/chat", 127);
+				}
+				GYPCooldown = 35;
+			}
 		}
 		break;
 
@@ -416,6 +431,24 @@ script << 0 >> (int type, int tag)
 		// Not a line type, but used by the Programmer death script.
 		ChangeSky ("SKYMNT01", "SKYMNT01");
 		break;
+	}
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+script "StrifeCoop_GYPCooldownScript" OPEN
+{
+	while(1)
+	{
+		if (GYPCooldown > 0)
+		{
+			GYPCooldown--;
+		}
+		Delay(1);
 	}
 }
 
