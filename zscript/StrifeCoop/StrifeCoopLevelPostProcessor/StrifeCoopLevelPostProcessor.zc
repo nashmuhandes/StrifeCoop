@@ -389,6 +389,61 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '4A79D4C48352804FAB3557EE423ADAFE': // strife1.wad map07 - Castle
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 4 because there are proper player starts already
+			SetThingEdNum(84, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 4);
+			SetThingArgument(94, 0, 4);
+			SetThingArgument(95, 0, 4);
+			SetThingArgument(96, 0, 4);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Sewer entrance (stairs)
+			// (Teleport New Map Spot 1)
+			SetThingEdNum(13, 0);
+			t = AddThing(1, (-928, -1072, 0), 90); SetThingArgument(t, 0, 1);
+			t = AddThing(2, (-864, -1088, 0), 135); SetThingArgument(t, 0, 1);
+			t = AddThing(3, (-832, -1008, 0), 180); SetThingArgument(t, 0, 1);
+			t = AddThing(4, (-800, -1056, 0), 180); SetThingArgument(t, 0, 1);
+
+			// Training Facility entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(14, 0);
+			t = AddThing(1, (832, -768, 0), 135); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (788, -804, 0), 90); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (735, -770, 0), 86); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (846, -718, 0), 171); SetThingArgument(t, 0, 2);
+
+			// Programmer's Keep entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(15, 0);
+			t = AddThing(1, (4120, 960, 0), 180); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (4064, 928, 0), 180); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (4064, 992, 0), 180); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (4016, 960, 0), 180); SetThingArgument(t, 0, 3);
+
+			// Audience Chamber entrance
+			// (Teleport New Map Spot 5)
+			SetThingEdNum(16, 0);
+			t = AddThing(1, (2560, 2336, 0), 225); SetThingArgument(t, 0, 5);
+			t = AddThing(2, (2560, 2288, 0), 225); SetThingArgument(t, 0, 5);
+			t = AddThing(3, (2512, 2336, 0), 225); SetThingArgument(t, 0, 5);
+			t = AddThing(4, (2512, 2288, 0), 225); SetThingArgument(t, 0, 5);
+
 			break;
 
 		case 'D1377FAF42EA65955466169020CE5744': // strife1.wad map08 - Audience Chamber
