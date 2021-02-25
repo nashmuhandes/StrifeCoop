@@ -1270,6 +1270,40 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '840DE1C6C218D9C367E930C89EBDC40A': // strife1.wad map28 - Alien Ship
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(278, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+
+			// Add missing player starts
+			int p = 0;
+			p = AddThing(2, 2954, -2494, 0), 90); SetThingArgument(p, 0, 1);
+			p = AddThing(3, 2871, -2544, 0), 90); SetThingArgument(p, 0, 1);
+			p = AddThing(4, 3019, -2529, 0), 90); SetThingArgument(p, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Entity's Lair entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(105, 0);
+			t = AddThing(1, (7320, 1632, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (7267, 1630, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (7285, 1578, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (7302, 1685, 0), 180); SetThingArgument(t, 0, 2);
+
 			break;
 
 		case '775CBC35C0A58326FE87AAD638FF9E2A': // strife1.wad map29 - Entity's Lair
