@@ -1044,6 +1044,21 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '088F331310F54154443B15EE81AF8BFD': // strife1.wad map22 - Factory: Forge
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(56, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(2, 0, 1);
+			SetThingArgument(3, 0, 1);
+			SetThingArgument(4, 0, 1);
+
 			break;
 
 		case '777F7085371D7020872E10089AADB764': // strife1.wad map23 - Order Commons
