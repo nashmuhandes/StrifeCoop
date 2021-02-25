@@ -600,6 +600,53 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '66375224D5815F4FFCB1AEB9D39DFA8C': // strife1.wad map12 - The Temple of the Oracle
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(95, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(96, 0, 1);
+			SetThingArgument(97, 0, 1);
+			SetThingArgument(98, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Borderlands water entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(111, 0);
+			t = AddThing(1, (1592, 0, 0), 0); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (1632, 0, 0), 45); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (1672, 24, 0), 90); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (1648, 64, 0), 90); SetThingArgument(t, 0, 2);
+
+			// Borderlands teleporter entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(459, 0);
+			t = AddThing(1, (-352, 5088, 0), 135); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (-400, 4992, 0), 135); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (-336, 4992, 0), 135); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (-272, 4992, 0), 135); SetThingArgument(t, 0, 3);
+
+			// Proving Grounds teleporter entrance
+			// (Teleport New Map Spot 4)
+			SetThingEdNum(459, 0);
+			t = AddThing(1, (-1280, 5440, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(2, (-1360, 5408, 0), 315); SetThingArgument(t, 0, 4);
+			t = AddThing(3, (-1200, 5440, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(4, (-1296, 5344, 0), 0); SetThingArgument(t, 0, 4);
+
 			break;
 
 		case 'FB1FAC7C198518B892EE6A6CD8113548': // strife1.wad map13 - Catacombs
