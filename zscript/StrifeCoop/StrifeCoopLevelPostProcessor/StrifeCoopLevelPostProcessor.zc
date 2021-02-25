@@ -650,6 +650,73 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'FB1FAC7C198518B892EE6A6CD8113548': // strife1.wad map13 - Catacombs
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(1, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(2, 0, 1);
+			SetThingArgument(3, 0, 1);
+			SetThingArgument(4, 0, 1);
+
+			// Move the player starts to be on the stairs
+			SetThingXY(0, 968, 1096);
+			SetThingXY(2, 896, 1062);
+			SetThingXY(3, 896, 1120);
+			SetThingXY(4, 848, 1093);
+
+			// Make the player starts all face westt
+			SetThingAngle(0, 180);
+			SetThingAngle(2, 180);
+			SetThingAngle(3, 180);
+			SetThingAngle(4, 180);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Fortress: The Bailey entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(51, 0);
+			t = AddThing(1, (-184, 4280, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (-256, 4256, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (-160, 4192, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (-224, 4128, 0), 180); SetThingArgument(t, 0, 2);
+
+			// Catacombs: Ruined Temple entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(94, 0);
+			t = AddThing(1, (-1848, -1448, 0), 0); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (-1824, -1408, 0), 45); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (-1800, -1456, 0), 45); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (-1776, -1400, 0), 90); SetThingArgument(t, 0, 3);
+
+			// Factory: Conversion Chapel entrance
+			// (Teleport New Map Spot 4)
+			SetThingEdNum(117, 0);
+			t = AddThing(1, (1368, -1736, 0), 225); SetThingArgument(t, 0, 4);
+			t = AddThing(2, (1326, -1750, 0), 225); SetThingArgument(t, 0, 4);
+			t = AddThing(3, (1317, -1798, 0), 225); SetThingArgument(t, 0, 4);
+			t = AddThing(4, (1278, -1760, 0), 180); SetThingArgument(t, 0, 4);
+
+			// Factory: Manufacturing entrance
+			// (Teleport New Map Spot 5)
+			SetThingEdNum(120, 0);
+			t = AddThing(1, (2416, 912, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(2, (2376, 920, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(3, (2206, 937, 0), 180); SetThingArgument(t, 0, 5);
+			t = AddThing(4, (2200, 882, 0), 180); SetThingArgument(t, 0, 5);
+
 			break;
 
 		case 'EFBF3805358AA81DF2251889BFC5DD78': // strife1.wad map14 - Mines
