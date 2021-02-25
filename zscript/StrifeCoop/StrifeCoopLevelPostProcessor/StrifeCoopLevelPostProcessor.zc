@@ -757,6 +757,43 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '8D7A24B169717907DDA8399D8C1655DF': // strife1.wad map15 - Fortress: Administration
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 2 because there are proper player starts already
+			SetThingEdNum(15, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 2);
+			SetThingArgument(3, 0, 2);
+			SetThingArgument(4, 0, 2);
+			SetThingArgument(5, 0, 2);
+
+			// Move the player starts
+			SetThingXY(0, 3936, -3480);
+			SetThingXY(3, 3988, -3438);
+			SetThingXY(4, 3934, -3440);
+			SetThingXY(5, 393, -3434);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Fortress: Security Complex teleporter entrance
+			// (Teleport New Map Spot 1)
+			SetThingEdNum(2, 0);
+			t = AddThing(1, (4448, -3040, 0), 180); SetThingArgument(t, 0, 1);
+			t = AddThing(2, (4363, -3039, 0), 180); SetThingArgument(t, 0, 1);
+			t = AddThing(3, (4369, -3090, 0), 180); SetThingArgument(t, 0, 1);
+			t = AddThing(4, (4365, -2993, 0), 180); SetThingArgument(t, 0, 1);
+
 			break;
 
 		case 'E3E6ABE44B1C034F19385AD1B19BEC97': // strife1.wad map16 - Fortress: Bishop's Tower
