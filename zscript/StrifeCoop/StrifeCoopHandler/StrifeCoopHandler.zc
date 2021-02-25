@@ -406,33 +406,6 @@ class StrifeCoopHandler : EventHandler
 	//
 	//===========================================================================
 
-	static void GiveItemToOtherPlayers(class<Inventory> itm, PlayerPawn pmo)
-	{
-		if (!pmo) return;
-
-		for (int i = 0; i < MAXPLAYERS; i++)
-		{
-			if (playeringame[i])
-			{
-				PlayerPawn currentPlayer = players[i].mo;
-
-				// skip self
-				if (currentPlayer == pmo)
-				{
-					continue;
-				}
-
-				currentPlayer.A_GiveInventory(itm, 1);
-			}
-		}
-	}
-
-	//===========================================================================
-	//
-	//
-	//
-	//===========================================================================
-
 	static clearscope void DrawDebugText(PlayerInfo plr, int debugMode)
 	{
 		int vw = 512,
