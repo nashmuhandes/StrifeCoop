@@ -1386,6 +1386,9 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 
 			break;
 
+		// The demo version maps included in the commercial Strife IWAD are considered unplayable.
+		// No patching needed.
+		/*
 		case 'BB98350389778448D05D2C45E9EE5061': // strife1.wad map32 - Sanctuary (demo version)
 			break;
 
@@ -1394,6 +1397,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 
 		case 'B8B1BFA787E35850EAA95430B0713B88': // strife1.wad map34 - Movement Base (demo version)
 			break;
+		*/
 		}
 	}
 
