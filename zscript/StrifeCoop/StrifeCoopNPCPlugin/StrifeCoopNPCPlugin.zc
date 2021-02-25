@@ -62,6 +62,14 @@ class StrifeCoopNPCPlugin : Inventory
 			return;
 		}
 
+		if (multiplayer)
+		{
+			if (Owner.Health > 0 && ((Owner.target && Owner.target is "PlayerPawn") || Owner.bInCombat))
+			{
+				CheckForOtherPlayers();
+			}
+		}
+
 		if (talkingWasInterrupted > 0)
 		{
 			talkingWasInterrupted--;
@@ -73,16 +81,61 @@ class StrifeCoopNPCPlugin : Inventory
 	override void AbsorbDamage(int damage, Name damageType, out int newdamage, Actor inflictor, Actor source, int flags)
 	{
 		Super.AbsorbDamage(damage, damageType, newdamage, inflictor, source, flags);
+
 		if (newdamage > 0)
 		{
 			// Check if NPC was attacked, so that conversations can be cancelled immediately
 			if (Owner.bInConversation)
 			{
-				Console.Printf("%s was attacked while in conversation!", Owner.GetTag());
+				//Console.Printf("%s was attacked while in conversation!", Owner.GetTag());
 				Owner.bInConversation = false;
 				Owner.A_StopSound(CHAN_VOICE);
 				talkingWasInterrupted = 2;
 			}
 		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void CheckForOtherPlayers(void)
+	{
+		PlayerPawn targ = PlayerPawn(Owner.target);
+		if (!targ) return;
+
+		PlayerPawn newTarg = NULL;
+
+		let me = Owner;
+
+		// randomly target a new player every 2 seconds
+		if (level.time % (Thinker.TICRATE * 2) == 0)
+		{
+			int totalPlayers = 0;
+			for (int i = 0; i < MAXPLAYERS; i++)
+			{
+				if (playeringame[i]) totalPlayers++;
+			}
+
+			// random player has been picked
+			int p = random(0, totalPlayers - 1);
+
+			newTarg = players[p].mo;
+
+			// randomly chosen player was the same as before, so abort
+			if (newTarg == targ) return;
+
+			// check if newly chosen player is within distance and visibility
+			if (me.Distance3D(newTarg) < 1000.0 && me.CheckSight(newTarg, SF_SEEPASTBLOCKEVERYTHING | SF_SEEPASTSHOOTABLELINES))
+			{
+				me.target =
+				me.lastheard =
+				me.lastenemy = newTarg;
+			}
+		}
+
+		//Console.Printf("%s is currently targetting Player %d", Owner.GetTag(), targ.PlayerNumber() + 1);
 	}
 }
