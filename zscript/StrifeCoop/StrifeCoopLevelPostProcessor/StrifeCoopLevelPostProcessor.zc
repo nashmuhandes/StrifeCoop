@@ -339,6 +339,53 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'ED6BA7CD9388DBC9F30363EF24DBACDF': // strife1.wad map06 - Sewers
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(107, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(290, 0, 1);
+			SetThingArgument(289, 0, 1);
+			SetThingArgument(288, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Castle entrance (stairs to reclamation tank)
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(109, 0);
+			t = AddThing(1, (7200, 1280, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (7136, 1312, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (7264, 1312, 0), 270); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (7200, 1344, 0), 270); SetThingArgument(t, 0, 2);
+
+			// Castle entrance (fall from reclamation tank)
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(108, 0);
+			t = AddThing(1, (7616, 2528, 0), 90); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (7552, 2496, 0), 90); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (7680, 2496, 0), 90); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (7616, 2464, 0), 90); SetThingArgument(t, 0, 3);
+
+			// Town entrance (stairs)
+			// (Teleport New Map Spot 4)
+			SetThingEdNum(110, 0);
+			t = AddThing(1, (3648, 1824, 0), 0); SetThingArgument(t, 0, 4);
+			t = AddThing(2, (3734, 1831, 0), 247); SetThingArgument(t, 0, 4);
+			t = AddThing(3, (3726, 1790, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(4, (3701, 1747, 0), 270); SetThingArgument(t, 0, 4);
+
 			break;
 
 		case '4A79D4C48352804FAB3557EE423ADAFE': // strife1.wad map07 - Castle
