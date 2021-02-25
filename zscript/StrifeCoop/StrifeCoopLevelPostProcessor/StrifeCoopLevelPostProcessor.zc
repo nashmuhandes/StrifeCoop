@@ -905,6 +905,21 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'E6D6F6266DCB70D2792006D740F43473': // strife1.wad map18 - Fortress: Stores
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(21, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(1, 0, 1);
+			SetThingArgument(2, 0, 1);
+			SetThingArgument(3, 0, 1);
+
 			break;
 
 		case '1240E48EE30E52D7742DC3785BC0C919': // strife1.wad map19 - Fortress: Security Complex
