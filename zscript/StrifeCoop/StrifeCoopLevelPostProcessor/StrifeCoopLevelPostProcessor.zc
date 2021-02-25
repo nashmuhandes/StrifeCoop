@@ -671,7 +671,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingXY(3, 896, 1120);
 			SetThingXY(4, 848, 1093);
 
-			// Make the player starts all face westt
+			// Make the player starts all face west
 			SetThingAngle(0, 180);
 			SetThingAngle(2, 180);
 			SetThingAngle(3, 180);
@@ -720,6 +720,40 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'EFBF3805358AA81DF2251889BFC5DD78': // strife1.wad map14 - Mines
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(2, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+
+			// Add missing player starts
+			int p = 0;
+			p = AddThing(2, (-272, 3664, 0), 270); SetThingArgument(p, 0, 1);
+			p = AddThing(3, (-176, 3664, 0), 270); SetThingArgument(p, 0, 1);
+			p = AddThing(4, (-224, 3648, 0), 270); SetThingArgument(p, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			//  Factory: Receiving entrance
+			// (Teleport New Map Spot 2)
+			SetThingEdNum(38, 0);
+			t = AddThing(1, (2592, -576, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(2, (2552, -576, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(3, (2552, -616, 0), 180); SetThingArgument(t, 0, 2);
+			t = AddThing(4, (2552, -536, 0), 180); SetThingArgument(t, 0, 2);
+
 			break;
 
 		case '8D7A24B169717907DDA8399D8C1655DF': // strife1.wad map15 - Fortress: Administration
