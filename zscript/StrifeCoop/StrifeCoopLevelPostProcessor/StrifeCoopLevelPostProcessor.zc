@@ -1365,6 +1365,24 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'BA63176C687188C5C847306B3F516D3A': // strife1.wad map31 - Training Facility
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(238, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+
+			// Add missing player starts
+			int p = 0;
+			p = AddThing(2, 2582, 1699, 0), 315); SetThingArgument(p, 0, 1);
+			p = AddThing(3, 2652, 1712, 0), 315); SetThingArgument(p, 0, 1);
+			p = AddThing(4, 2580, 1646, 0), 315); SetThingArgument(p, 0, 1);
+
 			break;
 
 		case 'BB98350389778448D05D2C45E9EE5061': // strife1.wad map32 - Sanctuary (demo version)
