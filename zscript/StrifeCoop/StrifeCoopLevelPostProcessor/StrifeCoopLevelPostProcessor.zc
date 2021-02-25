@@ -447,6 +447,21 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'D1377FAF42EA65955466169020CE5744': // strife1.wad map08 - Audience Chamber
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 2 because there are proper player starts already
+			SetThingEdNum(18, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 2);
+			SetThingArgument(56, 0, 2);
+			SetThingArgument(57, 0, 2);
+			SetThingArgument(58, 0, 2);
+
 			break;
 
 		case '9DA85A8D59EFE7C8B80A0DF6DD9C40AB': // strife1.wad map09 - Castle: Programmer's Keep
