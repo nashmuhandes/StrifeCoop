@@ -1115,6 +1115,37 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '935024573889AB8CD873A17B21041857': // strife1.wad map24 - Factory: Conversion Chapel
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(124, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(90, 0, 1);
+			SetThingArgument(91, 0, 1);
+			SetThingArgument(92, 0, 1);
+
+			//===========================================================================
+			//
+			// Setup Coop-Friendly Player Starts
+			//
+			//===========================================================================
+
+			t = 0;
+
+			// Catacombs entrance
+			// (Teleport New Map Spot 3)
+			SetThingEdNum(209, 0);
+			t = AddThing(1, (-1760, 6400, 0), 45); SetThingArgument(t, 0, 3);
+			t = AddThing(2, (-1724, 6445, 0), 0); SetThingArgument(t, 0, 3);
+			t = AddThing(3, (-1682, 6423, 0), 315); SetThingArgument(t, 0, 3);
+			t = AddThing(4, (-1641, 6447, 0), 270); SetThingArgument(t, 0, 3);
+
 			break;
 
 		case '08A5B44623FFF504462EDC1CA36B1997': // strife1.wad map25 - Catacombs: Ruined Temple
