@@ -126,6 +126,8 @@ class StrifeCoopNPCPlugin : Inventory
 
 			newTarg = players[p].mo;
 
+			if (!newTarg || !targ) return;
+
 			// randomly chosen player was the same as before, so abort
 			if (newTarg == targ) return;
 
