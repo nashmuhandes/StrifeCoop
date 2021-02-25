@@ -923,6 +923,21 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '1240E48EE30E52D7742DC3785BC0C919': // strife1.wad map19 - Fortress: Security Complex
+			//===========================================================================
+			//
+			// Fix Bad Player Starts
+			//
+			//===========================================================================
+
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			SetThingEdNum(6, 0);
+
+			// Existing player starts need to be given the proper args
+			SetThingArgument(0, 0, 1);
+			SetThingArgument(1, 0, 1);
+			SetThingArgument(2, 0, 1);
+			SetThingArgument(3, 0, 1);
+
 			break;
 
 		case 'D8B1AB710958A1205098FE224B9189DE': // strife1.wad map20 - Factory: Receiving
