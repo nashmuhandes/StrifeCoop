@@ -66,7 +66,14 @@ class StrifeCoopNPCPlugin : Inventory
 		{
 			if (Owner.Health > 0 && ((Owner.target && Owner.target is "PlayerPawn") || Owner.bInCombat))
 			{
-				CheckForOtherPlayers();
+				State meleeState = Owner.ResolveState('Melee');
+				State missileState = Owner.ResolveState('Missile');
+				bool isInMeleeState = Owner.InStateSequence(Owner.curState, meleeState);
+				bool isMissileState = Owner.InStateSequence(Owner.curState, missileState);
+				if (!isInMeleeState && !isMissileState)
+				{
+					CheckForOtherPlayers();
+				}
 			}
 		}
 
