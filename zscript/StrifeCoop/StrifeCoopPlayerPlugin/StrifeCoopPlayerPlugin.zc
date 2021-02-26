@@ -226,7 +226,8 @@ class StrifeCoopPlayerPlugin : Inventory
 					if (t.linetarget.health > 0 && // Dead things can't talk.
 						!(t.linetarget.bInCombat) && // Fighting things don't talk either.
 						//t.linetarget.Conversation != NULL)
-						t.linetarget.bInConversation)
+						t.linetarget.bInConversation &&
+						!Owner.player.ConversationNPC && !Owner.player.ConversationPC)
 					{
 						if (Owner == players[consoleplayer].mo)
 						{
