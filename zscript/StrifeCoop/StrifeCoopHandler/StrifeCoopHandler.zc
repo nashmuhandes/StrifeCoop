@@ -200,7 +200,7 @@ class StrifeCoopHandler : EventHandler
 				if (playeringame[i]) totalPlayers++;
 			}
 
-			int p = random(0, totalPlayers - 1);
+			int p = random[RNG_TargetRandomPlayer](0, totalPlayers - 1);
 
 			players[p].mo.SoundAlert(players[p].mo, false);
 		}
