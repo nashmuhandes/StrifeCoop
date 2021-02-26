@@ -8,3 +8,14 @@ TXT_UPGRADEDSTAMINA = "You feel stronger.";
 TXT_UPGRADEDACCURACY = "You learn more about firearms.";
 TXT_UPGRADEDBOTH = "You feel stronger and learn more about firearms.";
 GYP_MUSTGATHERPARTY = "A true soldier never leaves their buddies behind!";
+
+[ru]
+
+// { RUSSIAN LANGUAGE DEFINITION }
+
+TXT_LOGUPDATED = "Обновлён журнал заданий.";
+TXT_NPCBUSY = "Персонаж занят.";
+TXT_UPGRADEDSTAMINA = "Вы чувствуете в себя силу.";
+TXT_UPGRADEDACCURACY = "Вы приобретаете знания об оружии.";
+TXT_UPGRADEDBOTH = "Вы чувствуете в себя силу и приобретаете знания об оружии.";
+GYP_MUSTGATHERPARTY = "Настоящий солдат своих не бросает!";
