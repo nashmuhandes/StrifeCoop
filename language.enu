@@ -2,6 +2,9 @@
 
 // { ENGLISH (US) LANGUAGE DEFINITION }
 
-TXT_LOGUPDATED = "Quest log updated";
+TXT_LOGUPDATED = "Quest log updated.";
 TXT_NPCBUSY = "This person is busy.";
+TXT_UPGRADEDSTAMINA = "You feel stronger.";
+TXT_UPGRADEDACCURACY = "You learn more about firearms.";
+TXT_UPGRADEDBOTH = "You feel stronger and learn more about firearms.";
 GYP_MUSTGATHERPARTY = "A true soldier never leaves their buddies behind!";

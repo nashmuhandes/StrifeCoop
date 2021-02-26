@@ -291,22 +291,19 @@ class StrifeCoopHandler : EventHandler
 
 		// AlienSpectre5 (the Loremaster's spectre) is hardcoded to only give upgrades when killed in single player.
 		// We deal with that here.
+		// It's okay to give the upgrades to every player unconditionally because according the base class code,
+		// players get ZERO upgrades in multiplayer :S
 		if (e.Thing && e.Thing is "AlienSpectre5")
 		{
 			PlayerPawn plr = NULL;
 			for (int i = 0; i < MAXPLAYERS; ++i)
 			{
-				if (playeringame[i] && players[i].health > 0)
+				if (playeringame[i])
 				{
 					plr = players[i].mo;
-					break;
+					plr.GiveInventoryType("UpgradeStamina");
+					plr.GiveInventoryType("UpgradeAccuracy");
 				}
-			}
-
-			if (plr)
-			{
-				plr.A_GiveInventory("StrifeCoopUpgradeStamina", 1);
-				plr.A_GiveInventory("StrifeCoopUpgradeAccuracy", 1);
 			}
 		}
 	}

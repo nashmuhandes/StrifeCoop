@@ -341,8 +341,8 @@ script << 0 >> (int type, int tag)
 		{
 			print (l:"TXT_DESTROYED_CONVERTER");
 			GiveInventory ("QuestItem25", 1);
-			GiveInventory ("StrifeCoopUpgradeStamina", 1);
-			GiveInventory ("StrifeCoopUpgradeAccuracy", 1);
+			GiveInventory ("UpgradeStamina", 10);
+			GiveInventory ("UpgradeAccuracy", 1);
 		}
 		else
 		{
@@ -371,8 +371,8 @@ script << 0 >> (int type, int tag)
 	case 226:
 		if (Floor_LowerToHighest (tag, 8, 128))
 		{
-			GiveInventory ("StrifeCoopUpgradeStamina", 1);
-			GiveInventory ("StrifeCoopUpgradeAccuracy", 1);
+			GiveInventory ("UpgradeStamina", 10);
+			GiveInventory ("UpgradeAccuracy", 1);
 			print (l:"TXT_COMPLETED_TRAINING");
 		}
 		else

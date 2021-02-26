@@ -10,6 +10,7 @@ ConversationIDs
 	// Override stamina upgrades given from the base game's conversations
 	// Using the same ConversationIDs as the original items ensures that training via dialog choices
 	// will give the players our custom upgrade items instead.
-	306 = StrifeCoopUpgradeStamina
-	307 = StrifeCoopUpgradeAccuracy
+	// Commented out because I've reverted to using the vanilla quest items, but leaving this here for reference
+	//306 = StrifeCoopUpgradeStamina
+	//307 = StrifeCoopUpgradeAccuracy
 }

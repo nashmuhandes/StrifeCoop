@@ -36,6 +36,9 @@ class StrifeCoopPlayerPlugin : Inventory
 	String oldLogText;
 	String newLogText;
 
+	int oldStamina, newStamina;
+	int oldAccuracy, newAccuracy;
+
 	//===========================================================================
 	//
 	//
@@ -63,6 +66,7 @@ class StrifeCoopPlayerPlugin : Inventory
 		if (Owner && !(Owner is "PlayerPawn")) return;
 
 		UpdateLogText();
+		UpdateStats();
 		CheckForTalkableNPCs();
 
 		Super.DoEffect();
@@ -127,6 +131,72 @@ class StrifeCoopPlayerPlugin : Inventory
 				}
 
 				oldLogText = newLogText;
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void UpdateStats(void)
+	{
+		PlayerPawn pmo = PlayerPawn(Owner);
+
+		if (pmo)
+		{
+			if (level.maptime == 0)
+			{
+				oldStamina = newStamina = pmo.Stamina;
+				oldAccuracy = newAccuracy = pmo.Accuracy;
+				return;
+			}
+
+			bool upgradedStamina = false;
+			bool upgradedAccuracy = false;
+
+			newStamina =  pmo.Stamina;
+			if (oldStamina != newStamina)
+			{
+				for (int i = 0; i < MAXPLAYERS; i++)
+				{
+					if (playeringame[i])
+					{
+						PlayerPawn currentPlayer = players[i].mo;
+						if (currentPlayer == pmo) continue;
+						currentPlayer.Stamina = newStamina;
+						currentPlayer.GiveBody(-100);
+					}
+				}
+				oldStamina = newStamina;
+				upgradedStamina = true;
+			}
+
+			newAccuracy =  pmo.Accuracy;
+			if (oldAccuracy != newAccuracy)
+			{
+				for (int i = 0; i < MAXPLAYERS; i++)
+				{
+					if (playeringame[i])
+					{
+						PlayerPawn currentPlayer = players[i].mo;
+						if (currentPlayer == pmo) continue;
+						currentPlayer.Accuracy = newAccuracy;
+					}
+				}
+				oldAccuracy = newAccuracy;
+				upgradedAccuracy = true;
+			}
+
+			if (pmo == players[consoleplayer].mo && (upgradedStamina || upgradedAccuracy))
+			{
+				String txt = "";
+				if (upgradedStamina && !upgradedAccuracy) txt = "$TXT_UPGRADEDSTAMINA";
+				else if (upgradedAccuracy && !upgradedStamina) txt = "$TXT_UPGRADEDACCURACY";
+				else if (upgradedStamina && upgradedAccuracy) txt = "$TXT_UPGRADEDBOTH";
+				Console.MidPrint(NULL, txt);
 			}
 		}
 	}
