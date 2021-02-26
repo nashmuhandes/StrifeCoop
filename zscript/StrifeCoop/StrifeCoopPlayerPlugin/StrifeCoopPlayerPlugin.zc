@@ -33,6 +33,9 @@
 class StrifeCoopPlayerPlugin : Inventory
 {
 
+	String oldLogText;
+	String newLogText;
+
 	//===========================================================================
 	//
 	//
@@ -57,11 +60,75 @@ class StrifeCoopPlayerPlugin : Inventory
 	override void DoEffect(void)
 	{
 		if (!Owner) return;
-		if (!(Owner is "PlayerPawn")) return;
+		if (Owner && !(Owner is "PlayerPawn")) return;
 
+		UpdateLogText();
 		CheckForTalkableNPCs();
 
 		Super.DoEffect();
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void UpdateLogText(void)
+	{
+		PlayerPawn pmo = PlayerPawn(Owner);
+
+		if (pmo)
+		{
+			// Don't run this at the start of the level
+			if (level.maptime == 0)
+			{
+				oldLogText = newLogText = pmo.player.LogText;
+				return;
+			}
+
+			// Monitor the player's quest log. If the text changes, update it for all players.
+			// Can't think of a better way to do this LOL...
+			newLogText =  pmo.player.LogText;
+			if (oldLogText != newLogText)
+			{
+				for (int i = 0; i < MAXPLAYERS; i++)
+				{
+					if (playeringame[i])
+					{
+						PlayerPawn currentPlayer = players[i].mo;
+
+						// skip self
+						if (currentPlayer == pmo)
+						{
+							if (currentPlayer == players[consoleplayer].mo)
+							{
+								Console.MidPrint(NULL, "$TXT_LOGUPDATED");
+							}
+							continue;
+						}
+
+						// get the log number
+						String txt = newLogText;
+						int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
+
+						if (currentPlayer == players[consoleplayer].mo)
+						{
+							currentPlayer.player.SetLogNumber(num);
+
+							// hack needed to make subtitles show up when you kill AlienSpectre5...
+							if (num == 83 || num == 85)
+							{
+								String voc = "svox/voc" .. num;
+								currentPlayer.player.SetSubtitleNumber(num, voc);
+							}
+						}
+					}
+				}
+
+				oldLogText = newLogText;
+			}
+		}
 	}
 
 	//===========================================================================

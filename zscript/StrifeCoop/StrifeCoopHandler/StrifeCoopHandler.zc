@@ -163,13 +163,7 @@ class StrifeCoopHandler : EventHandler
 
 	void SetupPlayer(PlayerPawn pmo)
 	{
-		// Enable quest log tracking and synchronization
-		let a = pmo.FindInventory("StrifeCoopLogTextTracker", true);
-		if (!a)
-		{
-			pmo.A_GiveInventory("StrifeCoopLogTextTracker");
-		}
-
+		// Enable player plugin
 		let plugin = pmo.FindInventory("StrifeCoopPlayerPlugin", true);
 		if (!plugin)
 		{

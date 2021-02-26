@@ -34,7 +34,6 @@ version "4.5.0"
 
 #include "zscript/StrifeCoop/StrifeCoopHandler/StrifeCoopHandler.zc"
 #include "zscript/StrifeCoop/StrifeCoopLevelPostProcessor/StrifeCoopLevelPostProcessor.zc"
-#include "zscript/StrifeCoop/StrifeCoopLogTextTracker/StrifeCoopLogTextTracker.zc"
 #include "zscript/StrifeCoop/StrifeCoopNPCPlugin/StrifeCoopNPCPlugin.zc"
 #include "zscript/StrifeCoop/StrifeCoopPlayerPlugin/StrifeCoopPlayerPlugin.zc"
 
