@@ -95,17 +95,15 @@ script << 0 >> (int type, int tag)
 		break;
 
 	case 228:
-		// [Nash] TO DO: fix this so that all players can hear it
+		// [Nash] Moved the sound-playing and subtitle-handling stuff to ZScript.
 		if (CheckInventory ("QuestItem24"))
 		{
+			str soundToPlay = "svox/voc128";
 			if (CheckInventory ("QuestItem28"))
 			{
-				LocalAmbientSound ("svox/voc130", 127);
+				soundToPlay = "svox/voc130";
 			}
-			else
-			{
-				LocalAmbientSound ("svox/voc128", 127);
-			}
+			ScriptCall("StrifeCoopHandler", "PlayEntityGreeting", soundToPlay);
 			clearlinespecial ();
 		}
 		break;

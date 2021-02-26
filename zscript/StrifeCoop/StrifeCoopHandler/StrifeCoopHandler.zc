@@ -394,6 +394,30 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
+	static void PlayEntityGreeting(Actor activator, String soundToPlay)
+	{
+		// play The Entity's greeting sound and show subtitles for all players simultaneously
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				let pmo = players[i].mo;
+				if (pmo == players[consoleplayer].mo)
+				{
+					Sound snd = soundToPlay;
+					if (snd) pmo.A_StartSound(snd, CHAN_AUTO, CHANF_UI, attenuation: ATTN_NONE);
+
+					// remove these when PR gets merged
+					if (soundToPlay == "svox/voc130") pmo.player.SetSubTitleNumber(128, "svox/voc130");
+					else if (soundToPlay == "svox/voc128") pmo.player.SetSubTitleNumber(128, "svox/voc128");
+
+					// use this when PR gets merged
+					//pmo.A_GiveInventory("EntityGreetingSubtitles");
+				}
+			}
+		}
+	}
+
 	//===========================================================================
 	//
 	//
