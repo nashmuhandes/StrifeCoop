@@ -141,6 +141,17 @@ class StrifeCoopPlayerPlugin : Inventory
 	//
 	//===========================================================================
 
+	void DoUpdateStamina(PlayerPawn pmo, int i)
+	{
+		pmo.Stamina = i;
+		pmo.Givebody(-100);
+	}
+
+	void DoUpdateAccuracy(PlayerPawn pmo, int i)
+	{
+		pmo.Accuracy = i;
+	}
+
 	void UpdateStats(void)
 	{
 		PlayerPawn pmo = PlayerPawn(Owner);
@@ -166,8 +177,7 @@ class StrifeCoopPlayerPlugin : Inventory
 					{
 						PlayerPawn currentPlayer = players[i].mo;
 						if (currentPlayer == pmo) continue;
-						currentPlayer.Stamina = newStamina;
-						currentPlayer.GiveBody(-100);
+						DoUpdateStamina(currentPlayer, newStamina);
 					}
 				}
 				oldStamina = newStamina;
@@ -183,19 +193,27 @@ class StrifeCoopPlayerPlugin : Inventory
 					{
 						PlayerPawn currentPlayer = players[i].mo;
 						if (currentPlayer == pmo) continue;
-						currentPlayer.Accuracy = newAccuracy;
+						DoUpdateAccuracy(currentPlayer, newAccuracy);
 					}
 				}
 				oldAccuracy = newAccuracy;
 				upgradedAccuracy = true;
 			}
 
+			// update the globally tracked stats so that it can easily be restored later
+			let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+			if (eh)
+			{
+				eh.maxStamina = newStamina;
+				eh.maxAccuracy = newAccuracy;
+			}
+
 			if (pmo == players[consoleplayer].mo && (upgradedStamina || upgradedAccuracy))
 			{
 				String txt = "";
-				if (upgradedStamina && !upgradedAccuracy) txt = "$TXT_UPGRADEDSTAMINA";
-				else if (upgradedAccuracy && !upgradedStamina) txt = "$TXT_UPGRADEDACCURACY";
-				else if (upgradedStamina && upgradedAccuracy) txt = "$TXT_UPGRADEDBOTH";
+				if		(upgradedStamina && !upgradedAccuracy)	txt = "$TXT_UPGRADEDSTAMINA";
+				else if	(upgradedAccuracy && !upgradedStamina)	txt = "$TXT_UPGRADEDACCURACY";
+				else if	(upgradedStamina && upgradedAccuracy)	txt = "$TXT_UPGRADEDBOTH";
 				Console.MidPrint(NULL, txt);
 			}
 		}

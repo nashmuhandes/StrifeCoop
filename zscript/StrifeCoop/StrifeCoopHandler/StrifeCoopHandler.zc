@@ -37,6 +37,12 @@ class StrifeCoopHandler : EventHandler
 	// keep a global record of QuestItems acquired throughout the journey
 	Array< class<Inventory> > retrievedQuestItems;
 
+	// track player stats globally
+	// ATTENTION: this is obviously designed for Strife's single player campaign where it's not designed
+	// for each player to have individual upgrades.
+	// For a custom campaign where such things would be allowed, this would need to reworked.
+	int maxStamina, maxAccuracy;
+
 	//===========================================================================
 	//
 	//
@@ -163,11 +169,25 @@ class StrifeCoopHandler : EventHandler
 
 	void SetupPlayer(PlayerPawn pmo)
 	{
+		if (!pmo) return;
+
 		// Enable player plugin
-		let plugin = pmo.FindInventory("StrifeCoopPlayerPlugin", true);
+		let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
 		if (!plugin)
 		{
 			pmo.A_GiveInventory("StrifeCoopPlayerPlugin");
+		}
+
+		if (plugin)
+		{
+			// if these values are non-zero, we can assume a current game is in progrss
+			if (maxStamina > 0 || maxAccuracy > 0)
+			{
+				plugin.oldStamina = plugin.newStamina = maxStamina;
+				plugin.oldAccuracy = plugin.newAccuracy = maxAccuracy;
+				plugin.DoUpdateStamina(pmo, maxStamina);
+				plugin.DoUpdateAccuracy(pmo, maxAccuracy);
+			}
 		}
 	}
 
@@ -504,13 +524,15 @@ class StrifeCoopHandler : EventHandler
 		{
 			if (plr && plr.mo)
 			{
+				PlayerPawn pmo = plr.mo;
+
 				//===========================================================================
 				//
 				// Basic player info
 				//
 				//===========================================================================
 
-				s = s .. String.Format("%s (Player %d)", plr.GetUserName(), plr.mo.PlayerNumber() + 1);
+				s = s .. String.Format("%s (Player %d)", plr.GetUserName(), pmo.PlayerNumber() + 1);
 				s = s .. "\n";
 
 				//===========================================================================
@@ -555,6 +577,33 @@ class StrifeCoopHandler : EventHandler
 					"%s %s %s",
 					"ConversationPC: ", ConversationPCName, hasConversationPC ? "[" .. ConversationPCPtrAdr .. "]" : ""
 				);
+				s = s .. "\n";
+
+				//===========================================================================
+				//
+				// Global player stat info
+				//
+				//===========================================================================
+
+				let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+				if (eh)
+				{
+					s = s .. String.Format
+					(
+						"Global stats -- maxStamina: %d, maxAccuracy: %d",
+						eh.maxStamina, eh.maxAccuracy
+					);
+				}
+
+				s = s .. "\n";
+
+				s = s .. String.Format
+				(
+					"Your stats -- Stamina: %d, Accuracy: %d",
+					pmo.Stamina, pmo.Accuracy
+				);
+
+				s = s .. "\n";
 			}
 		}
 		else if (debugTextMode == 2)
