@@ -1,7 +1,7 @@
 GameInfo
 {
 	DefaultConversationMenuClass = "StrifeCoopConversationMenu"
-	AddEventHandlers = "StrifeCoopHandler"
+	AddEventHandlers = "StrifeCoopHandler", "StrifeCoopLoadSaveHandler"
 	//Translator = "xlat/XLATStrifeCoop.lmp"
 }
 

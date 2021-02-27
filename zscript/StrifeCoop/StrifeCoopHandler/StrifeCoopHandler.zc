@@ -201,6 +201,20 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
+	void HandlePlayersOnLoadedGame(void)
+	{
+		// TO DO: this can probably be done in a more robust way...
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				let pmo = players[i].mo;
+				SetupPlayer(pmo);
+				Console.Printf("Handling a loaded save game for player %d", pmo.PlayerNumber() + 1);
+			}
+		}
+	}
+
 	//===========================================================================
 	//
 	//
