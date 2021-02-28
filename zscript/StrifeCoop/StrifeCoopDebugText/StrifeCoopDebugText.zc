@@ -79,7 +79,8 @@ class StrifeCoopDebugText ui
 				s = s .. isCoopTxt;
 				s = s .. "\n";
 
-				s = s .. String.Format("Campaign lifetime: %d seconds", campaign.GetLifetimeInSeconds());
+				s = s .. String.Format("Campaign duration: %02d:%02d:%02d", campaign.GetTimeInSeconds() / 3600, (campaign.GetTimeInSeconds() % 3600) / 60, campaign.GetTimeInSeconds());
+
 				s = s .. "\n";
 
 				//===========================================================================

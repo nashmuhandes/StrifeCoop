@@ -89,7 +89,7 @@ class StrifeCoopCampaign : Thinker
 		else return NULL;
 	}
 
-	clearscope int GetLifetimeInSeconds(void)
+	clearscope int GetTimeInSeconds(void)
 	{
 		return (campaignTime / Thinker.TICRATE);
 	}
