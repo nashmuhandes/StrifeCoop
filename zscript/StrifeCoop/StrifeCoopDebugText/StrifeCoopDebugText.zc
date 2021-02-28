@@ -1,0 +1,173 @@
+// Copyright 2021 Nash Muhandes
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+//
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. The name of the author may not be used to endorse or promote products
+//    derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+//===========================================================================
+//
+// StrifeCoopDebugText
+//
+//===========================================================================
+
+class StrifeCoopDebugText ui
+{
+	static clearscope void DrawDebugText(PlayerInfo plr, int debugMode)
+	{
+		int vw = 512,
+			vh = 384;
+
+		String debugText = GetDebugText(plr, debugMode);
+		Screen.DrawText(NewConsoleFont, Font.CR_WHITE,
+			0, 0,
+			debugText,
+			DTA_Clean, true, DTA_VirtualWidth, vw, DTA_VirtualHeight, vh);
+	}
+
+	static clearscope String GetDebugText(PlayerInfo plr, int debugTextMode)
+	{
+		String s;
+
+		if (debugTextMode == 1)
+		{
+			if (plr && plr.mo)
+			{
+				PlayerPawn pmo = plr.mo;
+
+				//===========================================================================
+				//
+				// Basic player info
+				//
+				//===========================================================================
+
+				s = s .. String.Format("%s (Player %d)", plr.GetUserName(), pmo.PlayerNumber() + 1);
+				s = s .. "\n";
+
+				//===========================================================================
+				//
+				// ConversationNPC info
+				//
+				//===========================================================================
+
+				String ConversationNPCName = "<none>";
+				String ConversationNPCPtrAdr = "";
+				bool hasConversationNPC = false;
+				if (plr.ConversationNPC)
+				{
+					ConversationNPCName = plr.ConversationNPC.GetTag();
+					ConversationNPCPtrAdr = String.Format("%p", plr.ConversationNPC);
+					hasConversationNPC = true;
+				}
+				s = s .. String.Format
+				(
+					"%s %s %s",
+					"ConversationNPC: ", ConversationNPCName, hasConversationNPC ? "[" .. ConversationNPCPtrAdr .. "]" : ""
+				);
+				s = s .. "\n";
+
+				//===========================================================================
+				//
+				// ConversationPC info
+				//
+				//===========================================================================
+
+				String ConversationPCName = "<none>";
+				String ConversationPCPtrAdr = "";
+				bool hasConversationPC = false;
+				if (plr.ConversationPC)
+				{
+					ConversationPCName = plr.ConversationPC.GetTag();
+					ConversationPCPtrAdr = String.Format("%p", plr.ConversationPC);
+					hasConversationPC = true;
+				}
+				s = s .. String.Format
+				(
+					"%s %s %s",
+					"ConversationPC: ", ConversationPCName, hasConversationPC ? "[" .. ConversationPCPtrAdr .. "]" : ""
+				);
+				s = s .. "\n";
+
+				//===========================================================================
+				//
+				// Global player stat info
+				//
+				//===========================================================================
+
+				let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+				if (eh)
+				{
+					s = s .. String.Format
+					(
+						"Global stats -- maxStamina: %d, maxAccuracy: %d",
+						eh.maxStamina, eh.maxAccuracy
+					);
+				}
+
+				s = s .. "\n";
+
+				s = s .. String.Format
+				(
+					"Your stats -- Stamina: %d, Accuracy: %d",
+					pmo.Stamina, pmo.Accuracy
+				);
+
+				s = s .. "\n";
+			}
+		}
+		else if (debugTextMode == 2)
+		{
+			//===========================================================================
+			//
+			// Retrieved Quest Items info
+			//
+			//===========================================================================
+
+			s = "Retrieved Quest Items:" .. "\n\n";
+
+			let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+
+			if (eh)
+			{
+				if (eh.retrievedQuestItems.Size() > 0)
+				{
+					for (int i = 0; i < eh.retrievedQuestItems.Size(); i++)
+					{
+						s = s .. eh.retrievedQuestItems[i].GetClassName() .. "\n";
+					}
+				}
+			}
+		}
+		else if (debugTextMode == 3)
+		{
+			//===========================================================================
+			//
+			// Quest Log info
+			//
+			//===========================================================================
+
+			s = "Quest Log" .. "\n\n";
+		}
+
+		return s;
+	}
+}

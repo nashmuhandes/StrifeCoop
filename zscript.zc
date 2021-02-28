@@ -32,6 +32,7 @@ version "4.5.0"
 //
 //===========================================================================
 
+#include "zscript/StrifeCoop/StrifeCoopDebugText/StrifeCoopDebugText.zc"
 #include "zscript/StrifeCoop/StrifeCoopHandler/StrifeCoopHandler.zc"
 #include "zscript/StrifeCoop/StrifeCoopLoadSaveHandler/StrifeCoopLoadSaveHandler.zc"
 #include "zscript/StrifeCoop/StrifeCoopLevelPostProcessor/StrifeCoopLevelPostProcessor.zc"

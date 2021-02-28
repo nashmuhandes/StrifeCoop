@@ -91,6 +91,6 @@ class StrifeCoopConversationMenu : ConversationMenu
 		if (!plr) return;
 		int debugMode = CVar.GetCVar("strifecoop_debug", plr).GetInt();
 		if (debugMode <= 0) return;
-		StrifeCoopHandler.DrawDebugText(plr, debugMode);
+		StrifeCoopDebugText.DrawDebugText(plr, debugMode);
 	}
 }
