@@ -159,20 +159,29 @@ class StrifeCoopHandler : EventHandler
 	override void RenderOverlay(RenderEvent e)
 	{
 		PlayerInfo plr;
-
 		if (e.Camera is "PlayerPawn" && e.Camera == players[consoleplayer].camera && e.Camera.player)
 		{
 			plr = e.Camera.player;
 		}
-
 		if (!plr) return;
-
-		DrawPlayerLocator(e);
 
 		int debugMode = CVar.GetCVar("strifecoop_debug", plr).GetInt();
 		if (debugMode <= 0) return;
 
 		StrifeCoopDebugText.DrawDebugText(plr, debugMode);
+	}
+
+	override void RenderUnderlay(RenderEvent e)
+	{
+		PlayerInfo plr;
+		if (e.Camera is "PlayerPawn" && e.Camera == players[consoleplayer].camera && e.Camera.player)
+		{
+			plr = e.Camera.player;
+		}
+		if (!plr) return;
+
+		// project player names
+		DrawPlayerLocator(e);
 	}
 
 	//===========================================================================
