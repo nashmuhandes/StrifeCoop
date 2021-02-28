@@ -599,12 +599,12 @@ class StrifeCoopHandler : EventHandler
 		let mnu = Menu.GetCurrentMenu();
 		if (mnu) return;
 
-		PlayerPawn p = PlayerPawn(players[consoleplayer].mo);
-		if (!p) return;
+		PlayerPawn pmo = PlayerPawn(players[consoleplayer].mo);
+		if (!pmo) return;
 
 		// TO DO: please implement user CVar caching
-		if (!p.player) return;
-		CVar cv = CVar.GetCVar("strifecoop_showplayerlocator", p.player);
+		if (!pmo.player) return;
+		CVar cv = CVar.GetCVar("strifecoop_showplayerlocator", pmo.player);
 		if (cv && !cv.GetBool()) return;
 
 		StrifeCoopGutamaticsMatrix worldToClip = StrifeCoopGutamaticsMatrix.WorldToClip(e.ViewPos, e.ViewAngle, e.ViewPitch, e.ViewRoll, players[consoleplayer].FOV);
