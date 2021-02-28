@@ -48,11 +48,34 @@ class StrifeCoopDebugText ui
 	{
 		String s;
 
+		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+		if (!eh)
+		{
+			ThrowAbortException("StrifeCoopDebugText::GetDebugText could not find StrifeCoopHandler");
+			return "";
+		}
+
+		let campaign = eh.campaign;
+		if (!campaign)
+		{
+			ThrowAbortException("StrifeCoopDebugText::GetDebugText could not find campaign object");
+			return "";
+		}
+
 		if (debugTextMode == 1)
 		{
 			if (plr && plr.mo)
 			{
 				PlayerPawn pmo = plr.mo;
+
+				//===========================================================================
+				//
+				// Campaign info
+				//
+				//===========================================================================
+
+				s = s .. String.Format("Campaign lifetime: %d seconds", campaign.GetLifetimeInSeconds());
+				s = s .. "\n";
 
 				//===========================================================================
 				//
@@ -113,15 +136,11 @@ class StrifeCoopDebugText ui
 				//
 				//===========================================================================
 
-				let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
-				if (eh)
-				{
-					s = s .. String.Format
-					(
-						"Global stats -- maxStamina: %d, maxAccuracy: %d",
-						eh.maxStamina, eh.maxAccuracy
-					);
-				}
+				s = s .. String.Format
+				(
+					"Global stats -- maxStamina: %d, maxAccuracy: %d",
+					eh.maxStamina, eh.maxAccuracy
+				);
 
 				s = s .. "\n";
 
@@ -144,16 +163,11 @@ class StrifeCoopDebugText ui
 
 			s = "Retrieved Quest Items:" .. "\n\n";
 
-			let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
-
-			if (eh)
+			if (eh.retrievedQuestItems.Size() > 0)
 			{
-				if (eh.retrievedQuestItems.Size() > 0)
+				for (int i = 0; i < eh.retrievedQuestItems.Size(); i++)
 				{
-					for (int i = 0; i < eh.retrievedQuestItems.Size(); i++)
-					{
-						s = s .. eh.retrievedQuestItems[i].GetClassName() .. "\n";
-					}
+					s = s .. eh.retrievedQuestItems[i].GetClassName() .. "\n";
 				}
 			}
 		}

@@ -34,6 +34,9 @@ class StrifeCoopHandler : EventHandler
 {
 	const PARTY_DISTANCE = 200.0;
 
+	// a reference to the campaign object MUST always exist!
+	StrifeCoopCampaign campaign;
+
 	// keep a global record of QuestItems acquired throughout the journey
 	Array< class<Inventory> > retrievedQuestItems;
 
@@ -49,6 +52,11 @@ class StrifeCoopHandler : EventHandler
 	//
 	//===========================================================================
 
+	override void NewGame(void)
+	{
+		CreateCampaign();
+	}
+
 	override void PlayerEntered(PlayerEvent e)
 	{
 		let pmo = players[e.PlayerNumber].mo;
@@ -63,7 +71,7 @@ class StrifeCoopHandler : EventHandler
 		let pmo = players[e.PlayerNumber].mo;
 		if (pmo)
 		{
-			SetupPlayer(pmo);
+			ResurrectPlayer(pmo);
 		}
 	}
 
@@ -84,11 +92,21 @@ class StrifeCoopHandler : EventHandler
 
 	override void WorldLoaded(WorldEvent e)
 	{
+		GetCampaign();
 		WakeStartingEnemiesInTown();
 	}
 
 	override void WorldTick(void)
 	{
+		if (!campaign)
+		{
+			ThrowAbortException("StrifeCoopHandler::WorldTick could not find a valid campaign object!");
+			return;
+		}
+
+		// have to manually tick the campaign because STAT_STATIC thinkers don't automatically tick...
+		campaign.Tick();
+
 		HandleQuestItems();
 	}
 
@@ -167,9 +185,44 @@ class StrifeCoopHandler : EventHandler
 	//
 	//===========================================================================
 
+	void CreateCampaign(void)
+	{
+		if (!campaign)
+		{
+			ThinkerIterator it = ThinkerIterator.Create("StrifeCoopCampaign", Thinker.STAT_STATIC);
+			let p = StrifeCoopCampaign(it.Next());
+			if (!p)
+			{
+				Console.Printf("Creating a new campaign object...");
+				campaign = new("StrifeCoopCampaign").Init();
+			}
+		}
+	}
+
+	void GetCampaign(void)
+	{
+		if (!campaign)
+		{
+			ThinkerIterator it = ThinkerIterator.Create("StrifeCoopCampaign", Thinker.STAT_STATIC);
+			let p = StrifeCoopCampaign(it.Next());
+			if (p)
+			{
+				campaign = p;
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
 	void SetupPlayer(PlayerPawn pmo)
 	{
 		if (!pmo) return;
+
+		Console.Printf("SetupPlayer() running for player %d", pmo.PlayerNumber() + 1);
 
 		// Enable player plugin
 		let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
@@ -177,9 +230,21 @@ class StrifeCoopHandler : EventHandler
 		{
 			pmo.A_GiveInventory("StrifeCoopPlayerPlugin");
 		}
+	}
 
+	void ResurrectPlayer(PlayerPawn pmo)
+	{
+		if (!pmo) return;
+
+		Console.Printf("ResurrectPlayer() running for player %d", pmo.PlayerNumber() + 1);
+
+		SetupPlayer(pmo);
+
+		let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
 		if (plugin)
 		{
+			Console.Printf("Restoring stats for player %d", pmo.PlayerNumber() + 1);
+
 			// if these values are non-zero, we can assume a current game is in progrss
 			if (maxStamina > 0 || maxAccuracy > 0)
 			{
