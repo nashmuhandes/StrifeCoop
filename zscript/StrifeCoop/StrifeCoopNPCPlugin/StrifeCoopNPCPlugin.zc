@@ -72,7 +72,7 @@ class StrifeCoopNPCPlugin : Inventory
 				bool isMissileState = Owner.InStateSequence(Owner.curState, missileState);
 				if (!isInMeleeState && !isMissileState)
 				{
-					CheckForOtherPlayers();
+					RandomlyTargetOtherPlayers();
 				}
 			}
 		}
@@ -110,7 +110,19 @@ class StrifeCoopNPCPlugin : Inventory
 	//
 	//===========================================================================
 
-	void CheckForOtherPlayers(void)
+	clearscope static StrifeCoopNPCPlugin Find(Actor a)
+	{
+		StrifeCoopNPCPlugin plugin = StrifeCoopNPCPlugin(a.FindInventory("StrifeCoopNPCPlugin", true));
+		return plugin;
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void RandomlyTargetOtherPlayers(void)
 	{
 		PlayerPawn targ = PlayerPawn(Owner.target);
 		if (!targ) return;

@@ -68,7 +68,7 @@ class StrifeCoopConversationMenu : ConversationMenu
 		if (plr.ConversationNPC && plr.ConversationPC)
 		{
 			Actor npc = plr.ConversationNPC;
-			let plugin = StrifeCoopNPCPlugin(npc.FindInventory("StrifeCoopNPCPlugin", true));
+			let plugin = StrifeCoopNPCPlugin.Find(npc);
 			if (plugin)
 			{
 				if (plugin.talkingWasInterrupted > 0)

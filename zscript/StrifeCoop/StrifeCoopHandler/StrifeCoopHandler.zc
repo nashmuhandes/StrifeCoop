@@ -219,7 +219,7 @@ class StrifeCoopHandler : EventHandler
 		//Console.Printf("SetupPlayer() running for player %d", pmo.PlayerNumber() + 1);
 
 		// Enable player plugin
-		let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
+		let plugin = StrifeCoopPlayerPlugin.Find(pmo);
 		if (!plugin)
 		{
 			pmo.A_GiveInventory("StrifeCoopPlayerPlugin");
@@ -234,7 +234,7 @@ class StrifeCoopHandler : EventHandler
 
 		SetupPlayer(pmo);
 
-		let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
+		let plugin = StrifeCoopPlayerPlugin.Find(pmo);
 		if (plugin)
 		{
 			//Console.Printf("Restoring stats for resurrected player %d", pmo.PlayerNumber() + 1);
@@ -268,11 +268,11 @@ class StrifeCoopHandler : EventHandler
 					//Console.Printf("Handling a loaded save game for player %d", pmo.PlayerNumber() + 1);
 
 					// the player doesn't have a plugin, so we can assume it's a newly-added player
-					let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
+					let plugin = StrifeCoopPlayerPlugin.Find(pmo);
 					if (!plugin)
 					{
 						SetupPlayer(pmo);
-						plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
+						plugin = StrifeCoopPlayerPlugin.Find(pmo);
 						plugin.isNewJoiningPlayer = true;
 					}
 

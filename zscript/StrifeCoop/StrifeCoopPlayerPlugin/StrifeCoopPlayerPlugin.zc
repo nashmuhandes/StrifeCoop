@@ -106,6 +106,18 @@ class StrifeCoopPlayerPlugin : Inventory
 	//
 	//===========================================================================
 
+	clearscope static StrifeCoopPlayerPlugin Find(Actor a)
+	{
+		StrifeCoopPlayerPlugin plugin = StrifeCoopPlayerPlugin(a.FindInventory("StrifeCoopPlayerPlugin", true));
+		return plugin;
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
 	void HandleNewPlayer(void)
 	{
 		// handle just-joined players
@@ -252,7 +264,7 @@ class StrifeCoopPlayerPlugin : Inventory
 							// update stamina on the other player
 							// make sure to update all the variables properly so that
 							// those players won't trigger an extra update
-							let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
+							let playerToUpdatePlugin = StrifeCoopPlayerPlugin.Find(playerToUpdate);
 							if (playerToUpdatePlugin)
 							{
 								playerToUpdate.Stamina = newStamina;
@@ -285,7 +297,7 @@ class StrifeCoopPlayerPlugin : Inventory
 							// update accuracy on the other player
 							// make sure to update all the variables properly so that
 							// those players won't trigger an extra update
-							let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
+							let playerToUpdatePlugin = StrifeCoopPlayerPlugin.Find(playerToUpdate);
 							if (playerToUpdatePlugin)
 							{
 								playerToUpdate.Accuracy = newAccuracy;
