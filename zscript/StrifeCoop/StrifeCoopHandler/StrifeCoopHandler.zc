@@ -95,9 +95,6 @@ class StrifeCoopHandler : EventHandler
 			return;
 		}
 
-		// have to manually tick the campaign because STAT_STATIC thinkers don't automatically tick...
-		campaign.Tick();
-
 		HandleQuestItems();
 	}
 

@@ -92,10 +92,12 @@ class StrifeCoopCampaign : Thinker
 		else return NULL;
 	}
 
+	/*
 	clearscope int GetTimeInSeconds(void)
 	{
 		return (campaignTime / Thinker.TICRATE);
 	}
+	*/
 
 	//===========================================================================
 	//
@@ -103,6 +105,7 @@ class StrifeCoopCampaign : Thinker
 	//
 	//===========================================================================
 
+	/*
 	override void Tick(void)
 	{
 		// STAT_STATIC thinkers don't automatically tick.
@@ -110,4 +113,5 @@ class StrifeCoopCampaign : Thinker
 
 		campaignTime++;
 	}
+	*/
 }

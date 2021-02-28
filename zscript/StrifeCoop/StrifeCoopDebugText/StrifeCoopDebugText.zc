@@ -75,13 +75,11 @@ class StrifeCoopDebugText ui
 				//===========================================================================
 
 				String isCoopTxt = campaign.isCoopGame ? "This StrifeCoop session is valid" : "IS NOT VALID STRIFECOOP SESSION!!!";
-
 				s = s .. isCoopTxt;
 				s = s .. "\n";
 
-				s = s .. String.Format("Campaign duration: %02d:%02d:%02d", campaign.GetTimeInSeconds() / 3600, (campaign.GetTimeInSeconds() % 3600) / 60, campaign.GetTimeInSeconds());
-
-				s = s .. "\n";
+				//s = s .. String.Format("Campaign duration: %02d:%02d:%02d", campaign.GetTimeInSeconds() / 3600, (campaign.GetTimeInSeconds() % 3600) / 60, campaign.GetTimeInSeconds());
+				//s = s .. "\n";
 
 				//===========================================================================
 				//
@@ -155,7 +153,6 @@ class StrifeCoopDebugText ui
 					"Your stats -- Stamina: %d, Accuracy: %d",
 					pmo.Stamina, pmo.Accuracy
 				);
-
 				s = s .. "\n";
 
 				//===========================================================================
@@ -182,7 +179,6 @@ class StrifeCoopDebugText ui
 					"Last log text: %s",
 					truncLogTxt
 				);
-
 				s = s .. "\n";
 			}
 		}
@@ -203,16 +199,6 @@ class StrifeCoopDebugText ui
 					s = s .. eh.campaign.retrievedQuestItems[i].GetClassName() .. "\n";
 				}
 			}
-		}
-		else if (debugTextMode == 3)
-		{
-			//===========================================================================
-			//
-			// Quest Log info
-			//
-			//===========================================================================
-
-			s = "Quest Log" .. "\n\n";
 		}
 
 		return s;
