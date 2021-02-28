@@ -40,12 +40,6 @@ class StrifeCoopHandler : EventHandler
 	// keep a global record of QuestItems acquired throughout the journey
 	Array< class<Inventory> > retrievedQuestItems;
 
-	// track player stats globally
-	// ATTENTION: this is obviously designed for Strife's single player campaign where it's not designed
-	// for each player to have individual upgrades.
-	// For a custom campaign where such things would be allowed, this would need to reworked.
-	int maxStamina, maxAccuracy;
-
 	//===========================================================================
 	//
 	//
@@ -244,15 +238,7 @@ class StrifeCoopHandler : EventHandler
 		if (plugin)
 		{
 			Console.Printf("Restoring stats for player %d", pmo.PlayerNumber() + 1);
-
-			// if these values are non-zero, we can assume a current game is in progrss
-			if (maxStamina > 0 || maxAccuracy > 0)
-			{
-				plugin.oldStamina = plugin.newStamina = maxStamina;
-				plugin.oldAccuracy = plugin.newAccuracy = maxAccuracy;
-				plugin.DoUpdateStamina(pmo, maxStamina);
-				plugin.DoUpdateAccuracy(pmo, maxAccuracy);
-			}
+			// nothing yet
 		}
 	}
 

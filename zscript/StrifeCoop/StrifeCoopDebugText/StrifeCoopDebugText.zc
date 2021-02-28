@@ -144,7 +144,7 @@ class StrifeCoopDebugText ui
 				s = s .. String.Format
 				(
 					"Global stats -- maxStamina: %d, maxAccuracy: %d",
-					eh.maxStamina, eh.maxAccuracy
+					eh.campaign.maxStamina, eh.campaign.maxAccuracy
 				);
 
 				s = s .. "\n";

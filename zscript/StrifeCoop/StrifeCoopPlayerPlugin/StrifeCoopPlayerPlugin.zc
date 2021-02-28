@@ -32,12 +32,14 @@
 
 class StrifeCoopPlayerPlugin : Inventory
 {
+	StrifeCoopCampaign campaign;
 
 	String oldLogText;
 	String newLogText;
 
 	int oldStamina, newStamina;
 	int oldAccuracy, newAccuracy;
+	bool upgradedStamina, upgradedAccuracy;
 
 	//===========================================================================
 	//
@@ -60,10 +62,23 @@ class StrifeCoopPlayerPlugin : Inventory
 	//
 	//===========================================================================
 
+	override bool TryPickup(in out Actor toucher)
+	{
+		if (!campaign) campaign = StrifeCoopCampaign.GetInstance();
+		return Super.TryPickup(toucher);
+	}
+
 	override void DoEffect(void)
 	{
 		if (!Owner) return;
 		if (Owner && !(Owner is "PlayerPawn")) return;
+
+		// must have a valid campaign reference
+		if (!campaign)
+		{
+			ThrowAbortException(String.Format("StrifeCoopPlayerPlugin for player %d can't find campaign object", Owner.PlayerNumber() + 1));
+			return;
+		}
 
 		UpdateLogText();
 		UpdateStats();
@@ -141,73 +156,21 @@ class StrifeCoopPlayerPlugin : Inventory
 	//
 	//===========================================================================
 
-	void DoUpdateStamina(PlayerPawn pmo, int i)
-	{
-		pmo.Stamina = i;
-		pmo.Givebody(-100);
-	}
-
-	void DoUpdateAccuracy(PlayerPawn pmo, int i)
-	{
-		pmo.Accuracy = i;
-	}
-
 	void UpdateStats(void)
 	{
 		PlayerPawn pmo = PlayerPawn(Owner);
 
 		if (pmo)
 		{
-			if (level.maptime == 0)
+			// the game just started, no point in continuing the check
+			if (level.totaltime == 0)
 			{
 				oldStamina = newStamina = pmo.Stamina;
 				oldAccuracy = newAccuracy = pmo.Accuracy;
 				return;
 			}
 
-			bool upgradedStamina = false;
-			bool upgradedAccuracy = false;
-
-			newStamina =  pmo.Stamina;
-			if (oldStamina != newStamina)
-			{
-				for (int i = 0; i < MAXPLAYERS; i++)
-				{
-					if (playeringame[i])
-					{
-						PlayerPawn currentPlayer = players[i].mo;
-						if (currentPlayer == pmo) continue;
-						DoUpdateStamina(currentPlayer, newStamina);
-					}
-				}
-				oldStamina = newStamina;
-				upgradedStamina = true;
-			}
-
-			newAccuracy =  pmo.Accuracy;
-			if (oldAccuracy != newAccuracy)
-			{
-				for (int i = 0; i < MAXPLAYERS; i++)
-				{
-					if (playeringame[i])
-					{
-						PlayerPawn currentPlayer = players[i].mo;
-						if (currentPlayer == pmo) continue;
-						DoUpdateAccuracy(currentPlayer, newAccuracy);
-					}
-				}
-				oldAccuracy = newAccuracy;
-				upgradedAccuracy = true;
-			}
-
-			// update the globally tracked stats so that it can easily be restored later
-			let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
-			if (eh)
-			{
-				eh.maxStamina = newStamina;
-				eh.maxAccuracy = newAccuracy;
-			}
-
+			// print message for other players to see
 			if (pmo == players[consoleplayer].mo && (upgradedStamina || upgradedAccuracy))
 			{
 				String txt = "";
@@ -216,6 +179,74 @@ class StrifeCoopPlayerPlugin : Inventory
 				else if	(upgradedStamina && upgradedAccuracy)	txt = "$TXT_UPGRADEDBOTH";
 				Console.MidPrint(NULL, txt);
 			}
+
+			upgradedStamina = false;
+			upgradedAccuracy = false;
+
+			// this player detected a stamina change
+			newStamina = pmo.Stamina;
+			if (oldStamina != newStamina)
+			{
+				// update stamina for all players except this one
+				for (int i = 0; i < MAXPLAYERS; i++)
+				{
+					if (playeringame[i])
+					{
+						PlayerPawn playerToUpdate = players[i].mo;
+
+						// skip this player
+						if (playerToUpdate == pmo) continue;
+
+						// update stamina on the other player
+						// make sure to update all the variables properly so that
+						// those players won't trigger an extra update
+						let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
+						if (playerToUpdatePlugin)
+						{
+							playerToUpdate.Stamina = newStamina;
+							playerToUpdate.GiveBody(-100);
+							playerToUpdatePlugin.oldStamina = playerToUpdatePlugin.newStamina = newStamina;
+							playerToUpdatePlugin.upgradedStamina = true;
+						}
+					}
+				}
+				oldStamina = newStamina;
+				upgradedStamina = true;
+			}
+
+			// this player detected an accuracy change
+			newAccuracy = pmo.Accuracy;
+			if (oldAccuracy != newAccuracy)
+			{
+				// update accuracy for all players except this one
+				for (int i = 0; i < MAXPLAYERS; i++)
+				{
+					if (playeringame[i])
+					{
+						PlayerPawn playerToUpdate = players[i].mo;
+
+						// skip this player
+						if (playerToUpdate == pmo) continue;
+
+						// update accuracy on the other player
+						// make sure to update all the variables properly so that
+						// those players won't trigger an extra update
+						let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
+						if (playerToUpdatePlugin)
+						{
+							playerToUpdate.Accuracy = newAccuracy;
+							playerToUpdatePlugin.oldAccuracy = playerToUpdatePlugin.newAccuracy = newAccuracy;
+							playerToUpdatePlugin.upgradedAccuracy = true;
+						}
+					}
+				}
+				oldAccuracy = newAccuracy;
+				upgradedAccuracy = true;
+			}
+
+			// update the globally tracked stats
+			campaign.maxStamina = newStamina;
+			campaign.maxAccuracy = newAccuracy;
 		}
 	}
 

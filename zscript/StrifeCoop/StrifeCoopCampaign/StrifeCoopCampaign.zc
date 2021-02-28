@@ -46,6 +46,8 @@ class StrifeCoopCampaign : Thinker
 	// ATTENTION: this is obviously designed for Strife's single player campaign where it's not designed
 	// for each player to have individual upgrades.
 	// For a custom campaign where such things would be allowed, this would need to reworked.
+	// Additionally, this only works correctly for stats that keep increasing. I assume this system will
+	// break if a mod makes it possible for stats to decrease.
 	int maxStamina, maxAccuracy;
 
 	//===========================================================================
