@@ -238,7 +238,10 @@ class StrifeCoopHandler : EventHandler
 		if (plugin)
 		{
 			Console.Printf("Restoring stats for player %d", pmo.PlayerNumber() + 1);
-			// nothing yet
+			pmo.Stamina = campaign.maxStamina; pmo.GiveBody(-100);
+			pmo.Accuracy = campaign.maxAccuracy;
+			plugin.oldStamina = plugin.newStamina = campaign.maxStamina;
+			plugin.oldAccuracy = plugin.newAccuracy = campaign.maxAccuracy;
 		}
 	}
 
