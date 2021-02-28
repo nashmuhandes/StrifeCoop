@@ -115,7 +115,7 @@ class StrifeCoopPlayerPlugin : Inventory
 			let pmo = PlayerPawn(Owner);
 			if (pmo)
 			{
-				Console.Printf("Player %d is a noob", pmo.PlayerNumber() + 1);
+				//Console.Printf("Player %d is a noob", pmo.PlayerNumber() + 1);
 				pmo.Stamina = campaign.maxStamina;
 				pmo.Accuracy = campaign.maxAccuracy;
 				oldStamina = newStamina = campaign.maxStamina; pmo.GiveBody(-100);

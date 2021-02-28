@@ -187,7 +187,7 @@ class StrifeCoopHandler : EventHandler
 			let p = StrifeCoopCampaign(it.Next());
 			if (!p)
 			{
-				Console.Printf("Creating a new campaign object...");
+				//Console.Printf("Creating a new campaign object...");
 				campaign = new("StrifeCoopCampaign").Init();
 			}
 		}
@@ -216,7 +216,7 @@ class StrifeCoopHandler : EventHandler
 	{
 		if (!pmo) return;
 
-		Console.Printf("SetupPlayer() running for player %d", pmo.PlayerNumber() + 1);
+		//Console.Printf("SetupPlayer() running for player %d", pmo.PlayerNumber() + 1);
 
 		// Enable player plugin
 		let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
@@ -230,14 +230,14 @@ class StrifeCoopHandler : EventHandler
 	{
 		if (!pmo) return;
 
-		Console.Printf("ResurrectPlayer() running for player %d", pmo.PlayerNumber() + 1);
+		//Console.Printf("ResurrectPlayer() running for player %d", pmo.PlayerNumber() + 1);
 
 		SetupPlayer(pmo);
 
 		let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
 		if (plugin)
 		{
-			Console.Printf("Restoring stats for player %d", pmo.PlayerNumber() + 1);
+			//Console.Printf("Restoring stats for resurrected player %d", pmo.PlayerNumber() + 1);
 			pmo.Stamina = campaign.maxStamina; pmo.GiveBody(-100);
 			pmo.Accuracy = campaign.maxAccuracy;
 			plugin.oldStamina = plugin.newStamina = campaign.maxStamina;
@@ -265,7 +265,7 @@ class StrifeCoopHandler : EventHandler
 				let pmo = players[i].mo;
 				if (pmo)
 				{
-					Console.Printf("Handling a loaded save game for player %d", pmo.PlayerNumber() + 1);
+					//Console.Printf("Handling a loaded save game for player %d", pmo.PlayerNumber() + 1);
 
 					// the player doesn't have a plugin, so we can assume it's a newly-added player
 					let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
