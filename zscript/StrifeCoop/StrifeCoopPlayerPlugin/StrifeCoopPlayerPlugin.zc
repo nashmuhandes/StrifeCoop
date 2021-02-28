@@ -41,6 +41,10 @@ class StrifeCoopPlayerPlugin : Inventory
 	int oldAccuracy, newAccuracy;
 	bool upgradedStamina, upgradedAccuracy;
 
+	// this player joined as a new player after the save game was created
+	// (for example, player 3 joining on a save game that was saved with 2 players)
+	bool isNewJoiningPlayer;
+
 	//===========================================================================
 	//
 	//
@@ -64,7 +68,14 @@ class StrifeCoopPlayerPlugin : Inventory
 
 	override bool TryPickup(in out Actor toucher)
 	{
+		if (!(toucher is "PlayerPawn") || (toucher is "PlayerPawn" && !toucher.player))
+		{
+			GoAwayAndDie();
+			return false;
+		}
+
 		if (!campaign) campaign = StrifeCoopCampaign.GetInstance();
+
 		return Super.TryPickup(toucher);
 	}
 
@@ -80,11 +91,42 @@ class StrifeCoopPlayerPlugin : Inventory
 			return;
 		}
 
+		HandleNewPlayer();
+
 		UpdateLogText();
 		UpdateStats();
 		CheckForTalkableNPCs();
 
 		Super.DoEffect();
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void HandleNewPlayer(void)
+	{
+		// handle just-joined players
+		// set the stats to the saved data on the campaign
+		if (isNewJoiningPlayer)
+		{
+			let pmo = PlayerPawn(Owner);
+			if (pmo)
+			{
+				Console.Printf("Player %d is a noob", pmo.PlayerNumber() + 1);
+				pmo.Stamina = campaign.maxStamina;
+				pmo.Accuracy = campaign.maxAccuracy;
+				oldStamina = newStamina = campaign.maxStamina; pmo.GiveBody(-100);
+				oldAccuracy = newAccuracy = campaign.maxAccuracy;
+				oldLogText = newLogText = campaign.latestLogText;
+				String txt = campaign.latestLogText;
+				int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
+				pmo.player.SetLogNumber(num);
+				isNewJoiningPlayer = false;
+			}
+		}
 	}
 
 	//===========================================================================

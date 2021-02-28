@@ -48,7 +48,7 @@ class StrifeCoopLoadSaveHandler : StaticEventHandler
 					return;
 				}
 
-				// aboort if it isn't a valid StrifeCoop game
+				// abort if it isn't a valid StrifeCoop game
 				if (!campaign.isCoopGame)
 				{
 					ThrowAbortException(StringTable.Localize("$TXT_LOADEDGAMEISNOTCOOP"));

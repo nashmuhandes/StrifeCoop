@@ -263,8 +263,20 @@ class StrifeCoopHandler : EventHandler
 			if (playeringame[i])
 			{
 				let pmo = players[i].mo;
-				SetupPlayer(pmo);
-				Console.Printf("Handling a loaded save game for player %d", pmo.PlayerNumber() + 1);
+				if (pmo)
+				{
+					Console.Printf("Handling a loaded save game for player %d", pmo.PlayerNumber() + 1);
+
+					// the player doesn't have a plugin, so we can assume it's a newly-added player
+					let plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
+					if (!plugin)
+					{
+						SetupPlayer(pmo);
+						plugin = StrifeCoopPlayerPlugin(pmo.FindInventory("StrifeCoopPlayerPlugin", true));
+						plugin.isNewJoiningPlayer = true;
+					}
+
+				}
 			}
 		}
 	}
