@@ -1,5 +1,3 @@
-version "4.5.0"
-
 // Copyright 2021 Nash Muhandes
 // All rights reserved.
 //
@@ -28,23 +26,50 @@ version "4.5.0"
 
 //===========================================================================
 //
-// Core
+// StrifeCoopTalkIcon
 //
 //===========================================================================
 
-#include "zscript/StrifeCoop/StrifeCoopDebugText/StrifeCoopDebugText.zc"
-#include "zscript/StrifeCoop/StrifeCoopCampaign/StrifeCoopCampaign.zc"
-#include "zscript/StrifeCoop/StrifeCoopHandler/StrifeCoopHandler.zc"
-#include "zscript/StrifeCoop/StrifeCoopLoadSaveHandler/StrifeCoopLoadSaveHandler.zc"
-#include "zscript/StrifeCoop/StrifeCoopLevelPostProcessor/StrifeCoopLevelPostProcessor.zc"
-#include "zscript/StrifeCoop/StrifeCoopNPCPlugin/StrifeCoopNPCPlugin.zc"
-#include "zscript/StrifeCoop/StrifeCoopPlayerPlugin/StrifeCoopPlayerPlugin.zc"
-#include "zscript/StrifeCoop/StrifeCoopTalkIcon/StrifeCoopTalkIcon.zc"
+class StrifeCoopTalkIcon : Actor
+{
+	Default
+	{
+		Scale 0.66;
+		FloatBobPhase 0;
+		FloatBobStrength 0.4;
+		+FLOATBOB
+		+NOINTERACTION
+		+FORCEXYBILLBOARD
+	}
 
-//===========================================================================
-//
-// Conversation Menu
-//
-//===========================================================================
+	override void PostBeginPlay(void)
+	{
+		Super.PostBeginPlay();
 
-#include "zscript/StrifeCoop/StrifeCoopConversationMenu/StrifeCoopConversationMenu.zc"
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				let pmo = players[i].mo;
+				if (pmo && pmo.player.ConversationNPC)
+				{
+					if (players[consoleplayer].mo == pmo.player.ConversationPC)
+					{
+						bInvisible = true;
+					}
+					else
+					{
+						bInvisible = false;
+					}
+				}
+			}
+		}
+	}
+
+	States
+	{
+	Spawn:
+		TALK A -1;
+		Stop;
+	}
+}

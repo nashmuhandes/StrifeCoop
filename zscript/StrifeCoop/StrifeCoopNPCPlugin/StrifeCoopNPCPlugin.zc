@@ -34,6 +34,8 @@ class StrifeCoopNPCPlugin : Inventory
 {
 	uint8 talkingWasInterrupted;
 
+	StrifeCoopTalkIcon talkIcon;
+
 	//===========================================================================
 	//
 	//
@@ -73,6 +75,21 @@ class StrifeCoopNPCPlugin : Inventory
 				if (!isInMeleeState && !isMissileState)
 				{
 					RandomlyTargetOtherPlayers();
+				}
+			}
+
+			if (Owner.bInConversation)
+			{
+				if (!talkIcon)
+				{
+					talkIcon = StrifeCoopTalkIcon(Owner.Spawn("StrifeCoopTalkIcon", Owner.Pos + (0, 0, Owner.Height), NO_REPLACE));
+				}
+			}
+			else
+			{
+				if (talkIcon)
+				{
+					talkIcon.Destroy();
 				}
 			}
 		}
