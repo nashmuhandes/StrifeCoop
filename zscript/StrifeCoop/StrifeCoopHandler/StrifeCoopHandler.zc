@@ -607,26 +607,30 @@ class StrifeCoopHandler : EventHandler
 		CVar cv = CVar.GetCVar("strifecoop_showplayerlocator", p.player);
 		if (cv && !cv.GetBool()) return;
 
-		StrifeCoopGutamaticsMatrix worldToClip = StrifeCoopGutamaticsMatrix.worldToClip(e.viewPos, e.viewAngle, e.viewPitch, e.viewRoll, players[consoleplayer].FOV);
+		StrifeCoopGutamaticsMatrix worldToClip = StrifeCoopGutamaticsMatrix.WorldToClip(e.ViewPos, e.ViewAngle, e.ViewPitch, e.ViewRoll, players[consoleplayer].FOV);
 
 		Actor projActor;
-		ThinkerIterator iter = ThinkerIterator.Create("PlayerPawn");
-		while ((projActor = Actor(iter.next())) != NULL)
+		ThinkerIterator it = ThinkerIterator.Create("PlayerPawn");
+		while ((projActor = Actor(it.Next())) != NULL)
 		{
 			// player can't be found
 			if (!projActor.player) continue;
 
 			// don't draw your own name
-			if (projActor == players[consoleplayer].mo) continue;
+			if (projActor == e.Camera) continue;
 
-			Vector3 adjustedWorldPos = e.viewPos + Level.vec3Diff(e.viewPos, projActor.pos);
-			Vector3 ndcPos = worldToClip.multiplyVector3(adjustedWorldPos + (0, 0, projActor.height)).asVector3();
-			if (ndcPos.z <= 1 && ndcPos.z >= -1)
+			Vector3 adjustedWorldPos = e.ViewPos + Level.Vec3Diff(e.ViewPos, projActor.Pos);
+			Vector3 ndcPos = worldToClip.MultiplyVector3(adjustedWorldPos + (0, 0, projActor.Height)).AsVector3();
+			if (ndcPos.Z <= 1 && ndcPos.Z >= -1)
 			{
-				// this is the coordinates where you're drawing to:
-				Vector2 drawPos = StrifeCoopGutamaticsGlobalMaths.ndcToViewPort(ndcPos);
-				String txt = projActor.player.GetUserName();
-				Screen.DrawText(smallfont, Font.CR_White, drawPos.X - (smallfont.stringWidth(txt) * CleanXFac / 2.0), drawPos.Y - (smallfont.GetHeight() * CleanYFac / 2.0), txt, DTA_CleanNoMove, true);
+				Vector2 drawPos = StrifeCoopGutamaticsGlobalMaths.NDCToViewPort(ndcPos);
+				String playerName = projActor.player.GetUserName();
+				let fnt = Menu.OptionFont();
+				Screen.DrawText(fnt, Font.CR_White,
+					drawPos.X - (fnt.StringWidth(playerName) * CleanXFac / 2.0),
+					drawPos.Y - (fnt.GetHeight() * CleanYFac / 2.0),
+					playerName,
+					DTA_CleanNoMove, true);
 			}
 		}
 	}
