@@ -39,6 +39,19 @@ class StrifeCoopLoadSaveHandler : StaticEventHandler
 			let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
 			if (eh)
 			{
+				let campaign = eh.campaign;
+
+				if (!campaign)
+				{
+					ThrowAbortException("StrifeCoopLoadSaveHandler trying to load a saved game with no campaign object");
+					return;
+				}
+
+				if (!campaign.isCoopGame)
+				{
+					ThrowAbortException(StringTable.Localize("$TXT_LOADEDGAMEISNOTCOOP"));
+				}
+
 				eh.HandlePlayersOnLoadedGame();
 			}
 		}

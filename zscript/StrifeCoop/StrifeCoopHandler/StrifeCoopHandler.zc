@@ -203,12 +203,12 @@ class StrifeCoopHandler : EventHandler
 	{
 		if (!campaign)
 		{
-			ThinkerIterator it = ThinkerIterator.Create("StrifeCoopCampaign", Thinker.STAT_STATIC);
-			let p = StrifeCoopCampaign(it.Next());
-			if (p)
-			{
-				campaign = p;
-			}
+			campaign = StrifeCoopCampaign.GetInstance();
+		}
+
+		if (!campaign)
+		{
+			ThrowAbortException("StrifeCoopHandler::GetCampaign could not find a campaign object");
 		}
 	}
 

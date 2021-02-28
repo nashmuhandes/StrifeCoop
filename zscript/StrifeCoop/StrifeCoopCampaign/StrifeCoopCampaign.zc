@@ -60,6 +60,10 @@ class StrifeCoopCampaign : Thinker
 
 		if (!initDone)
 		{
+			if (multiplayer && (multiplayer && !deathmatch))
+			{
+				isCoopGame = true;
+			}
 			initDone = true;
 		}
 

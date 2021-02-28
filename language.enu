@@ -7,6 +7,7 @@ TXT_NPCBUSY = "This person is busy.";
 TXT_UPGRADEDSTAMINA = "You feel stronger.";
 TXT_UPGRADEDACCURACY = "You learn more about firearms.";
 TXT_UPGRADEDBOTH = "You feel stronger and learn more about firearms.";
+TXT_LOADEDGAMEISNOTCOOP = "The save file you are trying to load is not a valid Strife coop game. Be sure to start a new coop netgame on MAP02!";
 GYP_MUSTGATHERPARTY = "A true soldier never leaves their buddies behind!";
 
 [ru]
