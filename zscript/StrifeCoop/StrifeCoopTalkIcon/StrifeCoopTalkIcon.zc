@@ -42,9 +42,15 @@ class StrifeCoopTalkIcon : Actor
 		+FORCEXYBILLBOARD
 	}
 
-	override void PostBeginPlay(void)
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	override void Tick(void)
 	{
-		Super.PostBeginPlay();
+		Super.Tick();
 
 		for (int i = 0; i < MAXPLAYERS; i++)
 		{
@@ -53,7 +59,7 @@ class StrifeCoopTalkIcon : Actor
 				let pmo = players[i].mo;
 				if (pmo && pmo.player.ConversationNPC)
 				{
-					if (players[consoleplayer].mo == pmo.player.ConversationPC)
+					if (players[consoleplayer].camera && players[consoleplayer].camera == pmo.player.ConversationPC)
 					{
 						bInvisible = true;
 					}
@@ -65,6 +71,12 @@ class StrifeCoopTalkIcon : Actor
 			}
 		}
 	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
 
 	States
 	{
