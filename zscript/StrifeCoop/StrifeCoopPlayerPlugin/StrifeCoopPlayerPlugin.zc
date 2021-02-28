@@ -115,31 +115,35 @@ class StrifeCoopPlayerPlugin : Inventory
 				{
 					if (playeringame[i])
 					{
-						PlayerPawn currentPlayer = players[i].mo;
+						PlayerPawn playerToUpdate = players[i].mo;
 
-						// skip self
-						if (currentPlayer == pmo)
+						if (playerToUpdate)
 						{
-							if (currentPlayer == players[consoleplayer].mo)
+							// skip self
+							if (playerToUpdate == pmo)
 							{
-								Console.MidPrint(NULL, "$TXT_LOGUPDATED");
+								if (playerToUpdate == players[consoleplayer].mo)
+								{
+									Console.MidPrint(NULL, "$TXT_LOGUPDATED");
+								}
+
+								continue;
 							}
-							continue;
-						}
 
-						// get the log number
-						String txt = newLogText;
-						int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
+							// get the log number
+							String txt = newLogText;
+							int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
 
-						if (currentPlayer == players[consoleplayer].mo)
-						{
-							currentPlayer.player.SetLogNumber(num);
-
-							// hack needed to make subtitles show up when you kill AlienSpectre5...
-							if (num == 83 || num == 85)
+							if (playerToUpdate == players[consoleplayer].mo)
 							{
-								String voc = "svox/voc" .. num;
-								currentPlayer.player.SetSubtitleNumber(num, voc);
+								playerToUpdate.player.SetLogNumber(num);
+
+								// hack needed to make subtitles show up when you kill AlienSpectre5...
+								if (num == 83 || num == 85)
+								{
+									String voc = "svox/voc" .. num;
+									playerToUpdate.player.SetSubtitleNumber(num, voc);
+								}
 							}
 						}
 					}
@@ -194,19 +198,22 @@ class StrifeCoopPlayerPlugin : Inventory
 					{
 						PlayerPawn playerToUpdate = players[i].mo;
 
-						// skip this player
-						if (playerToUpdate == pmo) continue;
-
-						// update stamina on the other player
-						// make sure to update all the variables properly so that
-						// those players won't trigger an extra update
-						let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
-						if (playerToUpdatePlugin)
+						if (playerToUpdate)
 						{
-							playerToUpdate.Stamina = newStamina;
-							playerToUpdate.GiveBody(-100);
-							playerToUpdatePlugin.oldStamina = playerToUpdatePlugin.newStamina = newStamina;
-							playerToUpdatePlugin.upgradedStamina = true;
+							// skip this player
+							if (playerToUpdate == pmo) continue;
+
+							// update stamina on the other player
+							// make sure to update all the variables properly so that
+							// those players won't trigger an extra update
+							let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
+							if (playerToUpdatePlugin)
+							{
+								playerToUpdate.Stamina = newStamina;
+								playerToUpdate.GiveBody(-100);
+								playerToUpdatePlugin.oldStamina = playerToUpdatePlugin.newStamina = newStamina;
+								playerToUpdatePlugin.upgradedStamina = true;
+							}
 						}
 					}
 				}
@@ -224,19 +231,21 @@ class StrifeCoopPlayerPlugin : Inventory
 					if (playeringame[i])
 					{
 						PlayerPawn playerToUpdate = players[i].mo;
-
-						// skip this player
-						if (playerToUpdate == pmo) continue;
-
-						// update accuracy on the other player
-						// make sure to update all the variables properly so that
-						// those players won't trigger an extra update
-						let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
-						if (playerToUpdatePlugin)
+						if (playerToUpdate)
 						{
-							playerToUpdate.Accuracy = newAccuracy;
-							playerToUpdatePlugin.oldAccuracy = playerToUpdatePlugin.newAccuracy = newAccuracy;
-							playerToUpdatePlugin.upgradedAccuracy = true;
+							// skip this player
+							if (playerToUpdate == pmo) continue;
+
+							// update accuracy on the other player
+							// make sure to update all the variables properly so that
+							// those players won't trigger an extra update
+							let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
+							if (playerToUpdatePlugin)
+							{
+								playerToUpdate.Accuracy = newAccuracy;
+								playerToUpdatePlugin.oldAccuracy = playerToUpdatePlugin.newAccuracy = newAccuracy;
+								playerToUpdatePlugin.upgradedAccuracy = true;
+							}
 						}
 					}
 				}

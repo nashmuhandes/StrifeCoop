@@ -380,14 +380,17 @@ class StrifeCoopHandler : EventHandler
 		// players get ZERO upgrades in multiplayer :S
 		if (e.Thing && e.Thing is "AlienSpectre5")
 		{
-			PlayerPawn plr = NULL;
+			PlayerPawn pmo = NULL;
 			for (int i = 0; i < MAXPLAYERS; ++i)
 			{
 				if (playeringame[i])
 				{
-					plr = players[i].mo;
-					plr.GiveInventoryType("UpgradeStamina");
-					plr.GiveInventoryType("UpgradeAccuracy");
+					pmo = players[i].mo;
+					if (pmo)
+					{
+						pmo.GiveInventoryType("UpgradeStamina");
+						pmo.GiveInventoryType("UpgradeAccuracy");
+					}
 				}
 			}
 		}
