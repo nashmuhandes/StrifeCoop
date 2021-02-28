@@ -145,6 +145,7 @@ class StrifeCoopPlayerPlugin : Inventory
 			if (level.totaltime == 0)
 			{
 				oldLogText = newLogText = pmo.player.LogText;
+				campaign.latestLogText = newLogText;
 				return;
 			}
 
