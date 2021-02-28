@@ -167,6 +167,8 @@ class StrifeCoopHandler : EventHandler
 
 		if (!plr) return;
 
+		DrawPlayerLocator(e);
+
 		int debugMode = CVar.GetCVar("strifecoop_debug", plr).GetInt();
 		if (debugMode <= 0) return;
 
@@ -579,5 +581,41 @@ class StrifeCoopHandler : EventHandler
 		}
 
 		return gathered;
+	}
+
+	ui void DrawPlayerLocator(RenderEvent e)
+	{
+		if (automapactive) return;
+
+		let mnu = Menu.GetCurrentMenu();
+		if (mnu) return;
+
+		PlayerPawn p = PlayerPawn(players[consoleplayer].mo);
+		if (!p) return;
+
+		// TO DO: please implement user CVar caching
+		if (!p.player) return;
+		CVar cv = CVar.GetCVar("strifecoop_showplayerlocator", p.player);
+		if (cv && !cv.GetBool()) return;
+
+		StrifeCoopGutamaticsMatrix worldToClip = StrifeCoopGutamaticsMatrix.worldToClip(e.viewPos, e.viewAngle, e.viewPitch, e.viewRoll, players[consoleplayer].FOV);
+
+		Actor projActor;
+		ThinkerIterator iter = ThinkerIterator.Create("PlayerPawn");
+		while ((projActor = Actor(iter.next())) != NULL)
+		{
+			// player can't be found
+			if (!projActor.player) continue;
+
+			Vector3 adjustedWorldPos = e.viewPos + Level.vec3Diff(e.viewPos, projActor.pos);
+			Vector3 ndcPos = worldToClip.multiplyVector3(adjustedWorldPos + (0, 0, projActor.height)).asVector3();
+			if (ndcPos.z <= 1 && ndcPos.z >= -1)
+			{
+				// this is the coordinates where you're drawing to:
+				Vector2 drawPos = StrifeCoopGutamaticsGlobalMaths.ndcToViewPort(ndcPos);
+				String txt = projActor.player.GetUserName();
+				Screen.DrawText(smallfont, Font.CR_White, drawPos.X - (smallfont.stringWidth(txt) * CleanXFac / 2.0), drawPos.Y - (smallfont.GetHeight() * CleanYFac / 2.0), txt, DTA_CleanNoMove, true);
+			}
+		}
 	}
 }
