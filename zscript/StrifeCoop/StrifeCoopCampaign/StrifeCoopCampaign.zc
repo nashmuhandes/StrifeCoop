@@ -53,6 +53,9 @@ class StrifeCoopCampaign : Thinker
 	// store log text globally
 	String latestLogText;
 
+	// keep a global record of QuestItems acquired throughout the journey
+	Array< class<Inventory> > retrievedQuestItems;
+
 	//===========================================================================
 	//
 	//

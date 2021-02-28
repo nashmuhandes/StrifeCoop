@@ -37,9 +37,6 @@ class StrifeCoopHandler : EventHandler
 	// a reference to the campaign object MUST always exist!
 	StrifeCoopCampaign campaign;
 
-	// keep a global record of QuestItems acquired throughout the journey
-	Array< class<Inventory> > retrievedQuestItems;
-
 	//===========================================================================
 	//
 	//
@@ -325,7 +322,7 @@ class StrifeCoopHandler : EventHandler
 
 	void HandleQuestItems(void)
 	{
-		if (!multiplayer) return;
+		if (!multiplayer || !campaign) return;
 
 		// No, there really isn't a better way to do this for the vanilla quest items.
 		// Actor replacement doesn't work because too many parts of the game check for the
@@ -348,10 +345,10 @@ class StrifeCoopHandler : EventHandler
 							class<Inventory> cls = item.GetClass();
 							if (cls)
 							{
-								if (retrievedQuestItems.Find(cls) == retrievedQuestItems.Size())
+								if (campaign.retrievedQuestItems.Find(cls) == campaign.retrievedQuestItems.Size())
 								{
 									//Console.Printf("Found %s on player %d", cls.GetClassName(), pmo.PlayerNumber() + 1);
-									retrievedQuestItems.Push(cls);
+									campaign.retrievedQuestItems.Push(cls);
 								}
 							}
 						}
@@ -370,13 +367,13 @@ class StrifeCoopHandler : EventHandler
 
 				if (pmo && plr)
 				{
-					for (int j = 0; j < retrievedQuestItems.Size(); j++)
+					for (int j = 0; j < campaign.retrievedQuestItems.Size(); j++)
 					{
-						let a = pmo.FindInventory(retrievedQuestItems[j], true);
+						let a = pmo.FindInventory(campaign.retrievedQuestItems[j], true);
 						if (!a)
 						{
-							//Console.Printf("Giving %s to player %d", retrievedQuestItems[j].GetClassName(), pmo.PlayerNumber() + 1);
-							pmo.A_GiveInventory(retrievedQuestItems[j], 1);
+							//Console.Printf("Giving %s to player %d", campaign.retrievedQuestItems[j].GetClassName(), pmo.PlayerNumber() + 1);
+							pmo.A_GiveInventory(campaign.retrievedQuestItems[j], 1);
 						}
 					}
 				}

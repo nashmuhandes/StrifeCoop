@@ -196,11 +196,11 @@ class StrifeCoopDebugText ui
 
 			s = "Retrieved Quest Items:" .. "\n\n";
 
-			if (eh.retrievedQuestItems.Size() > 0)
+			if (eh.campaign.retrievedQuestItems.Size() > 0)
 			{
-				for (int i = 0; i < eh.retrievedQuestItems.Size(); i++)
+				for (int i = 0; i < eh.campaign.retrievedQuestItems.Size(); i++)
 				{
-					s = s .. eh.retrievedQuestItems[i].GetClassName() .. "\n";
+					s = s .. eh.campaign.retrievedQuestItems[i].GetClassName() .. "\n";
 				}
 			}
 		}
