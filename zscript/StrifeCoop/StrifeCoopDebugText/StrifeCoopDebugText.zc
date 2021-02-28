@@ -157,6 +157,33 @@ class StrifeCoopDebugText ui
 				);
 
 				s = s .. "\n";
+
+				//===========================================================================
+				//
+				// Global log text
+				//
+				//===========================================================================
+
+				// only print the first 25 characters
+				String logTxt = StringTable.Localize(eh.campaign.latestLogText);
+				String truncLogTxt;
+
+				if (logTxt.Length() > 25)
+				{
+					truncLogTxt = logTxt.Left(25) .. "...";
+				}
+				else
+				{
+					truncLogTxt = logTxt;
+				}
+
+				s = s .. String.Format
+				(
+					"Last log text: %s",
+					truncLogTxt
+				);
+
+				s = s .. "\n";
 			}
 		}
 		else if (debugTextMode == 2)
