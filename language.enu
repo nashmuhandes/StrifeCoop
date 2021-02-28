@@ -7,7 +7,7 @@ TXT_NPCBUSY = "This person is busy.";
 TXT_UPGRADEDSTAMINA = "You feel stronger.";
 TXT_UPGRADEDACCURACY = "You learn more about firearms.";
 TXT_UPGRADEDBOTH = "You feel stronger and learn more about firearms.";
-TXT_LOADEDGAMEISNOTCOOP = "The save file you are trying to load is not a valid Strife coop game. Be sure to start a new coop netgame on MAP02!";
+TXT_LOADEDGAMEISNOTCOOP = "The save file you are trying to load is not a valid Strife coop game. Be sure to start a new coop netgame on MAP02.";
 GYP_MUSTGATHERPARTY = "A true soldier never leaves their buddies behind!";
 
 [ru]
@@ -19,4 +19,5 @@ TXT_NPCBUSY = "Персонаж занят.";
 TXT_UPGRADEDSTAMINA = "Вы чувствуете в себя силу.";
 TXT_UPGRADEDACCURACY = "Вы приобретаете знания об оружии.";
 TXT_UPGRADEDBOTH = "Вы чувствуете в себя силу и приобретаете знания об оружии.";
+TXT_LOADEDGAMEISNOTCOOP = "Данное сохранение создано не во время совместного прохождения Strife. Начните новую сетевую игру в режиме совместного прохождения с MAP02.";
 GYP_MUSTGATHERPARTY = "Настоящий солдат своих не бросает!";
