@@ -99,8 +99,8 @@ class StrifeCoopPlayerPlugin : Inventory
 
 		if (pmo)
 		{
-			// Don't run this at the start of the level
-			if (level.maptime == 0)
+			// Don't run this at the start of the campaign
+			if (level.totaltime == 0)
 			{
 				oldLogText = newLogText = pmo.player.LogText;
 				return;
@@ -145,9 +145,21 @@ class StrifeCoopPlayerPlugin : Inventory
 									playerToUpdate.player.SetSubtitleNumber(num, voc);
 								}
 							}
+
+							// update the variables on the updated player to prevent double-updates
+							let playerToUpdatePlugin = StrifeCoopPlayerPlugin(playerToUpdate.FindInventory("StrifeCoopPlayerPlugin", true));
+							{
+								if (playerToUpdatePlugin)
+								{
+									playerToUpdatePlugin.oldLogText = newLogText;
+								}
+							}
 						}
 					}
 				}
+
+				// update log text on the campaign object
+				campaign.latestLogText = newLogText;
 
 				oldLogText = newLogText;
 			}

@@ -50,6 +50,9 @@ class StrifeCoopCampaign : Thinker
 	// break if a mod makes it possible for stats to decrease.
 	int maxStamina, maxAccuracy;
 
+	// store log text globally
+	String latestLogText;
+
 	//===========================================================================
 	//
 	//
