@@ -426,6 +426,20 @@ class StrifeCoopPlayerPlugin : Inventory
 	//
 	//===========================================================================
 
+	void ClearConversationStuff(PlayerInfo plr)
+	{
+		plr.ConversationFaceTalker = false;
+		plr.ConversationNPC = NULL;
+		plr.ConversationPC = NULL;
+		plr.ConversationNPCAngle = 0.;
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
 	void HandleProgrammerDeathFade(void)
 	{
 		if (level.levelnum != 9 && level.levelnum != 10) return;

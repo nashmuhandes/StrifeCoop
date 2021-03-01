@@ -105,6 +105,9 @@ class StrifeCoopHandler : EventHandler
 
 	override void WorldUnloaded(WorldEvent e)
 	{
+		StopNPCVoices();
+		StopPlayerConversations();
+		ClearFloatingMessages();
 	}
 
 	override void WorldThingSpawned(WorldEvent e)
@@ -142,10 +145,11 @@ class StrifeCoopHandler : EventHandler
 		//===========================================================================
 		if (e.Name == 'EV_ClearConversationStuff')
 		{
-			pmo.player.ConversationFaceTalker = false;
-			pmo.player.ConversationNPC = NULL;
-			pmo.player.ConversationPC = NULL;
-			pmo.player.ConversationNPCAngle = 0.;
+			let plugin = StrifeCoopPlayerPlugin.Find(pmo);
+			if (plugin)
+			{
+				plugin.ClearConversationStuff(pmo.player);
+			}
 		}
 	}
 
@@ -552,6 +556,63 @@ class StrifeCoopHandler : EventHandler
 				}
 			}
 		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void StopNPCVoices(void)
+	{
+		ThinkerIterator it = ThinkerIterator.Create("Actor");
+		Actor mo;
+		while (mo = Actor(it.Next()))
+		{
+			// stop talking characters
+			bool valid =
+			(
+				mo is "StrifeHumanoid" ||
+				mo is "Macil1" ||
+				mo is "Oracle" ||
+				mo is "SpectralMonster"
+			);
+
+			if (valid && mo.IsActorPlayingSound(CHAN_VOICE))
+			{
+				mo.A_StopSound(CHAN_VOICE);
+			}
+
+			if (mo.bInConversation)
+			{
+				mo.bInConversation = false;
+			}
+		}
+	}
+
+	void StopPlayerConversations(void)
+	{
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				let pmo = players[i].mo;
+				if (pmo)
+				{
+					let plugin = StrifeCoopPlayerPlugin.Find(pmo);
+					if (plugin)
+					{
+						plugin.ClearConversationStuff(pmo.player);
+					}
+				}
+			}
+		}
+	}
+
+	void ClearFloatingMessages(void)
+	{
+		Console.MidPrint(NULL, "");
 	}
 
 	//===========================================================================
