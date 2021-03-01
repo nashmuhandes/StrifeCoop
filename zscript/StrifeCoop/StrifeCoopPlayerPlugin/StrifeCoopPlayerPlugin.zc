@@ -98,6 +98,8 @@ class StrifeCoopPlayerPlugin : Inventory
 		UpdateStats();
 		CheckForTalkableNPCs();
 
+		HandleProgrammerDeathFade();
+
 		Super.DoEffect();
 	}
 
@@ -390,6 +392,41 @@ class StrifeCoopPlayerPlugin : Inventory
 						break;
 					}
 					break;
+				}
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void HandleProgrammerDeathFade(void)
+	{
+		if (level.levelnum != 9 && level.levelnum != 10) return;
+		if (!Owner) return;
+
+		let a = Owner.FindInventory("ProgLevelEnder", false);
+		if (a)
+		{
+			PlayerPawn me = PlayerPawn(Owner);
+			if (me)
+			{
+				//Console.Printf("Player %d killed The Programmer", me.PlayerNumber() + 1);
+				for (int i = 0; i < MAXPLAYERS; i++)
+				{
+					if (playeringame[i])
+					{
+						let otherPlayer = PlayerPawn(players[i].mo);
+						if (otherPlayer && otherPlayer == me)
+						{
+							continue;
+						}
+						//Console.Printf("Giving StrifeCoopProgLevelEnder to player %d", otherPlayer.PlayerNumber() + 1);
+						otherPlayer.A_GiveInventory("StrifeCoopProgLevelEnder", 1);
+					}
 				}
 			}
 		}

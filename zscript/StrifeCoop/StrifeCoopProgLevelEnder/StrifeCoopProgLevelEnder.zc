@@ -1,5 +1,3 @@
-version "4.5.0"
-
 // Copyright 2021 Nash Muhandes
 // All rights reserved.
 //
@@ -28,27 +26,39 @@ version "4.5.0"
 
 //===========================================================================
 //
-// Core
+// StrifeCoopProgLevelEnder
+// This does only the screen fade stuff, without the level change call.
 //
 //===========================================================================
 
-#include "zscript/StrifeCoopGutamatics/Include.zsc"
+class StrifeCoopProgLevelEnder : ProgLevelEnder
+{
+	//============================================================================
+	//
+	// StrifeCoopProgLevelEnder :: Tick
+	//
+	// Fade to black then unfade.
+	//
+	//============================================================================
 
-#include "zscript/StrifeCoop/StrifeCoopDebugText/StrifeCoopDebugText.zc"
-#include "zscript/StrifeCoop/StrifeCoopCampaign/StrifeCoopCampaign.zc"
-#include "zscript/StrifeCoop/StrifeCoopHandler/StrifeCoopHandler.zc"
-#include "zscript/StrifeCoop/StrifeCoopLoadSaveHandler/StrifeCoopLoadSaveHandler.zc"
-#include "zscript/StrifeCoop/StrifeCoopLevelPostProcessor/StrifeCoopLevelPostProcessor.zc"
-#include "zscript/StrifeCoop/StrifeCoopNPCPlugin/StrifeCoopNPCPlugin.zc"
-#include "zscript/StrifeCoop/StrifeCoopPlayerPlugin/StrifeCoopPlayerPlugin.zc"
-#include "zscript/StrifeCoop/StrifeCoopDroppableAmmo/StrifeCoopDroppableAmmo.zc"
-#include "zscript/StrifeCoop/StrifeCoopTalkIcon/StrifeCoopTalkIcon.zc"
-#include "zscript/StrifeCoop/StrifeCoopProgLevelEnder/StrifeCoopProgLevelEnder.zc"
-
-//===========================================================================
-//
-// Conversation Menu
-//
-//===========================================================================
-
-#include "zscript/StrifeCoop/StrifeCoopConversationMenu/StrifeCoopConversationMenu.zc"
+	override void Tick(void)
+	{
+		if (special2 == 0)
+		{ // fade out over .66 second
+			special1 += 255 / (TICRATE*2/3);
+			if (++special1 >= 255)
+			{
+				special1 = 255;
+				special2 = 1;
+			}
+		}
+		else
+		{ // fade in over two seconds
+			special1 -= 255 / (TICRATE*2);
+			if (special1 <= 0)
+			{
+				Destroy ();
+			}
+		}
+	}
+}
