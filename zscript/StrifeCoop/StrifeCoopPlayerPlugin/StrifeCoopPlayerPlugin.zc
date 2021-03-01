@@ -93,6 +93,7 @@ class StrifeCoopPlayerPlugin : Inventory
 
 		HandleNewPlayer();
 
+		UpdateDroppableAmmo();
 		UpdateLogText();
 		UpdateStats();
 		CheckForTalkableNPCs();
@@ -138,6 +139,42 @@ class StrifeCoopPlayerPlugin : Inventory
 				pmo.player.SetLogNumber(num);
 				isNewJoiningPlayer = false;
 			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void UpdateDroppableAmmo(void)
+	{
+		let pmo = PlayerPawn(Owner);
+		if (!pmo) return;
+		if (pmo && !pmo.player) return;
+		let plr = pmo.player;
+
+		if (!strifecoop_droppableammo)
+		{
+			pmo.A_TakeInventory("StrifeCoopDroppableAmmo", int.max);
+			return;
+		}
+
+		let wpn = plr.ReadyWeapon;
+		if (!wpn) return;
+
+		// NOTE: Currently only supports weapons with 1 ammo type.
+		if (wpn.AmmoType1)
+		{
+			if (pmo.CountInv(wpn.AmmoType1) > 0)
+			{
+				pmo.A_GiveInventory("StrifeCoopDroppableAmmo", 1);
+			}
+		}
+		else
+		{
+			pmo.A_TakeInventory("StrifeCoopDroppableAmmo", int.max);
 		}
 	}
 

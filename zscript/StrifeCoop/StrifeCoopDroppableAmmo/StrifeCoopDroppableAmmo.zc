@@ -1,0 +1,139 @@
+// Copyright 2021 Nash Muhandes
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+//
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. The name of the author may not be used to endorse or promote products
+//    derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+//===========================================================================
+//
+// StrifeCoopDroppableAmmo
+// NOTE: This currently only supports weapons with 1 ammo type.
+//
+//===========================================================================
+
+class StrifeCoopDroppableAmmo : Inventory
+{
+	Default
+	{
+		Inventory.MaxAmount 1;
+		+Inventory.INVBAR
+		+Inventory.UNDROPPABLE
+		Tag "";
+		Inventory.Icon "";
+		Inventory.PickupMessage "";
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	override void DoEffect(void)
+	{
+		Super.DoEffect();
+
+		if (!Owner) return;
+		let pmo = PlayerPawn(Owner);
+		if (!pmo) return;
+		if (pmo && !pmo.player) return;
+		let plr = pmo.player;
+
+
+		// Change icon and name depending on the current weapon's ammo type
+		let wpn = plr.ReadyWeapon;
+		if (!wpn) return;
+
+		if (wpn.AmmoType1)
+		{
+			let a1 = pmo.FindInventory(wpn.AmmoType1, true);
+			Icon = a1.Icon;
+			Amount = a1.Amount;
+			String ammoName = StringTable.Localize(a1.GetTag());
+			String newTag = String.Format(StringTable.Localize("$TAG_DROPPABLEAMMO") .. " (" .. ammoName .. ")");
+			SetTag(newTag);
+		}
+		else
+		{
+			// No valid ammo type, so switch back to default icon and tag
+			Icon = GetDefaultByType("StrifeCoopDroppableAmmo").Icon;
+			SetTag(GetDefaultByType("StrifeCoopDroppableAmmo").GetTag());
+			Amount = 0;
+		}
+	}
+
+	override Inventory CreateTossable(int amt)
+	{
+		let pmo = PlayerPawn(Owner);
+		if (!pmo) return NULL;
+		if (pmo && !pmo.player) return NULL;
+		let plr = pmo.player;
+
+		let wpn = plr.ReadyWeapon;
+		if (!wpn) return NULL;
+
+		if (Amount <= 0) return NULL;
+
+		Inventory tossed;
+		class<Inventory> tossCls;
+
+		if (wpn.AmmoType1)
+		{
+			tossCls = wpn.AmmoType1;
+		}
+
+		if (!tossCls) return NULL;
+		if (!(tossCls is "Ammo")) return NULL;
+
+		//Console.Printf("Trying to drop %s", tossCls.GetClassName());
+
+		tossed = Ammo(Spawn(tossCls));
+		if (tossed)
+		{
+			tossed.bSpecial = false;
+			tossed.bSolid = false;
+			tossed.DropTime = 30;
+
+			// set the amount dynamically
+			let a1 = pmo.FindInventory(tossCls, true);
+			if (!a1) return NULL;
+
+			if (amt == -1) amt = a1.Amount >= 50 ? 50 : a1.Amount >= 25 ? 25 : a1.Amount >= 10 ? 10 : 1;
+
+			//Console.Printf("ammount to drop: %d", amt);
+
+			tossed.Amount = amt;
+			a1.Amount -= amt;
+
+			// swap the weapon out if no more ammo
+			if (a1.Amount <= 0)
+			{
+				pmo.PickNewWeapon(NULL);
+			}
+
+			return tossed;
+		}
+
+		return NULL;
+	}
+}
