@@ -483,3 +483,18 @@ script "StrifeCoop_SendToCommunicatorNoLog" (int voc_id, int front_only, int ide
 	int nolog = 1;
 	SendToCommunicator(voc_id, front_only, identify, nolog);
 }
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+script "StrifeCoop_MAP09ProgrammerTrapScript" (void)
+{
+	ClearLineSpecial();
+	Ceiling_LowerAndCrushDist(3, 200, 0x7FFFFFFF, 0, 1);
+	int octics = 240;
+	Delay((octics * 4.375) >> 16);
+	Door_Open(3, 16);
+}

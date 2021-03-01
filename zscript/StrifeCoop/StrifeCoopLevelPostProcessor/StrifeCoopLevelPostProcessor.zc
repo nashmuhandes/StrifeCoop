@@ -487,6 +487,14 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingXY(81, -840, 2168);
 			SetThingXY(82, -856, 2208);
 
+			// Make the trap room (before the usable Programmer screen) lower the pillars faster
+			// (and make them deadly crushers too so that the trap can't be broken)
+			// Note that I have intentionally left it so that only the player foolish enough to
+			// enter the trap room to actually get trapped in there.
+			// Note that this has to be offloaded to ACS because there apparently aren't any
+			// built-in ceiling-crusher specials that have a "wait before raising" function.
+			SetLineSpecial(1492, ACS_ExecuteAlways, -int('StrifeCoop_MAP09ProgrammerTrapScript'), 0, 0, 0, 0);
+
 			break;
 
 		case '39C594CAC07EE51C80F757DA465FCC94': // strife1.wad map10 - New Front Base
