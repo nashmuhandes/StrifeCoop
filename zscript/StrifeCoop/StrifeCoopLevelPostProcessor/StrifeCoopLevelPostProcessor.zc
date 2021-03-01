@@ -481,6 +481,12 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingArgument(81, 0, 1);
 			SetThingArgument(82, 0, 1);
 
+			// Move the player starts to prevent telefragging
+			SetThingXY(0, -808, 2208);
+			SetThingXY(80, -840, 2248);
+			SetThingXY(81, -840, 2168);
+			SetThingXY(82, -856, 2208);
+
 			break;
 
 		case '39C594CAC07EE51C80F757DA465FCC94': // strife1.wad map10 - New Front Base
