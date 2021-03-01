@@ -249,7 +249,7 @@ script << 0 >> (int type, int tag)
 				if (GYPCooldown == 0)
 				{
 					Print(l: "GYP_MUSTGATHERPARTY");
-					LocalAmbientSound("misc/chat", 127);
+					LocalAmbientSound("*grunt", 127);
 				}
 				GYPCooldown = 35;
 			}
