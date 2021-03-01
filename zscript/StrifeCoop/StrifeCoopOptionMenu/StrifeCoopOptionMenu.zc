@@ -99,9 +99,9 @@ class OptionMenuItemStrifeCoopSafeCommand : OptionMenuItemSafeCommand
 
 class StrifeCoopMenu : OptionMenu
 {
-	const START_TIME = 75;
+	const START_TIME = 85;
 	const END_TIME = 120;
-	const SCROLL_SPEED = 8;
+	const SCROLL_SPEED = 6;
 	const MAX_ASPECT = 16 / 9.;
 
 	int mDefaultPosition;
@@ -112,6 +112,15 @@ class StrifeCoopMenu : OptionMenu
 	private int scrollTimer;
 	private int prevSelected;
 
+	private int textBoxWidth;
+	private int textBoxStart;
+	private int fHeight;
+	private int padding;
+	private int xOfs;
+	private int txtLength;
+
+	private Font optFnt;
+
 	override void Init(Menu parent, OptionMenuDescriptor desc)
 	{
 		Super.Init(parent, desc);
@@ -120,8 +129,10 @@ class StrifeCoopMenu : OptionMenu
 		prevSelected = -1;
 	}
 
-	override void Drawer(void)
+	override void Ticker(void)
 	{
+		Super.Ticker();
+
 		mToolTip = "";
 
 		if (mDesc.mSelectedItem >= 0)
@@ -141,9 +152,9 @@ class StrifeCoopMenu : OptionMenu
 			}
 		}
 
-		Font of = OptionFont();
-		int fHeight = of.GetHeight() * CleanYFac_1;
-		int padding = fHeight << 1;
+		optFnt = OptionFont();
+		fHeight = optFnt.GetHeight() * CleanYFac_1;
+		padding = fHeight << 1;
 
 		if (prevSelected != mDesc.mSelectedItem)
 		{
@@ -163,19 +174,19 @@ class StrifeCoopMenu : OptionMenu
 				width = int(height * MAX_ASPECT);
 			}
 
-			int textBoxWidth = int(width * 3 / 4.);
-			int textBoxStart = width / 8 + (realWidth - width) / 2;
+			textBoxWidth = int(width * 3 / 4.);
+			textBoxStart = width / 8 + (realWidth - width) / 2;
 
-			int length = of.StringWidth(mToolTip) * CleanXFac_1;
-			int xOfs = (realWidth - length) / 2;
-			if (length > textBoxWidth)
+			txtLength = optFnt.StringWidth(mToolTip) * CleanXFac_1;
+			xOfs = (realWidth - txtLength) / 2;
+			if (txtLength > textBoxWidth)
 			{
 				xOfs = textBoxStart;
 				if (startTimer <= 0)
 				{
 					xOfs -= SCROLL_SPEED * (endTimer <= 0 ? scrollTimer++ : scrollTimer);
 
-					int end = xOfs + length;
+					int end = xOfs + txtLength;
 					if (endTimer > 0 || end < textBoxStart + textBoxWidth)
 					{
 						xOfs += (textBoxStart + textBoxWidth - end);
@@ -188,27 +199,8 @@ class StrifeCoopMenu : OptionMenu
 
 				if (endTimer <= 0)
 				{
-					textBoxWidth -= of.StringWidth("...") * CleanXFac_1;
+					textBoxWidth -= optFnt.StringWidth("...") * CleanXFac_1;
 				}
-			}
-
-			int cx, cy, cw, ch;
-			[cx, cy, cw, ch] = Screen.GetClipRect();
-			Screen.SetClipRect(textBoxStart, padding, textBoxWidth, fHeight);
-
-			Screen.DrawText(of, OptionMenuSettings.mFontColorValue,
-							xOfs, padding,
-							mToolTip,
-							DTA_CleanNoMove_1, true);
-
-			Screen.SetClipRect(cx, cy, cw, ch);
-
-			if (length > textBoxWidth && endTimer <= 0)
-			{
-				Screen.DrawText(of, OptionMenuSettings.mFontColorValue,
-								textBoxStart+textBoxWidth, padding,
-								"...",
-								DTA_CleanNoMove_1, true);
 			}
 		}
 
@@ -225,6 +217,28 @@ class StrifeCoopMenu : OptionMenu
 				scrollTimer = 0;
 				startTimer = START_TIME;
 			}
+		}
+	}
+
+	override void Drawer(void)
+	{
+		int cx, cy, cw, ch;
+		[cx, cy, cw, ch] = Screen.GetClipRect();
+		Screen.SetClipRect(textBoxStart, padding, textBoxWidth, fHeight);
+
+		Screen.DrawText(optFnt, OptionMenuSettings.mFontColorValue,
+						xOfs, padding,
+						mToolTip,
+						DTA_CleanNoMove_1, true);
+
+		Screen.SetClipRect(cx, cy, cw, ch);
+
+		if (txtLength > textBoxWidth && endTimer <= 0 && mDesc.mSelectedItem != -1)
+		{
+			Screen.DrawText(optFnt, OptionMenuSettings.mFontColorValue,
+							textBoxStart+textBoxWidth, padding,
+							"...",
+							DTA_CleanNoMove_1, true);
 		}
 
 		int shift = -padding / CleanYFac_1;
