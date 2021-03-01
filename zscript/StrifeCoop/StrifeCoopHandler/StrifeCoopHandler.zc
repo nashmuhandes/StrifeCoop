@@ -39,6 +39,7 @@ class StrifeCoopHandler : EventHandler
 
 	transient CVar cvDebug;
 	transient CVar cvShowPlayerLocator;
+	transient CVar cvChatBubble;
 
 	//===========================================================================
 	//
@@ -193,6 +194,7 @@ class StrifeCoopHandler : EventHandler
 	{
 		cvDebug = CVar.GetCVar("strifecoop_debug", players[consoleplayer]);
 		cvShowPlayerLocator = CVar.GetCVar("strifecoop_showplayerlocator", players[consoleplayer]);
+		cvChatBubble = CVar.GetCVar("strifecoop_chatbubble", players[consoleplayer]);
 	}
 
 	clearscope CVar GetCachedCVar(PlayerInfo p, Name cvn, CVar cv)

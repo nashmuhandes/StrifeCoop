@@ -65,6 +65,13 @@ class StrifeCoopTalkIcon : Actor
 					}
 					else
 					{
+						let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+						if (eh && !eh.GetCachedCVar(pmo.player, "strifecoop_chatbubble", eh.cvChatBubble).GetBool())
+						{
+							bInvisible = true;
+							continue;
+						}
+
 						bInvisible = false;
 					}
 				}

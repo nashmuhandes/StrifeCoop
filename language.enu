@@ -18,10 +18,12 @@ STRIFECOOPMNU_GAMEPLAY_PLAYERCOL = "Player Collision";
 STRIFECOOPMNU_GAMEPLAY_GROUPEXIT = "Group Exit Restriction";
 STRIFECOOPMNU_GAMEPLAY_DROPAMMO = "Droppable Ammo";
 STRIFECOOPMNU_UI_PLAYERLOCATOR = "Player Locator";
+STRIFECOOPMNU_UI_CHATBUBBLE = "Chat Bubble";
 STRIFECOOPMNU_HELPTEXT_GAMEPLAY_PLAYERCOL = "Toggles whether players can collide or pass through each other.";
 STRIFECOOPMNU_HELPTEXT_GAMEPLAY_GROUPEXIT = "Toggles whether all players must group together before being allowed to exit the level.";
 STRIFECOOPMNU_HELPTEXT_GAMEPLAY_DROPAMMO = "Toggles droppable ammo. Select the weapon you'd like to drop the ammo for, look for the ammo icon in the inventory bar, then press the Drop Item key.";
 STRIFECOOPMNU_HELPTEXT_UI_PLAYERLOCATOR = "Shows players' names and locations on the screen.";
+STRIFECOOPMNU_HELPTEXT_UI_CHATBUBBLE = "Shows chat bubbles above NPCs' heads when they're spoken to.";
 
 [ru]
 
@@ -43,7 +45,9 @@ STRIFECOOPMNU_GAMEPLAY_PLAYERCOL = "Столкновение между игро
 STRIFECOOPMNU_GAMEPLAY_GROUPEXIT = "Совместный выход";
 STRIFECOOPMNU_GAMEPLAY_DROPAMMO = "Сбрасывание патронов";
 STRIFECOOPMNU_UI_PLAYERLOCATOR = "Указывание игроков";
+STRIFECOOPMNU_UI_CHATBUBBLE = "Выноска";
 STRIFECOOPMNU_HELPTEXT_GAMEPLAY_PLAYERCOL = "Регулирует возможность столкновения между игроками/прохождения через друг друга.";
 STRIFECOOPMNU_HELPTEXT_GAMEPLAY_GROUPEXIT = "Регулирует требование группирования всех игроков перед выходом с уровня.";
 STRIFECOOPMNU_HELPTEXT_GAMEPLAY_DROPAMMO = "Регулирует возможность сбрасывания патронов. Выберите оружие, которому принадлежат желаемые для сбрасывания патроны, затем найдите их иконку в инвентаре и нажмите клавижу «Сбросить предмет».";
 STRIFECOOPMNU_HELPTEXT_UI_PLAYERLOCATOR = "Отображает имена и местонахождение игроков в игре.";
+STRIFECOOPMNU_HELPTEXT_UI_CHATBUBBLE = "Отображает выноску над персонажами, когда они находятся в разговоре.";
