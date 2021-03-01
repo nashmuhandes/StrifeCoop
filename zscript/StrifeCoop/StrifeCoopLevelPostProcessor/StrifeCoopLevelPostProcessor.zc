@@ -587,10 +587,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Temple of the Oracle (inner sanctum) teleporter entrance
 			// (Teleport New Map Spot 4)
 			SetThingEdNum(43, 0);
-			t = AddThing(1, (1880, 5072, 0), 270); SetThingArgument(t, 0, 4);
-			t = AddThing(2, (1935, 5092, 0), 270); SetThingArgument(t, 0, 4);
-			t = AddThing(3, (1949, 5036, 0), 270); SetThingArgument(t, 0, 4);
-			t = AddThing(4, (1992, 5050, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(1, (-1376, 4064, 0), 270); SetThingArgument(t, 0, 4);
+			t = AddThing(2, (-1244, 4049, 0), 180); SetThingArgument(t, 0, 4);
+			t = AddThing(3, (-1278, 4110, 0), 225); SetThingArgument(t, 0, 4);
+			t = AddThing(4, (-1342, 3972, 0), 90); SetThingArgument(t, 0, 4);
 
 			// Commons entrance
 			// (Teleport New Map Spot 5)
