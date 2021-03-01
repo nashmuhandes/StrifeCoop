@@ -251,7 +251,7 @@ script << 0 >> (int type, int tag)
 				if (GYPCooldown == 0)
 				{
 					Print(l: "GYP_MUSTGATHERPARTY");
-					LocalAmbientSound("*grunt", 127);
+					LocalAmbientSound("*usefail", 127);
 				}
 				GYPCooldown = 35;
 			}
