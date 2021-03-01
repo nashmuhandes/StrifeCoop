@@ -2,3 +2,4 @@ user int strifecoop_debug = 0;
 user bool strifecoop_showplayerlocator = true;
 server bool strifecoop_gatherparty = true;
 server bool strifecoop_droppableammo = true;
+server bool strifecoop_playercollision = true;

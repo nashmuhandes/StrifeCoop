@@ -93,6 +93,7 @@ class StrifeCoopPlayerPlugin : Inventory
 
 		HandleNewPlayer();
 
+		UpdatePlayerCollision();
 		UpdateDroppableAmmo();
 		UpdateLogText();
 		UpdateStats();
@@ -141,6 +142,28 @@ class StrifeCoopPlayerPlugin : Inventory
 				pmo.player.SetLogNumber(num);
 				isNewJoiningPlayer = false;
 			}
+		}
+	}
+
+	void UpdatePlayerCollision(void)
+	{
+		// deathmatch must use normal collision rules
+		if (deathmatch) return;
+
+		let pmo = PlayerPawn(Owner);
+		if (!pmo) return;
+
+		// normal player collision
+		if (strifecoop_playercollision)
+		{
+			pmo.bAllowThruBits = false;
+			pmo.ThruBits &= ~ThruGroup31;
+		}
+		// pass-through-player collision (players won't collide with each other)
+		else
+		{
+			pmo.bAllowThruBits = true;
+			pmo.ThruBits |= ThruGroup31;
 		}
 	}
 
