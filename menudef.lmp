@@ -1,0 +1,32 @@
+AddOptionMenu "OptionsMenu"
+{
+	StaticText ""
+	StaticText "Strife Coop Patch Project v0.9 beta"
+	Submenu "$OPTMNU_STRIFECOOP", "StrifeCoopMenu"
+}
+
+AddOptionMenu "OptionsMenuSimple"
+{
+	StaticText ""
+	StaticText "Strife Coop Patch Project v0.9 beta"
+	Submenu "$OPTMNU_STRIFECOOP", "StrifeCoopMenu"
+}
+
+OptionMenu "StrifeCoopMenu"
+{
+	Class "StrifeCoopMenu"
+	Title "$STRIFECOOPMNU_TITLE"
+	Position -32
+
+	StaticText ""
+
+	StaticText "$STRIFECOOPMNU_GAMEPLAY_TITLE", 1
+	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_PLAYERCOL", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_PLAYERCOL", "strifecoop_playercollision", "OnOff"
+	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_GROUPEXIT", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_GROUPEXIT", "strifecoop_gatherparty", "OnOff"
+	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_DROPAMMO", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_DROPAMMO", "strifecoop_droppableammo", "OnOff"
+
+	StaticText ""
+
+	StaticText "$STRIFECOOPMNU_UI_TITLE", 1
+	StrifeCoopOption "$STRIFECOOPMNU_UI_PLAYERLOCATOR", "$STRIFECOOPMNU_HELPTEXT_UI_PLAYERLOCATOR", "strifecoop_showplayerlocator", "OnOff"
+}

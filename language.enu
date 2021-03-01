@@ -10,6 +10,18 @@ TXT_UPGRADEDBOTH = "You feel stronger and learn more about firearms.";
 TXT_LOADEDGAMEISNOTCOOP = "The save file you are trying to load is not a valid Strife coop game. Be sure to start a new coop netgame on MAP02.";
 GYP_MUSTGATHERPARTY = "A true soldier never leaves their buddies behind!";
 TAG_DROPPABLEAMMO = "Drop Ammo";
+OPTMNU_STRIFECOOP = "Customize StrifeCoop";
+STRIFECOOPMNU_TITLE = "Strife Coop Patch Project Options";
+STRIFECOOPMNU_GAMEPLAY_TITLE = "Gameplay";
+STRIFECOOPMNU_UI_TITLE = "User Interface";
+STRIFECOOPMNU_GAMEPLAY_PLAYERCOL = "Player Collision";
+STRIFECOOPMNU_GAMEPLAY_GROUPEXIT = "Group Exit Restriction";
+STRIFECOOPMNU_GAMEPLAY_DROPAMMO = "Droppable Ammo";
+STRIFECOOPMNU_UI_PLAYERLOCATOR = "Player Locator";
+STRIFECOOPMNU_HELPTEXT_GAMEPLAY_PLAYERCOL = "Toggles whether players can collide or pass through each other.";
+STRIFECOOPMNU_HELPTEXT_GAMEPLAY_GROUPEXIT = "Toggles whether all players must group together before being allowed to exit the level.";
+STRIFECOOPMNU_HELPTEXT_GAMEPLAY_DROPAMMO = "Toggles droppable ammo. Select the weapon you'd like to drop the ammo for, look for the ammo icon in the inventory bar, then press the Drop Item key.";
+STRIFECOOPMNU_HELPTEXT_UI_PLAYERLOCATOR = "Shows players' names and locations on the screen.";
 
 [ru]
 

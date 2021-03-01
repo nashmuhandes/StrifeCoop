@@ -94,3 +94,11 @@ enum EThruGroups
 //===========================================================================
 
 #include "zscript/StrifeCoop/StrifeCoopConversationMenu/StrifeCoopConversationMenu.zc"
+
+//===========================================================================
+//
+// Option Menu
+//
+//===========================================================================
+
+#include "zscript/StrifeCoop/StrifeCoopOptionMenu/StrifeCoopOptionMenu.zc"
