@@ -15,9 +15,9 @@ GYP_MUSTGATHERPARTY = "A true soldier never leaves their buddies behind!";
 // { RUSSIAN LANGUAGE DEFINITION }
 
 TXT_LOGUPDATED = "Обновлён журнал заданий.";
-TXT_NPCBUSY = "Персонаж занят.";
-TXT_UPGRADEDSTAMINA = "Вы чувствуете в себя силу.";
-TXT_UPGRADEDACCURACY = "Вы приобретаете знания об оружии.";
-TXT_UPGRADEDBOTH = "Вы чувствуете в себя силу и приобретаете знания об оружии.";
+TXT_NPCBUSY = "Персонаж занят разговором.";
+TXT_UPGRADEDSTAMINA = "Вы обретаете силы.";
+TXT_UPGRADEDACCURACY = "Вы получаете знания об оружии.";
+TXT_UPGRADEDBOTH = "Вы обретаете силы и получаете знания об оружии.";
 TXT_LOADEDGAMEISNOTCOOP = "Данное сохранение создано не во время совместного прохождения Strife. Начните новую сетевую игру в режиме совместного прохождения с MAP02.";
 GYP_MUSTGATHERPARTY = "Настоящий солдат своих не бросает!";
