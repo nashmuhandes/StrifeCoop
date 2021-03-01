@@ -89,7 +89,9 @@ class StrifeCoopConversationMenu : ConversationMenu
 
 		// draw debug text
 		if (!plr) return;
-		int debugMode = CVar.GetCVar("strifecoop_debug", plr).GetInt();
+		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+		if (!eh) return;
+		int debugMode = eh.GetCachedCVar(plr, "strifecoop_debug", eh.cvDebug).GetInt();
 		if (debugMode <= 0) return;
 		StrifeCoopDebugText.DrawDebugText(plr, debugMode);
 	}

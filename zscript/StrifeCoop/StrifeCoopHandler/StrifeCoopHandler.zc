@@ -37,6 +37,9 @@ class StrifeCoopHandler : EventHandler
 	// a reference to the campaign object MUST always exist!
 	StrifeCoopCampaign campaign;
 
+	transient CVar cvDebug;
+	transient CVar cvShowPlayerLocator;
+
 	//===========================================================================
 	//
 	//
@@ -83,6 +86,7 @@ class StrifeCoopHandler : EventHandler
 
 	override void WorldLoaded(WorldEvent e)
 	{
+		CacheCVars();
 		GetCampaign();
 		WakeStartingEnemiesInTown();
 	}
@@ -159,8 +163,9 @@ class StrifeCoopHandler : EventHandler
 		}
 		if (!plr) return;
 
-		int debugMode = CVar.GetCVar("strifecoop_debug", plr).GetInt();
-		if (debugMode <= 0) return;
+		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+		if (!eh) return;
+		int debugMode = eh.GetCachedCVar(plr, "strifecoop_debug", eh.cvDebug).GetInt();
 
 		StrifeCoopDebugText.DrawDebugText(plr, debugMode);
 	}
@@ -176,6 +181,27 @@ class StrifeCoopHandler : EventHandler
 
 		// project player names
 		DrawPlayerLocator(e);
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void CacheCVars(void)
+	{
+		cvDebug = CVar.GetCVar("strifecoop_debug", players[consoleplayer]);
+		cvShowPlayerLocator = CVar.GetCVar("strifecoop_showplayerlocator", players[consoleplayer]);
+	}
+
+	clearscope CVar GetCachedCVar(PlayerInfo p, Name cvn, CVar cv)
+	{
+		if (!cv)
+		{
+			ThrowAbortException("CVar %s was not cached", cvn);
+		}
+		return cv;
 	}
 
 	//===========================================================================
@@ -596,10 +622,10 @@ class StrifeCoopHandler : EventHandler
 		PlayerPawn pmo = PlayerPawn(players[consoleplayer].mo);
 		if (!pmo) return;
 
-		// TO DO: please implement user CVar caching
 		if (!pmo.player) return;
-		CVar cv = CVar.GetCVar("strifecoop_showplayerlocator", pmo.player);
-		if (cv && !cv.GetBool()) return;
+		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+		if (!eh) return;
+		if (!eh.GetCachedCVar(pmo.player, "strifecoop_showplayerlocator", eh.cvShowPlayerLocator).GetBool()) return;
 
 		StrifeCoopGutamaticsMatrix worldToClip = StrifeCoopGutamaticsMatrix.WorldToClip(e.ViewPos, e.ViewAngle, e.ViewPitch, e.ViewRoll, players[consoleplayer].FOV);
 
