@@ -619,7 +619,15 @@ class StrifeCoopHandler : EventHandler
 		double alpha = 1.0;
 
 		let mnu = Menu.GetCurrentMenu();
-		if (mnu) alpha = 0.2;
+		if (mnu)
+		{
+			alpha = 0.2;
+
+			if (mnu is "ConversationMenu")
+			{
+				alpha = 0.0;
+			}
+		}
 
 		PlayerPawn pmo = PlayerPawn(players[consoleplayer].mo);
 		if (!pmo) return;
