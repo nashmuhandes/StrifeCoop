@@ -118,7 +118,7 @@ class StrifeCoopDroppableAmmo : Inventory
 			let a1 = pmo.FindInventory(tossCls, true);
 			if (!a1) return NULL;
 
-			if (amt == -1) amt = a1.Amount >= 50 ? 50 : a1.Amount >= 25 ? 25 : a1.Amount >= 10 ? 10 : 1;
+			if (amt == -1) amt = a1.Amount >= 50 ? 50 : a1.Amount >= 25 ? 25 : a1.Amount >= 10 ? 10 : a1.Amount >= 5 ? 5 : 1;
 
 			//Console.Printf("ammount to drop: %d", amt);
 
