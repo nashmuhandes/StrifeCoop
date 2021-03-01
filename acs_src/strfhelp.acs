@@ -242,7 +242,9 @@ script << 0 >> (int type, int tag)
 				// This is so that players don't accidentally bump into the wrong travel direction at map start
 				// which can happen if a player is confused with their orientation
 				travelCooldown = (35 * 3);
-				Teleport_NewMap (tag/100, tag%100, FALSE);
+				bool facing = TRUE;
+				if (gametype() == GAME_NET_DEATHMATCH || gametype() == GAME_NET_COOPERATIVE) facing = FALSE;
+				Teleport_NewMap (tag/100, tag%100, facing);
 			}
 			else
 			{
