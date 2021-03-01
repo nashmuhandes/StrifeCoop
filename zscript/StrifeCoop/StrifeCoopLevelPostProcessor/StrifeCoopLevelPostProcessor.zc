@@ -487,6 +487,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingXY(81, -840, 2168);
 			SetThingXY(82, -856, 2208);
 
+			// Make the entrance-blocking crusher much faster to prevent sequence-breaking
+			SetLineSpecial(241, Ceiling_LowerAndCrushDist, 11, 200, 0x7FFFFFFF, 0, 1);
+			SetLineSpecial(231, Ceiling_LowerAndCrushDist, 11, 200, 0x7FFFFFFF, 0, 1);
+
 			// Make the trap room (before the usable Programmer screen) lower the pillars faster
 			// (and make them deadly crushers too so that the trap can't be broken)
 			// Note that I have intentionally left it so that only the player foolish enough to
