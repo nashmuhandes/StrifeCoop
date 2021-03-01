@@ -616,8 +616,10 @@ class StrifeCoopHandler : EventHandler
 	{
 		if (automapactive) return;
 
+		double alpha = 1.0;
+
 		let mnu = Menu.GetCurrentMenu();
-		if (mnu) return;
+		if (mnu) alpha = 0.2;
 
 		PlayerPawn pmo = PlayerPawn(players[consoleplayer].mo);
 		if (!pmo) return;
@@ -650,7 +652,8 @@ class StrifeCoopHandler : EventHandler
 					drawPos.X - (fnt.StringWidth(playerName) * CleanXFac / 2.0),
 					drawPos.Y - (fnt.GetHeight() * CleanYFac / 2.0),
 					playerName,
-					DTA_CleanNoMove, true);
+					DTA_CleanNoMove, true,
+					DTA_Alpha, alpha);
 			}
 		}
 	}
