@@ -100,6 +100,7 @@ class StrifeCoopHandler : EventHandler
 			return;
 		}
 
+		campaign.Tick();
 		HandleQuestItems();
 	}
 
@@ -112,7 +113,8 @@ class StrifeCoopHandler : EventHandler
 
 	override void WorldThingSpawned(WorldEvent e)
 	{
-		SetupNPCs(e);
+		SetupNPC(e);
+		ScaleNPCStats(e);
 	}
 
 	override void WorldThingDied(WorldEvent e)
@@ -282,16 +284,6 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
-	void SetupNPCs(WorldEvent e)
-	{
-		// Inject custom logic into all NPCs
-		if (e.Thing && e.Thing.bIsMonster)
-		{
-			Actor npc = e.Thing;
-			npc.A_GiveInventory("StrifeCoopNPCPlugin", 1);
-		}
-	}
-
 	void HandlePlayersOnLoadedGame(void)
 	{
 		// TO DO: this can probably be done in a more robust way...
@@ -314,6 +306,50 @@ class StrifeCoopHandler : EventHandler
 					}
 
 				}
+			}
+		}
+	}
+
+	static clearscope int GetPlayerCount(void)
+	{
+		int p = 0;
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				p++;
+			}
+		}
+		return p;
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void SetupNPC(WorldEvent e)
+	{
+		// Inject custom logic into all NPCs
+		if (e.Thing && e.Thing.bIsMonster)
+		{
+			Actor npc = e.Thing;
+			npc.A_GiveInventory("StrifeCoopNPCPlugin", 1);
+		}
+	}
+
+	void ScaleNPCStats(WorldEvent e)
+	{
+		if (!strifecoop_scaleenemies) return;
+
+		if (e.Thing && StrifeCoopHandler.IsEnemy(e.Thing))
+		{
+			Actor npc = e.Thing;
+			let plugin = StrifeCoopNPCPlugin.Find(npc);
+			if (plugin)
+			{
+				plugin.ScaleStats();
 			}
 		}
 	}

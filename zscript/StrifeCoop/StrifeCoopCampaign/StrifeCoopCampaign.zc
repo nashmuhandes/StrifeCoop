@@ -56,6 +56,9 @@ class StrifeCoopCampaign : Thinker
 	// keep a global record of QuestItems acquired throughout the journey
 	Array< class<Inventory> > retrievedQuestItems;
 
+	// enemy scaling
+	bool oldScaleEnemies, newScaleEnemies;
+
 	//===========================================================================
 	//
 	//
@@ -92,12 +95,10 @@ class StrifeCoopCampaign : Thinker
 		else return NULL;
 	}
 
-	/*
 	clearscope int GetTimeInSeconds(void)
 	{
 		return (campaignTime / Thinker.TICRATE);
 	}
-	*/
 
 	//===========================================================================
 	//
@@ -105,13 +106,44 @@ class StrifeCoopCampaign : Thinker
 	//
 	//===========================================================================
 
-	/*
 	override void Tick(void)
 	{
 		// STAT_STATIC thinkers don't automatically tick.
 		// This would usually be called by StrifeCoopHandler::WorldTick
 
 		campaignTime++;
+
+		CheckEnemyScalingSettings();
 	}
-	*/
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	private void CheckEnemyScalingSettings(void)
+	{
+		newScaleEnemies = strifecoop_scaleenemies;
+		if (oldScaleEnemies != newScaleEnemies)
+		{
+			DoScaleEnemies();
+			//Console.Printf("Enemy scaling settings have changed. Rescaling enemies...");
+			oldScaleEnemies = newScaleEnemies;
+		}
+	}
+
+	void DoScaleEnemies(void)
+	{
+		ThinkerIterator it = ThinkerIterator.Create("Actor");
+		Actor mo;
+		while (mo = Actor(it.Next()))
+		{
+			let plugin = StrifeCoopNPCPlugin.Find(mo);
+			if (plugin)
+			{
+				plugin.ScaleStats();
+			}
+		}
+	}
 }

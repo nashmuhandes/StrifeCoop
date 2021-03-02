@@ -139,6 +139,47 @@ class StrifeCoopNPCPlugin : Inventory
 	//
 	//===========================================================================
 
+	void ScaleStats(void)
+	{
+		if (!Owner) return;
+		let me = Owner;
+
+		if (me.Health <= 0) return;
+
+		int pcount = StrifeCoopHandler.GetPlayerCount();
+
+		//===========================================================================
+		//
+		// Scale max health
+		//
+		//===========================================================================
+		int osh = me.SpawnHealth();
+		int nsh = osh;
+
+		// keep track of original health percentage scaling
+		int originalHealthPercent = 100 * me.Health / me.SpawnHealth();
+
+		//Console.Printf("%s's health is at %d%% before scaling", me.GetTag(), originalHealthPercent);
+
+		for (int i = 0; i < pcount; i++)
+		{
+			// no additional health on the 0th player
+			if (i > 0)
+			{
+				// 50% additional health for every player from player 2 and beyond
+				nsh = nsh + (nsh / 2);
+			}
+		}
+
+		// you can't write to SpawnHealth, but apparently StartHealth does it
+		me.StartHealth = strifecoop_scaleenemies ? nsh : me.Default.SpawnHealth();
+
+		// now set the health percentage back to what it originally was
+		int newHealth = me.SpawnHealth() * originalHealthPercent / 100;
+		//Console.Printf("%s's new health is %d after scaling", me.GetTag(), newHealth);
+		me.A_SetHealth(newHealth);
+	}
+
 	void RandomlyTargetOtherPlayers(void)
 	{
 		PlayerPawn targ = PlayerPawn(Owner.target);
