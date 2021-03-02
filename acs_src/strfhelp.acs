@@ -9,8 +9,10 @@
 #define VDOORWAIT   150
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
-global int 62: travelCooldown;
-global int 63: GYPCooldown;
+global bool	60: map09PointOfNoReturn;
+global int	61: map09PointOfNoReturnSpawnTIDs[];
+global int	62: travelCooldown;
+global int	63: GYPCooldown;
 
 str QuestItems[32] =
 {
@@ -491,6 +493,54 @@ script "StrifeCoop_SendToCommunicatorNoLog" (int voc_id, int front_only, int ide
 //
 //
 //===========================================================================
+
+script "StrifeCoop_MAP09PointOfNoReturnScript" (void)
+{
+	ClearLineSpecial();
+	Ceiling_LowerAndCrushDist(11, 200, 0x7FFFFFFF, 0, 1);
+
+	if (!map09PointOfNoReturn)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE)
+		{
+			// Spawn the new map spots for the resurrecting players to teleport to.
+			int tid = 0;
+
+			// Player 1
+			tid = UniqueTID();
+			map09PointOfNoReturnSpawnTIDs[0] = tid;
+			SpawnForced("MapSpotGravity", -624.0, 2208.0, 128.0, tid, 0);
+
+			// Player 2
+			tid = UniqueTID();
+			map09PointOfNoReturnSpawnTIDs[1] = tid;
+			SpawnForced("MapSpotGravity", -672.0, 2208.0, 128.0, tid, 0);
+
+			// Player 3
+			tid = UniqueTID();
+			map09PointOfNoReturnSpawnTIDs[2] = tid;
+			SpawnForced("MapSpotGravity", -672.0, 2256.0, 128.0, tid, 0);
+
+			// Player 4
+			tid = UniqueTID();
+			map09PointOfNoReturnSpawnTIDs[3] = tid;
+			SpawnForced("MapSpotGravity", -672.0, 2160.0, 128.0, tid, 0);
+		}
+
+		map09PointOfNoReturn = TRUE;
+	}
+}
+
+script "StrifeCoop_MAP09PointOfNoReturnPlayerRespawnScript" RESPAWN
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) == 9)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE && map09PointOfNoReturn == TRUE)
+		{
+			Thing_Move(0, map09PointOfNoReturnSpawnTIDs[PlayerNumber()], FALSE);
+		}
+	}
+}
 
 script "StrifeCoop_MAP09ProgrammerTrapScript" (void)
 {

@@ -488,8 +488,12 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingXY(82, -856, 2208);
 
 			// Make the entrance-blocking crusher much faster to prevent sequence-breaking
-			SetLineSpecial(241, Ceiling_LowerAndCrushDist, 11, 200, 0x7FFFFFFF, 0, 1);
-			SetLineSpecial(231, Ceiling_LowerAndCrushDist, 11, 200, 0x7FFFFFFF, 0, 1);
+			// Now offloaded to a new ACS script, to be able to handle the dynamic player start locations.
+			// Crossing these lines will activate a "point of no return", where the ceiling in the original
+			// starting room gets lowered. The original player starts would therefore have to be moved. This
+			// is done in the ACS script.
+			SetLineSpecial(241, ACS_ExecuteAlways, -int('StrifeCoop_MAP09PointOfNoReturnScript'), 0, 0, 0, 0);
+			SetLineSpecial(231, ACS_ExecuteAlways, -int('StrifeCoop_MAP09PointOfNoReturnScript'), 0, 0, 0, 0);
 
 			// Make the trap room (before the usable Programmer screen) lower the pillars faster
 			// (and make them deadly crushers too so that the trap can't be broken)
