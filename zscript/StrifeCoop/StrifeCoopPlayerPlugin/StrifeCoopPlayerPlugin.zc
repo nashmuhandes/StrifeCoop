@@ -148,7 +148,7 @@ class StrifeCoopPlayerPlugin : Inventory
 					let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
 					if (eh && eh.campaign)
 					{
-						eh.DoScaleEnemies();
+						eh.campaign.DoScaleEnemies();
 					}
 				}
 			}
