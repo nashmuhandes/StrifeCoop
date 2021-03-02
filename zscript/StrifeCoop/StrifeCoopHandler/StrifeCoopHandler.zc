@@ -564,22 +564,56 @@ class StrifeCoopHandler : EventHandler
 	//
 	//===========================================================================
 
+	static clearscope bool IsTalkableNPC(Actor mo)
+	{
+		return
+		(
+			mo is "StrifeHumanoid"	||
+			mo is "Macil1"			||
+			mo is "Oracle"			||
+			mo is "SpectralMonster"	||
+			mo is "Merchant"
+		);
+	}
+
+	static clearscope bool IsEnemy(Actor mo)
+	{
+		if (!mo.bIsMonster || (mo.bIsMonster && mo.bFriendly)) return false;
+
+		return
+		(
+			mo is "Acolyte"			||
+			mo is "SpectralMonster"	||
+			mo is "Crusader"		||
+			mo is "Inquisitor"		||
+			mo is "LoreMaster"		||
+			mo is "Macil1"			||
+			mo is "Programmer"		||
+			mo is "Reaver"			||
+			mo is "Sentinel"		||
+			mo is "Stalker"			||
+			mo is "Templar"
+		);
+	}
+
+	static clearscope bool IsMerchant(Actor mo)
+	{
+		return (mo is "Merchant");
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
 	void StopNPCVoices(void)
 	{
 		ThinkerIterator it = ThinkerIterator.Create("Actor");
 		Actor mo;
 		while (mo = Actor(it.Next()))
 		{
-			// stop talking characters
-			bool valid =
-			(
-				mo is "StrifeHumanoid" ||
-				mo is "Macil1" ||
-				mo is "Oracle" ||
-				mo is "SpectralMonster"
-			);
-
-			if (valid && mo.IsActorPlayingSound(CHAN_VOICE))
+			if (StrifeCoopHandler.IsTalkableNPC(mo) && mo.IsActorPlayingSound(CHAN_VOICE))
 			{
 				mo.A_StopSound(CHAN_VOICE);
 			}
