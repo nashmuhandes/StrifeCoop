@@ -265,8 +265,8 @@ class StrifeCoopPlayerPlugin : Inventory
 							{
 								playerToUpdate.player.SetLogNumber(num);
 
-								// hack needed to make subtitles show up when you kill AlienSpectre5...
-								if (num == 83 || num == 85)
+								// hack needed to make subtitles show up when you kill AlienSpectre5, or the scanning crew (blue Acolytes)...
+								if (num == 83 || num == 85 || num == 14)
 								{
 									String voc = "svox/voc" .. num;
 									playerToUpdate.player.SetSubtitleNumber(num, voc);
