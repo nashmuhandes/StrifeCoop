@@ -141,6 +141,16 @@ class StrifeCoopPlayerPlugin : Inventory
 				int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
 				pmo.player.SetLogNumber(num);
 				isNewJoiningPlayer = false;
+
+				// rescale enemies
+				if (strifecoop_scaleenemies)
+				{
+					let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+					if (eh && eh.campaign)
+					{
+						eh.DoScaleEnemies();
+					}
+				}
 			}
 		}
 	}
