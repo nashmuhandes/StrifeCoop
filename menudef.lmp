@@ -29,6 +29,7 @@ OptionMenu "StrifeCoopMenu"
 
 	StaticText "$STRIFECOOPMNU_BALANCE_TITLE", 1
 	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_ENEMYSCALING", "$STRIFECOOPMNU_HELPTEXT_BALANCE_ENEMYSCALING", "strifecoop_scaleenemies", "OnOff"
+	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_EXTRAAMMO", "$STRIFECOOPMNU_HELPTEXT_BALANCE_EXTRAAMMO", "strifecoop_extraammo", "OnOff"
 
 	StaticText ""
 

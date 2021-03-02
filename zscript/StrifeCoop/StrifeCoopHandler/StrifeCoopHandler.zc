@@ -115,6 +115,7 @@ class StrifeCoopHandler : EventHandler
 	{
 		SetupNPC(e);
 		ScaleNPCStats(e);
+		ScaleAmmoPickupAmount(e);
 	}
 
 	override void WorldThingDied(WorldEvent e)
@@ -350,6 +351,30 @@ class StrifeCoopHandler : EventHandler
 			if (plugin)
 			{
 				plugin.ScaleStats();
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void ScaleAmmoPickupAmount(WorldEvent e)
+	{
+		if (!strifecoop_extraammo) return;
+
+		if (e.Thing && e.Thing is "Ammo")
+		{
+			let ammo = Ammo(e.Thing);
+			if (ammo)
+			{
+				//Console.Printf("%s ammo before: %d", ammo.GetTag(), ammo.Amount);
+				double oa = int(ammo.Amount);
+				oa *= (1.20 * StrifeCoopHandler.GetPlayerCount() - 1);
+				ammo.Amount = int(oa);
+				//Console.Printf("%s ammo after: %d", ammo.GetTag(), ammo.Amount);
 			}
 		}
 	}
