@@ -264,6 +264,14 @@ class StrifeCoopHandler : EventHandler
 		{
 			pmo.A_GiveInventory("StrifeCoopPlayerPlugin");
 		}
+
+		if (plugin)
+		{
+			if (plugin.exitedLevel)
+			{
+				plugin.exitedLevel = false;
+			}
+		}
 	}
 
 	void ResurrectPlayer(PlayerPawn pmo)
@@ -698,7 +706,11 @@ class StrifeCoopHandler : EventHandler
 					let plugin = StrifeCoopPlayerPlugin.Find(pmo);
 					if (plugin)
 					{
-						plugin.ClearConversationStuff(pmo.player);
+						if (gameaction != ga_slideshow)
+						{
+							plugin.ClearConversationStuff(pmo.player);
+							plugin.exitedLevel = true;
+						}
 					}
 				}
 			}

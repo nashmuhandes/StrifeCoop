@@ -45,6 +45,8 @@ class StrifeCoopPlayerPlugin : Inventory
 	// (for example, player 3 joining on a save game that was saved with 2 players)
 	bool isNewJoiningPlayer;
 
+	bool exitedLevel;
+
 	//===========================================================================
 	//
 	//
@@ -438,6 +440,16 @@ class StrifeCoopPlayerPlugin : Inventory
 
 	void ClearConversationStuff(PlayerInfo plr)
 	{
+		let npc = plr.ConversationNPC;
+		if (npc)
+		{
+			// restore NPC angle
+			if (!npc.bDontFaceTalker)
+			{
+				npc.Angle = plr.ConversationNPCAngle;
+			}
+		}
+
 		plr.ConversationFaceTalker = false;
 		plr.ConversationNPC = NULL;
 		plr.ConversationPC = NULL;

@@ -64,21 +64,38 @@ class StrifeCoopConversationMenu : ConversationMenu
 	{
 		Super.Ticker();
 
-		// if the person you're talking to was attacked, end the conversation immediately
 		if (plr.ConversationNPC && plr.ConversationPC)
 		{
+			bool forceCloseConversation = false;
+
+			// if the person you're talking to was attacked, end the conversation immediately
 			Actor npc = plr.ConversationNPC;
 			let plugin = StrifeCoopNPCPlugin.Find(npc);
 			if (plugin)
 			{
 				if (plugin.talkingWasInterrupted > 0)
 				{
-					// clear conversation pointers
-					StrifeCoopHandler.SendNetworkEvent("EV_ClearConversationStuff");
-
-					// use the "back" event instead of closing the menu directly
-					MenuEvent(MKEY_Back, false);
+					forceCloseConversation = true;
 				}
+			}
+
+			// close the conversation if someone triggered a level exit
+			let pplugin = StrifeCoopPlayerPlugin.Find(pmo);
+			if (pplugin)
+			{
+				if (pplugin.exitedLevel)
+				{
+					forceCloseConversation = true;
+				}
+			}
+
+			if (forceCloseConversation)
+			{
+				// clear conversation pointers
+				StrifeCoopHandler.SendNetworkEvent("EV_ClearConversationStuff");
+
+				// use the "back" event instead of closing the menu directly
+				MenuEvent(MKEY_Back, false);
 			}
 		}
 	}
