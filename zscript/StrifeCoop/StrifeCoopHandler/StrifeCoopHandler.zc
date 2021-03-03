@@ -101,7 +101,6 @@ class StrifeCoopHandler : EventHandler
 		}
 
 		campaign.Tick();
-		HandleQuestItems();
 	}
 
 	override void WorldUnloaded(WorldEvent e)
@@ -417,67 +416,6 @@ class StrifeCoopHandler : EventHandler
 	//
 	//
 	//===========================================================================
-
-	void HandleQuestItems(void)
-	{
-		if (!multiplayer || !campaign) return;
-
-		// No, there really isn't a better way to do this for the vanilla quest items.
-		// Actor replacement doesn't work because too many parts of the game check for the
-		// original items directly by class name.
-
-		// First, collect all of the items each player has
-		for (int i = 0; i < MAXPLAYERS; i++)
-		{
-			if (playeringame[i])
-			{
-				PlayerInfo plr = players[i];
-				let pmo = players[i].mo;
-
-				if (pmo && plr)
-				{
-					for (Inventory item = pmo.Inv; item != NULL; item = item.Inv)
-					{
-						if (item is "QuestItem" || item is "Communicator" || item is "StrifeKey" || item is "PrisonPass")
-						{
-							class<Inventory> cls = item.GetClass();
-							if (cls)
-							{
-								if (campaign.retrievedQuestItems.Find(cls) == campaign.retrievedQuestItems.Size())
-								{
-									//Console.Printf("Found %s on player %d", cls.GetClassName(), pmo.PlayerNumber() + 1);
-									campaign.retrievedQuestItems.Push(cls);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		// Then, distribute the items to all players
-		for (int i = 0; i < MAXPLAYERS; i++)
-		{
-			if (playeringame[i])
-			{
-				PlayerInfo plr = players[i];
-				let pmo = players[i].mo;
-
-				if (pmo && plr)
-				{
-					for (int j = 0; j < campaign.retrievedQuestItems.Size(); j++)
-					{
-						let a = pmo.FindInventory(campaign.retrievedQuestItems[j], true);
-						if (!a)
-						{
-							//Console.Printf("Giving %s to player %d", campaign.retrievedQuestItems[j].GetClassName(), pmo.PlayerNumber() + 1);
-							pmo.A_GiveInventory(campaign.retrievedQuestItems[j], 1);
-						}
-					}
-				}
-			}
-		}
-	}
 
 	void TransferQuestItems(PlayerEvent e)
 	{
