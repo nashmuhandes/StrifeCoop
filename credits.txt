@@ -1,0 +1,40 @@
+STRIFE COOP PATCH PROJECT
+-------------------------
+
+Developed by Nash Muhandes
+
+
+ZDOOM
+-----
+
+randi / Marisa Heit
+
+
+GZDOOM
+------
+
+Graf Zahl / Cristoph Oelckers
+
+
+GUTAMATICS
+----------
+
+Gutawer / Jessica Russel
+
+
+ADDITIONAL ASSISTANCE
+---------------------
+
+phantombeta
+
+
+PLAYTESTERS
+-----------
+
+Marisa Kirisame
+Kostov
+StroggVorbis
+Srbosanka
+
+
+Thanks for playing!
