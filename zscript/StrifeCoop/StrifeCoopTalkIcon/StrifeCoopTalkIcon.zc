@@ -36,7 +36,7 @@ class StrifeCoopTalkIcon : Actor
 	{
 		Scale 0.66;
 		FloatBobPhase 0;
-		FloatBobStrength 0.4;
+		FloatBobStrength 0.087;
 		+FLOATBOB
 		+NOINTERACTION
 		+FORCEXYBILLBOARD
@@ -88,7 +88,7 @@ class StrifeCoopTalkIcon : Actor
 	States
 	{
 	Spawn:
-		TALK A -1;
-		Stop;
+		TALK ABCD 21;
+		Loop;
 	}
 }
