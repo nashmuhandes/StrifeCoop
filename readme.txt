@@ -1,4 +1,4 @@
-Strife Coop Project (StrifeCoop) v0.9 beta
+Strife Coop Project (StrifeCoop) v0.9 beta (hotfix version)
 
 Developed by Nash Muhandes
 
