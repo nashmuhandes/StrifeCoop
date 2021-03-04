@@ -56,6 +56,10 @@ class StrifeCoopCampaign : Thinker
 	// keep a global record of QuestItems acquired throughout the journey
 	Array< class<Inventory> > retrievedQuestItems;
 
+	// picking up an officer's uniform should give all players the uniform, but only just once.
+	// if they drop it, it's their responsibility to get it back
+	bool playerHasOfficersUniform[MAXPLAYERS];
+
 	// enemy scaling
 	bool oldScaleEnemies, newScaleEnemies;
 
@@ -144,13 +148,29 @@ class StrifeCoopCampaign : Thinker
 				{
 					for (Inventory item = pmo.Inv; item != NULL; item = item.Inv)
 					{
-						if (item is "QuestItem" || item is "Communicator" || item is "StrifeKey" || item is "PrisonPass" || item is "Sigil")
+						bool isValidItem =
+						(
+							item is "QuestItem"			||
+							item is "Communicator"		||
+							item is "StrifeKey"			||
+							item is "PrisonPass"		||
+							item is "OfficersUniform"	||
+							item is "Sigil"
+						);
+
+						if (isValidItem)
 						{
 							class<Inventory> cls = item.GetClass();
 							if (cls)
 							{
 								if (retrievedQuestItems.Find(cls) == retrievedQuestItems.Size())
 								{
+									// special handling for the officer's uniform
+									if (item is "OfficersUniform" && !playerHasOfficersUniform[i])
+									{
+										playerHasOfficersUniform[i] = true;
+									}
+
 									//Console.Printf("Found %s on player %d", cls.GetClassName(), pmo.PlayerNumber() + 1);
 									retrievedQuestItems.Push(cls);
 								}
@@ -173,11 +193,21 @@ class StrifeCoopCampaign : Thinker
 				{
 					for (int j = 0; j < retrievedQuestItems.Size(); j++)
 					{
-						let a = pmo.FindInventory(retrievedQuestItems[j], true);
+						let itemToGive = retrievedQuestItems[j];
+						let a = pmo.FindInventory(itemToGive, true);
 						if (!a)
 						{
-							//Console.Printf("Giving %s to player %d", retrievedQuestItems[j].GetClassName(), pmo.PlayerNumber() + 1);
-							pmo.A_GiveInventory(retrievedQuestItems[j], 1);
+							//Console.Printf("Giving %s to player %d", itemToGive.GetClassName(), pmo.PlayerNumber() + 1);
+							if (!(itemToGive is "OfficersUniform"))
+							{
+								pmo.A_GiveInventory(itemToGive, 1);
+							}
+							// officer's uniform needs special handling so that it is only given once per player
+							else if (itemToGive is "OfficersUniform" && !playerHasOfficersUniform[i])
+							{
+								pmo.A_GiveInventory(itemToGive, 1);
+								playerHasOfficersUniform[i] = true;
+							}
 						}
 					}
 				}
