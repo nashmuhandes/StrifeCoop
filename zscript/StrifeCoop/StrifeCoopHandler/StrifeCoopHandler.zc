@@ -555,7 +555,7 @@ class StrifeCoopHandler : EventHandler
 					if (snd) pmo.A_StartSound(snd, CHAN_AUTO, CHANF_UI, attenuation: ATTN_NONE);
 
 					// remove these when PR gets merged
-					if (soundToPlay == "svox/voc130") pmo.player.SetSubTitleNumber(128, "svox/voc130");
+					if (soundToPlay == "svox/voc130") pmo.player.SetSubTitleNumber(130, "svox/voc130");
 					else if (soundToPlay == "svox/voc128") pmo.player.SetSubTitleNumber(128, "svox/voc128");
 
 					// use this when PR gets merged
