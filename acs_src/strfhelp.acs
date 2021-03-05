@@ -6,6 +6,9 @@
 #define VDOORWAIT   150
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+global int	55: map28PointOfNoReturn;
+global int	56: map28PointOfNoReturn2SpawnTIDs[];
+global int	57: map28PointOfNoReturn1SpawnTIDs[];
 global bool	58: map25PointOfNoReturn;
 global int	59: map25PointOfNoReturnSpawnTIDs[];
 global bool	60: map09PointOfNoReturn;
@@ -602,6 +605,113 @@ script "StrifeCoop_MAP25PointOfNoReturnPlayerRespawnScript" RESPAWN
 		if (GameType() == GAME_NET_COOPERATIVE && map25PointOfNoReturn == TRUE)
 		{
 			Thing_Move(0, map25PointOfNoReturnSpawnTIDs[PlayerNumber()], FALSE);
+		}
+	}
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+script "StrifeCoop_MAP28PointOfNoReturn1Script" (void)
+{
+	ClearLineSpecial();
+	Floor_RaiseToLowestCeiling(11, 8);
+
+	if (map28PointOfNoReturn == 0)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE)
+		{
+			// Spawn the new map spots for the resurrecting players to teleport to.
+			int tid = 0;
+
+			// Player 1
+			tid = UniqueTID();
+			map28PointOfNoReturn1SpawnTIDs[0] = tid;
+			SpawnForced("MapSpotGravity", 2848.0, -1856.0, 0.0, tid, 64);
+
+			// Player 2
+			tid = UniqueTID();
+			map28PointOfNoReturn1SpawnTIDs[1] = tid;
+			SpawnForced("MapSpotGravity", 2912.0, -1856.0, 0.0, tid, 64);
+
+			// Player 3
+			tid = UniqueTID();
+			map28PointOfNoReturn1SpawnTIDs[2] = tid;
+			SpawnForced("MapSpotGravity", 2976.0, -1856.0, 0.0, tid, 64);
+
+			// Player 4
+			tid = UniqueTID();
+			map28PointOfNoReturn1SpawnTIDs[3] = tid;
+			SpawnForced("MapSpotGravity", 3040.0, -1856.0, 0.0, tid, 64);
+		}
+
+		map28PointOfNoReturn = 1;
+	}
+}
+
+script "StrifeCoop_MAP28PointOfNoReturn2Script" (void)
+{
+	ClearLineSpecial();
+	Ceiling_LowerAndCrushDist(3, 200, 0x7FFFFFFF, 0, 1);
+
+	if (map28PointOfNoReturn == 1)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE)
+		{
+			// Spawn the new map spots for the resurrecting players to teleport to.
+			int tid = 0;
+
+			// Player 1
+			tid = UniqueTID();
+			map28PointOfNoReturn2SpawnTIDs[0] = tid;
+			SpawnForced("MapSpotGravity", 2976.0, -992.0, -48.0, tid, 64);
+
+			// Player 2
+			tid = UniqueTID();
+			map28PointOfNoReturn2SpawnTIDs[1] = tid;
+			SpawnForced("MapSpotGravity", 3040.0, -992.0, -48.0, tid, 64);
+
+			// Player 3
+			tid = UniqueTID();
+			map28PointOfNoReturn2SpawnTIDs[2] = tid;
+			SpawnForced("MapSpotGravity", 3104.0, -992.0, -48.0, tid, 64);
+
+			// Player 4
+			tid = UniqueTID();
+			map28PointOfNoReturn2SpawnTIDs[3] = tid;
+			SpawnForced("MapSpotGravity", 3168.0, -992.0, -48.0, tid, 64);
+		}
+
+		map28PointOfNoReturn = 2;
+	}
+}
+
+script "StrifeCoop_MAP28ExitToEntityLairScript" (void)
+{
+	map28PointOfNoReturn = 3;
+	ACS_ExecuteAlways(0, 0, 145, 2901);
+}
+
+script "StrifeCoop_MAP28PointOfNoReturnPlayerRespawnScript" RESPAWN
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) == 28)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE)
+		{
+			if (map28PointOfNoReturn < 3)
+			{
+				if (map28PointOfNoReturn == 1)
+				{
+					Thing_Move(0, map28PointOfNoReturn1SpawnTIDs[PlayerNumber()], FALSE);
+				}
+				else if (map28PointOfNoReturn == 2)
+				{
+					Thing_Move(0, map28PointOfNoReturn2SpawnTIDs[PlayerNumber()], FALSE);
+				}
+			}
 		}
 	}
 }

@@ -1316,6 +1316,13 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			p = AddThing(3, (2871, -2544, 0), 90); SetThingArgument(p, 0, 1);
 			p = AddThing(4, (3019, -2529, 0), 90); SetThingArgument(p, 0, 1);
 
+			// Handle points of no return
+			SetLineSpecial(1087, ACS_ExecuteAlways, -int('StrifeCoop_MAP28PointOfNoReturn1Script'), 0, 0, 0, 0);
+			SetLineSpecial(1088, ACS_ExecuteAlways, -int('StrifeCoop_MAP28PointOfNoReturn1Script'), 0, 0, 0, 0);
+			SetLineSpecial(1089, ACS_ExecuteAlways, -int('StrifeCoop_MAP28PointOfNoReturn1Script'), 0, 0, 0, 0);
+			SetLineSpecial(69, ACS_ExecuteAlways, -int('StrifeCoop_MAP28PointOfNoReturn2Script'), 0, 0, 0, 0);
+			SetLineSpecial(1002, ACS_ExecuteAlways, -int('StrifeCoop_MAP28ExitToEntityLairScript'), 0, 0, 0, 0);
+
 			//===========================================================================
 			//
 			// Setup Coop-Friendly Player Starts
