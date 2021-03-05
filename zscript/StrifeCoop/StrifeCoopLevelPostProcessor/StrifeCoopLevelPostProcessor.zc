@@ -1199,6 +1199,9 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingAngle(4, 180);
 			SetThingAngle(5, 225);
 
+			// Setup new player respawn points after the exit blocker was triggered
+			SetLineSpecial(865, ACS_ExecuteAlways, -int('StrifeCoop_MAP25PointOfNoReturnScript'), 0, 0, 0, 0);
+
 			break;
 
 		case '85D7183042B90FCC7CCC820FE2FA7B77': // strife1.wad map26 - Proving Grounds
