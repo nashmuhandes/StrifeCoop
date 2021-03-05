@@ -125,6 +125,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '92DD353943BE589C175FEFC969597950': // strife1.wad map01 - Sanctuary
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -263,6 +275,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '20C20E1FC803F192613A52A62872BCDE': // strife1.wad map03 - Front Base
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -297,6 +321,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '8AB955C176204FC3DC8008A01BDDEE87': // strife1.wad map04 - Power Station
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -316,6 +352,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '8DC5B4A41E35089C9789F7EC6393A015': // strife1.wad map05 - Prison
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -340,6 +388,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'ED6BA7CD9388DBC9F30363EF24DBACDF': // strife1.wad map06 - Sewers
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -390,6 +450,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '4A79D4C48352804FAB3557EE423ADAFE': // strife1.wad map07 - Castle
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -450,6 +522,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case 'D1377FAF42EA65955466169020CE5744': // strife1.wad map08 - Audience Chamber
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -466,6 +550,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '9DA85A8D59EFE7C8B80A0DF6DD9C40AB': // strife1.wad map09 - Castle: Programmer's Keep
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -506,6 +602,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '39C594CAC07EE51C80F757DA465FCC94': // strife1.wad map10 - New Front Base
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Setup Coop-Friendly Player Starts
@@ -549,6 +657,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '28CB8D6614024C51C8DB00C7ADBFD857': // strife1.wad map11 - Borderlands
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -625,6 +745,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '66375224D5815F4FFCB1AEB9D39DFA8C': // strife1.wad map12 - The Temple of the Oracle
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -673,6 +805,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'FB1FAC7C198518B892EE6A6CD8113548': // strife1.wad map13 - Catacombs
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -745,6 +889,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case 'EFBF3805358AA81DF2251889BFC5DD78': // strife1.wad map14 - Mines
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -780,6 +936,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '8D7A24B169717907DDA8399D8C1655DF': // strife1.wad map15 - Fortress: Administration
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -822,6 +990,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case 'E3E6ABE44B1C034F19385AD1B19BEC97': // strife1.wad map16 - Fortress: Bishop's Tower
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -856,6 +1036,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'F61264F1BCEC279E03BEF14CC45D98AB': // strife1.wad map17 - Fortress: The Bailey
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -930,6 +1122,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case 'E6D6F6266DCB70D2792006D740F43473': // strife1.wad map18 - Fortress: Stores
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -948,6 +1152,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '1240E48EE30E52D7742DC3785BC0C919': // strife1.wad map19 - Fortress: Security Complex
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -964,6 +1180,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'D8B1AB710958A1205098FE224B9189DE': // strife1.wad map20 - Factory: Receiving
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -1019,6 +1247,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case 'D5FD90FA7A8133E7BFED682D3D313962': // strife1.wad map21 - Factory: Manufacturing
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -1069,6 +1309,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '088F331310F54154443B15EE81AF8BFD': // strife1.wad map22 - Factory: Forge
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -1085,6 +1337,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '777F7085371D7020872E10089AADB764': // strife1.wad map23 - Order Commons
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -1140,6 +1404,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '935024573889AB8CD873A17B21041857': // strife1.wad map24 - Factory: Conversion Chapel
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -1174,6 +1450,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '08A5B44623FFF504462EDC1CA36B1997': // strife1.wad map25 - Catacombs: Ruined Temple
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -1205,6 +1493,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '85D7183042B90FCC7CCC820FE2FA7B77': // strife1.wad map26 - Proving Grounds
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -1263,6 +1563,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case 'BAF651138A21FB03AB920FA626F6E64D': // strife1.wad map27 - The Lab
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -1298,6 +1610,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '840DE1C6C218D9C367E930C89EBDC40A': // strife1.wad map28 - Alien Ship
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
@@ -1344,6 +1668,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		case '775CBC35C0A58326FE87AAD638FF9E2A': // strife1.wad map29 - Entity's Lair
 			//===========================================================================
 			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
+			//===========================================================================
+			//
 			// Fix Bad Player Starts
 			//
 			//===========================================================================
@@ -1366,6 +1702,18 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '252AF75417C87B680AD2CA48E52DC716': // strife1.wad map30 - Abandoned Front Base
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			t = 0;
+			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
