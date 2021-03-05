@@ -153,7 +153,6 @@ class StrifeCoopCampaign : Thinker
 							item is "QuestItem"			||
 							item is "Communicator"		||
 							item is "StrifeKey"			||
-							item is "PrisonPass"		||
 							item is "OfficersUniform"	||
 							item is "Sigil"
 						);
