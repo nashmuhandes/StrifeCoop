@@ -328,7 +328,7 @@ script << 0 >> (int type, int tag)
 	case 194:
 		if (Door_Open (tag, VDOORSPEED))
 		{
-			print (l:"TXT_FREED_PRISONERS");
+			printbold (l:"TXT_FREED_PRISONERS");
 			GiveInventory ("QuestItem13", 1);
 		}
 		else
@@ -340,7 +340,7 @@ script << 0 >> (int type, int tag)
 	case 199:
 		if (Ceiling_LowerAndCrush (tag, 8, 10))
 		{
-			print (l:"TXT_DESTROYED_CONVERTER");
+			printbold (l:"TXT_DESTROYED_CONVERTER");
 			GiveInventory ("QuestItem25", 1);
 			GiveInventory ("UpgradeStamina", 10);
 			GiveInventory ("UpgradeAccuracy", 1);
@@ -374,7 +374,7 @@ script << 0 >> (int type, int tag)
 		{
 			GiveInventory ("UpgradeStamina", 10);
 			GiveInventory ("UpgradeAccuracy", 1);
-			print (l:"TXT_COMPLETED_TRAINING");
+			printbold (l:"TXT_COMPLETED_TRAINING");
 		}
 		else
 		{
