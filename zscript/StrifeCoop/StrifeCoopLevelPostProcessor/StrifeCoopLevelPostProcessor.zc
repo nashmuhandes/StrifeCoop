@@ -1208,7 +1208,9 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			//
 			//===========================================================================
 
-			// Remove Teleport New Map Spot 1 because there are proper player starts already
+			// Factory: Manufacturing entrance
+
+			// Remove Teleport New Map Spot 1  because there are proper player starts already
 			SetThingEdNum(333, 0);
 
 			// Existing player starts need to be given the proper args
@@ -1237,7 +1239,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 
 			t = 0;
 
-			// Lab entrance
+			// The Lab entrance
 			// (Teleport New Map Spot 2)
 			SetThingEdNum(177, 0);
 			t = AddThing(1, (1824, 3344, 0), 270); SetThingArgument(t, 0, 2);
@@ -1245,9 +1247,9 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			t = AddThing(3, (1865, 3360, 0), 270); SetThingArgument(t, 0, 2);
 			t = AddThing(4, (1782, 3359, 0), 270); SetThingArgument(t, 0, 2);
 
-			// Temple of the Oracle teleporter entrance
+			// Temple of the Oracle (inner sanctum) teleporter entrance
 			// (Teleport New Map Spot 3)
-			SetThingEdNum(177, 0);
+			SetThingEdNum(335, 0);
 			t = AddThing(1, (1632, -32, 0), 90); SetThingArgument(t, 0, 3);
 			t = AddThing(2, (1566, -11, 0), 90); SetThingArgument(t, 0, 3);
 			t = AddThing(3, (1697, -11, 0), 90); SetThingArgument(t, 0, 3);
