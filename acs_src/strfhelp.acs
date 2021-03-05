@@ -121,7 +121,9 @@ script << 0 >> (int type, int tag)
 	case 197:
 		if (GetSigilPieces() > 1)
 		{
-			Door_Close (tag, VDOORSPEED*4);
+			// [Nash] This is when you're approaching the Oracle to decide whether to kill Macil or not.
+			// Make it a fast lethal crusher so that players don't break the sequence
+			Ceiling_LowerAndCrushDist(tag, 200, 0x7FFFFFFF, 0, 1);
 			clearlinespecial ();
 		}
 		break;
