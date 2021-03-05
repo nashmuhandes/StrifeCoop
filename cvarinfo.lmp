@@ -1,7 +1,6 @@
 user int strifecoop_debug = 0;
 user bool strifecoop_chatbubble = true;
 server bool strifecoop_gatherparty = true;
-server bool strifecoop_droppableammo = true;
 server bool strifecoop_playercollision = true;
 server bool strifecoop_scaleenemies = false;
 server bool strifecoop_extraammo = false;

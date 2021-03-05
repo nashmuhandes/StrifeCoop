@@ -23,7 +23,6 @@ OptionMenu "StrifeCoopMenu"
 	StaticText "$STRIFECOOPMNU_GAMEPLAY_TITLE", 1
 	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_PLAYERCOL", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_PLAYERCOL", "strifecoop_playercollision", "OnOff"
 	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_GROUPEXIT", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_GROUPEXIT", "strifecoop_gatherparty", "OnOff"
-	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_DROPAMMO", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_DROPAMMO", "strifecoop_droppableammo", "OnOff"
 
 	StaticText ""
 

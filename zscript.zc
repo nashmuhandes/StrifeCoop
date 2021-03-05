@@ -81,7 +81,6 @@ enum EThruGroups
 #include "zscript/StrifeCoop/StrifeCoopLevelPostProcessor/StrifeCoopLevelPostProcessor.zc"
 #include "zscript/StrifeCoop/StrifeCoopNPCPlugin/StrifeCoopNPCPlugin.zc"
 #include "zscript/StrifeCoop/StrifeCoopPlayerPlugin/StrifeCoopPlayerPlugin.zc"
-#include "zscript/StrifeCoop/StrifeCoopDroppableAmmo/StrifeCoopDroppableAmmo.zc"
 #include "zscript/StrifeCoop/StrifeCoopTalkIcon/StrifeCoopTalkIcon.zc"
 #include "zscript/StrifeCoop/StrifeCoopProgLevelEnder/StrifeCoopProgLevelEnder.zc"
 
