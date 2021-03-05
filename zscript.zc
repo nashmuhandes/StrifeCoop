@@ -74,8 +74,6 @@ enum EThruGroups
 //
 //===========================================================================
 
-#include "zscript/StrifeCoopGutamatics/Include.zsc"
-
 #include "zscript/StrifeCoop/StrifeCoopDebugText/StrifeCoopDebugText.zc"
 #include "zscript/StrifeCoop/StrifeCoopCampaign/StrifeCoopCampaign.zc"
 #include "zscript/StrifeCoop/StrifeCoopHandler/StrifeCoopHandler.zc"

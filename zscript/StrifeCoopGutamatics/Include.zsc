@@ -1,4 +1,0 @@
-#include "zscript/StrifeCoopGutamatics/GlobalMaths.zsc"
-#include "zscript/StrifeCoopGutamatics/Matrix.zsc"
-#include "zscript/StrifeCoopGutamatics/Quaternion.zsc"
-#include "zscript/StrifeCoopGutamatics/VectorUtil.zsc"

@@ -1,5 +1,4 @@
 user int strifecoop_debug = 0;
-user bool strifecoop_showplayerlocator = true;
 user bool strifecoop_chatbubble = true;
 server bool strifecoop_gatherparty = true;
 server bool strifecoop_droppableammo = true;

@@ -37,6 +37,5 @@ OptionMenu "StrifeCoopMenu"
 	StaticText ""
 
 	StaticText "$STRIFECOOPMNU_UI_TITLE", 1
-	StrifeCoopOption "$STRIFECOOPMNU_UI_PLAYERLOCATOR", "$STRIFECOOPMNU_HELPTEXT_UI_PLAYERLOCATOR", "strifecoop_showplayerlocator", "OnOff"
 	StrifeCoopOption "$STRIFECOOPMNU_UI_CHATBUBBLE", "$STRIFECOOPMNU_HELPTEXT_UI_CHATBUBBLE", "strifecoop_chatbubble", "OnOff"
 }
