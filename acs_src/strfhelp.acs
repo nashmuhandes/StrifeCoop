@@ -2,9 +2,6 @@
 
 #include "zcommon.acs"
 
-// [Nash] why doesn't ACS have a MAXPLAYERS defined??!!?
-#define MAXPLAYERS 8
-
 #define VDOORSPEED  16
 #define VDOORWAIT   150
 
