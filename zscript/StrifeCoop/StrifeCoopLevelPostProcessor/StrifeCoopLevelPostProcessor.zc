@@ -129,11 +129,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(156), GetThingAngle(156));
+			AddThing(3, GetThingPos(39), GetThingAngle(39));
+			AddThing(4, GetThingPos(38), GetThingAngle(38));
 
 			//===========================================================================
 			//
@@ -279,11 +278,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(12), GetThingAngle(12));
+			AddThing(3, GetThingPos(13), GetThingAngle(13));
+			AddThing(4, GetThingPos(14), GetThingAngle(14));
 
 			//===========================================================================
 			//
@@ -325,11 +323,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(375), GetThingAngle(375));
+			AddThing(3, GetThingPos(376), GetThingAngle(376));
+			AddThing(4, GetThingPos(377), GetThingAngle(377));
 
 			//===========================================================================
 			//
@@ -358,11 +355,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (1062, -737, 240), GetThingAngle(0));
+			AddThing(2, (1041, -697, 240), GetThingAngle(194));
+			AddThing(3, (1039, -778, 240), GetThingAngle(195));
+			AddThing(4, (1024, -738, 240), GetThingAngle(196));
 
 			//===========================================================================
 			//
@@ -394,11 +390,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(290), GetThingAngle(290));
+			AddThing(3, GetThingPos(289), GetThingAngle(289));
+			AddThing(4, GetThingPos(288), GetThingAngle(288));
 
 			//===========================================================================
 			//
@@ -456,11 +451,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(94), GetThingAngle(94));
+			AddThing(3, GetThingPos(95), GetThingAngle(95));
+			AddThing(4, GetThingPos(96), GetThingAngle(96));
 
 			//===========================================================================
 			//
@@ -526,11 +520,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(56), GetThingAngle(56));
+			AddThing(3, GetThingPos(57), GetThingAngle(57));
+			AddThing(4, GetThingPos(58), GetThingAngle(58));
 
 			//===========================================================================
 			//
@@ -556,11 +549,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (-808, 2208, 112), GetThingAngle(0));
+			AddThing(2, (-840, 2248, 112), GetThingAngle(80));
+			AddThing(3, (-840, 2168, 112), GetThingAngle(81));
+			AddThing(4, (-856, 2208, 112), GetThingAngle(82));
 
 			//===========================================================================
 			//
@@ -602,18 +594,6 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case '39C594CAC07EE51C80F757DA465FCC94': // strife1.wad map10 - New Front Base
-			//===========================================================================
-			//
-			// Dummy Default Player Starts
-			// Needed for the engine to function properly
-			//
-			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-
 			//===========================================================================
 			//
 			// Setup Coop-Friendly Player Starts
@@ -663,11 +643,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(325), GetThingAngle(325));
+			AddThing(3, GetThingPos(326), GetThingAngle(326));
+			AddThing(4, GetThingPos(327), GetThingAngle(327));
 
 			//===========================================================================
 			//
@@ -749,11 +728,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(96), GetThingAngle(96));
+			AddThing(3, GetThingPos(97), GetThingAngle(97));
+			AddThing(4, GetThingPos(98), GetThingAngle(98));
 
 			//===========================================================================
 			//
@@ -811,11 +789,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (968, 1096, 104), 180);
+			AddThing(2, (896, 1062, 88), 180);
+			AddThing(3, (896, 1120, 88), 180);
+			AddThing(4, (848, 1093, 56), 180);
 
 			//===========================================================================
 			//
@@ -893,11 +870,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, (-272, 3664, 0), 270);
+			AddThing(3, (-176, 3664, 0), 270);
+			AddThing(4, (-224, 3648, 0), 270);
 
 			//===========================================================================
 			//
@@ -942,11 +918,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (3936, -3480, 0), GetThingAngle(0));
+			AddThing(2, (3988, -3438, 0), GetThingAngle(3));
+			AddThing(3, (3934, -3440, 0), GetThingAngle(4));
+			AddThing(4, (3890, -3434, 0), GetThingAngle(5));
 
 			//===========================================================================
 			//
@@ -967,7 +942,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingXY(0, 3936, -3480);
 			SetThingXY(3, 3988, -3438);
 			SetThingXY(4, 3934, -3440);
-			SetThingXY(5, 393, -3434);
+			SetThingXY(5, 3890, -3434);
 
 			//===========================================================================
 			//
@@ -994,11 +969,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (640, 488, 24), 90);
+			AddThing(2, (600, 456, 24), 90);
+			AddThing(3, (680, 456, 24), 90);
+			AddThing(4, (640, 448, 24), 90);
 
 			//===========================================================================
 			//
@@ -1042,11 +1016,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (-1472, -1216, -144), GetThingAngle(0));
+			AddThing(2, (-1514, -1196, -144), GetThingAngle(55));
+			AddThing(3, (-1431, -1202, -144), GetThingAngle(56));
+			AddThing(4, (-1472, -1175, -144), GetThingAngle(57));
 
 			//===========================================================================
 			//
@@ -1126,11 +1099,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(1), GetThingAngle(1));
+			AddThing(3, GetThingPos(2), GetThingAngle(2));
+			AddThing(4, GetThingPos(3), GetThingAngle(3));
 
 			//===========================================================================
 			//
@@ -1156,11 +1128,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(1), GetThingAngle(1));
+			AddThing(3, GetThingPos(2), GetThingAngle(2));
+			AddThing(4, GetThingPos(3), GetThingAngle(3));
 
 			//===========================================================================
 			//
@@ -1186,11 +1157,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, (-304, -486, 0), 270);
+			AddThing(3, (-178, -486, 0), 270);
+			AddThing(4, (-353, -487, 0), 270);
 
 			//===========================================================================
 			//
@@ -1251,11 +1221,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(2), GetThingAngle(3));
+			AddThing(3, GetThingPos(3), GetThingAngle(3));
+			AddThing(4, GetThingPos(4), GetThingAngle(4));
 
 			//===========================================================================
 			//
@@ -1313,11 +1282,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(2), GetThingAngle(2));
+			AddThing(3, GetThingPos(3), GetThingAngle(3));
+			AddThing(4, GetThingPos(4), GetThingAngle(4));
 
 			//===========================================================================
 			//
@@ -1343,11 +1311,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, (-188, 963, 0), 315);
+			AddThing(3, (-231, 879, 0), 0);
+			AddThing(4, (-136, 946, 0), 270);
 
 			//===========================================================================
 			//
@@ -1408,11 +1375,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(90), GetThingAngle(90));
+			AddThing(3, GetThingPos(91), GetThingAngle(91));
+			AddThing(4, GetThingPos(92), GetThingAngle(92));
 
 			//===========================================================================
 			//
@@ -1454,11 +1420,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (4032, 2248, -56), 180);
+			AddThing(2, (3967, 2225, -56), 90);
+			AddThing(3, (3912, 2233, -56), 180);
+			AddThing(4, (3844, 2279, -56), 225);
 
 			//===========================================================================
 			//
@@ -1499,11 +1464,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (1824, 32, 320), 90);
+			AddThing(2, (1773, 26, 320), 90);
+			AddThing(3, (1870, 19, 320), 90);
+			AddThing(4, (1822, -10, 320), 90);
 
 			//===========================================================================
 			//
@@ -1567,11 +1531,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, (2497, -698, 0), 90);
+			AddThing(3, (2456, -663, 0), 90);
+			AddThing(4, (2535, -667, 0), 90);
 
 			//===========================================================================
 			//
@@ -1616,11 +1579,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, (2954, -2494, 0), 90);
+			AddThing(3, (2871, -2544, 0), 90);
+			AddThing(4, (3019, -2529, 0), 90);
 
 			//===========================================================================
 			//
@@ -1672,11 +1634,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, (-24416, 13792, 0), 0);
+			AddThing(2, (-24352, 13792, 0), 0);
+			AddThing(3, (-24384, 13849, 0), 0);
+			AddThing(4, (-24382, 13742, 0), 0);
 
 			//===========================================================================
 			//
@@ -1708,11 +1669,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Needed for the engine to function properly
 			//
 			//===========================================================================
-			t = 0;
-			t = AddThing(1, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(2, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(3, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
-			t = AddThing(4, (0, 0, 0), 0); SetThingArgument(t, 0, 0);
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, GetThingPos(9), GetThingAngle(9));
+			AddThing(3, GetThingPos(10), GetThingAngle(10));
+			AddThing(4, GetThingPos(11), GetThingAngle(11));
 
 			//===========================================================================
 			//
@@ -1748,6 +1708,17 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			break;
 
 		case 'BA63176C687188C5C847306B3F516D3A': // strife1.wad map31 - Training Facility
+			//===========================================================================
+			//
+			// Dummy Default Player Starts
+			// Needed for the engine to function properly
+			//
+			//===========================================================================
+			AddThing(1, GetThingPos(0), GetThingAngle(0));
+			AddThing(2, (2582, 1699, 0), 315);
+			AddThing(3, (2652, 1712, 0), 315);
+			AddThing(4, (2580, 1646, 0), 315);
+
 			//===========================================================================
 			//
 			// Fix Bad Player Starts
