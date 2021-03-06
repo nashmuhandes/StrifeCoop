@@ -28,48 +28,6 @@ version "4.5.0"
 
 //===========================================================================
 //
-// Global Constants
-//
-//===========================================================================
-
-enum EThruGroups
-{
-	ThruGroup1	= 1 << 0,
-	ThruGroup2	= 1 << 1,
-	ThruGroup3	= 1 << 2,
-	ThruGroup4	= 1 << 3,
-	ThruGroup5	= 1 << 4,
-	ThruGroup6	= 1 << 5,
-	ThruGroup7	= 1 << 6,
-	ThruGroup8	= 1 << 7,
-	ThruGroup9	= 1 << 8,
-	ThruGroup10	= 1 << 9,
-	ThruGroup11	= 1 << 10,
-	ThruGroup12	= 1 << 11,
-	ThruGroup13	= 1 << 12,
-	ThruGroup14	= 1 << 13,
-	ThruGroup15	= 1 << 14,
-	ThruGroup16	= 1 << 15,
-	ThruGroup17	= 1 << 16,
-	ThruGroup18	= 1 << 17,
-	ThruGroup19	= 1 << 18,
-	ThruGroup20	= 1 << 19,
-	ThruGroup21	= 1 << 20,
-	ThruGroup22	= 1 << 21,
-	ThruGroup23	= 1 << 22,
-	ThruGroup24	= 1 << 23,
-	ThruGroup25	= 1 << 24,
-	ThruGroup26	= 1 << 25,
-	ThruGroup27	= 1 << 26,
-	ThruGroup28	= 1 << 27,
-	ThruGroup29	= 1 << 28,
-	ThruGroup30	= 1 << 29,
-	ThruGroup31	= 1 << 30,
-	ThruGroup32	= 1 << 31
-};
-
-//===========================================================================
-//
 // Core
 //
 //===========================================================================
