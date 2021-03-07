@@ -94,7 +94,7 @@ class StrifeCoopPlayerPlugin : Inventory
 		}
 
 		HandleNewPlayer();
-
+		HandleSigil();
 		UpdateLogText();
 		UpdateStats();
 		CheckForTalkableNPCs();
@@ -394,6 +394,29 @@ class StrifeCoopPlayerPlugin : Inventory
 		plr.ConversationNPC = NULL;
 		plr.ConversationPC = NULL;
 		plr.ConversationNPCAngle = 0.;
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void HandleSigil(void)
+	{
+		PlayerPawn pmo = PlayerPawn(Owner);
+
+		if (pmo)
+		{
+			let sig = pmo.FindInventory("Sigil", false);
+			if (sig)
+			{
+				// Make the Sigil undroppable because being allowed to do this will break the game
+				// (for example, being able to go back to the non-abandoned Front Base map AFTER
+				// The Programmer has been defeated)
+				sig.bUndroppable = true;
+			}
+		}
 	}
 
 	//===========================================================================
