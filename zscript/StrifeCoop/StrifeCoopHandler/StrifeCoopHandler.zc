@@ -118,6 +118,7 @@ class StrifeCoopHandler : EventHandler
 
 	override void WorldThingDied(WorldEvent e)
 	{
+		DropGold(e);
 		HandleAlienSpectre5Death(e);
 	}
 
@@ -445,6 +446,44 @@ class StrifeCoopHandler : EventHandler
 	//
 	//
 	//===========================================================================
+
+	void DropGold(WorldEvent e)
+	{
+		if (!multiplayer) return;
+		if (!strifecoop_enemiesdropgold) return;
+
+		let mo = e.Thing;
+
+		// bosses shouldn't drop gold...
+		bool isBoss =
+		(
+			mo is "Programmer"		||
+			mo is "Bishop"			||
+			mo is "LoreMaster"		||
+			mo is "SpectralMonster"
+		);
+
+		if (isBoss) return;
+
+		if (mo && mo.bIsMonster && !mo.bFriendly)
+		{
+			int pcount = StrifeCoopHandler.GetPlayerCount();
+
+			int lvl = Level.LevelNum;
+
+			// Sanctuary and Town amounts need to be swapped because of the weird level numbering
+			if (lvl == 1) lvl = 2;
+			else if (lvl == 2) lvl = 1;
+
+			int amt = lvl * pcount / 10;
+			if (amt == 0) amt = 1;
+
+			for (int i = 0; i < amt; i++)
+			{
+				mo.A_DropItem("Coin");
+			}
+		}
+	}
 
 	void HandleAlienSpectre5Death(WorldEvent e)
 	{
