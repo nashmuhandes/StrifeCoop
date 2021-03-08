@@ -24,6 +24,6 @@ STRIFECOOPMNU_BALANCE_DROPGOLD = "Enemies Drop Gold";
 STRIFECOOPMNU_UI_CHATBUBBLE = "Chat Bubble";
 STRIFECOOPMNU_HELPTEXT_GAMEPLAY_GROUPEXIT = "Toggles whether all players must group up before leaving the level.";
 STRIFECOOPMNU_HELPTEXT_BALANCE_ENEMYSCALING = "Scales the maximum health of enemies depending on the number of players.";
-STRIFECOOPMNU_HELPTEXT_BALANCE_EXTRAAMMO = "Scales the amount of ammo received when picking up dropped ammunition from enemies depending on the number of players.";
+STRIFECOOPMNU_HELPTEXT_BALANCE_EXTRAAMMO = "Defeated enemies drop extra ammunition depending on the number of players.";
 STRIFECOOPMNU_HELPTEXT_BALANCE_DROPGOLD = "Defeated enemies drop gold proportionate to the quest's progress and number of players.";
 STRIFECOOPMNU_HELPTEXT_UI_CHATBUBBLE = "Shows chat bubbles above an NPC's head when they're spoken to.";
