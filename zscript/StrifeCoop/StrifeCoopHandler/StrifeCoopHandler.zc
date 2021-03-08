@@ -113,7 +113,7 @@ class StrifeCoopHandler : EventHandler
 	{
 		SetupNPC(e);
 		ScaleNPCStats(e);
-		ScaleAmmoPickupAmount(e);
+		SpawnExtraDroppedAmmo(e);
 	}
 
 	override void WorldThingDied(WorldEvent e)
@@ -353,6 +353,7 @@ class StrifeCoopHandler : EventHandler
 	//
 	//===========================================================================
 
+	/*
 	void ScaleAmmoPickupAmount(WorldEvent e)
 	{
 		if (!strifecoop_extraammo) return;
@@ -367,6 +368,37 @@ class StrifeCoopHandler : EventHandler
 				oa *= (1.20 * StrifeCoopHandler.GetPlayerCount() - 1);
 				ammo.Amount = int(oa);
 				//Console.Printf("%s ammo after: %d", ammo.GetTag(), ammo.Amount);
+			}
+		}
+	}
+	*/
+
+	void SpawnExtraDroppedammo(WorldEvent e)
+	{
+		if (!strifecoop_extraammo) return;
+
+		if (e.Thing && e.Thing is "Ammo")
+		{
+			let ammo = Ammo(e.Thing);
+			if (ammo && ammo.bDropped)
+			{
+				int pcount = StrifeCoopHandler.GetPlayerCount();
+				for (int i = 1; i < pcount; i++)
+				{
+					let newAmmo = ammo.Spawn(ammo.GetClass(), ammo.Pos, ALLOW_REPLACE);
+					if (newAmmo)
+					{
+						newAmmo.bDropped = false;
+						Inventory(newAmmo).ModifyDropAmount(ammo.DropAmount);
+						Vector3 sVel =
+						(
+							frandom(-1.0, 1.0),
+							frandom(-1.0, 1.0),
+							ammo.Vel.Z
+						);
+						newAmmo.Vel = sVel;
+					}
+				}
 			}
 		}
 	}
