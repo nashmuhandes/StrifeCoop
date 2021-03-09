@@ -383,6 +383,11 @@ class StrifeCoopPlayerPlugin : Inventory
 		let npc = plr.ConversationNPC;
 		if (npc)
 		{
+			if (npc.bInConversation)
+			{
+				npc.bInConversation = false;
+			}
+
 			// restore NPC angle
 			if (!npc.bDontFaceTalker)
 			{
