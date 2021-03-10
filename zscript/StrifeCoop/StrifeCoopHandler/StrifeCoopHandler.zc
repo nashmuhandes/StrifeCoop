@@ -339,10 +339,13 @@ class StrifeCoopHandler : EventHandler
 	void SetupNPC(WorldEvent e)
 	{
 		// Inject custom logic into all NPCs
-		if (e.Thing && e.Thing.bIsMonster)
+		if (e.Thing)
 		{
 			Actor npc = e.Thing;
-			npc.A_GiveInventory("StrifeCoopNPCPlugin", 1);
+			if (IsTalkableNPC(npc) || IsEnemy(npc) || IsMerchant(npc))
+			{
+				npc.A_GiveInventory("StrifeCoopNPCPlugin", 1);
+			}
 		}
 	}
 
