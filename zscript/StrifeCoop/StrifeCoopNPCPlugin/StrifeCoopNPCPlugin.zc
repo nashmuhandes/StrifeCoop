@@ -144,6 +144,7 @@ class StrifeCoopNPCPlugin : Inventory
 		if (!Owner) return;
 		let me = Owner;
 
+		if (StrifeCoopHandler.IsMerchant(me)) return;
 		if (me.Health <= 0) return;
 
 		int pcount = StrifeCoopHandler.GetPlayerCount();
