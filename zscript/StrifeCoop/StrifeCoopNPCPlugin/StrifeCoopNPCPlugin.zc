@@ -83,6 +83,24 @@ class StrifeCoopNPCPlugin : Inventory
 				if (!talkIcon)
 				{
 					talkIcon = StrifeCoopTalkIcon(Owner.Spawn("StrifeCoopTalkIcon", Owner.Pos + (0, 0, Owner.Height), NO_REPLACE));
+					if (talkIcon)
+					{
+						// assign the chat bubble to this NPC
+						talkIcon.npc = Owner;
+
+						// find the player this NPC is talking to
+						for (int i = 0; i < MAXPLAYERS; i++)
+						{
+							if (playeringame[i] && players[i].mo)
+							{
+								let pmo = players[i].mo;
+								if (pmo.player.ConversationPC && pmo.player.ConversationNPC && pmo.player.ConversationNPC == Owner)
+								{
+									talkIcon.pmoTalkedTo = pmo;
+								}
+							}
+						}
+					}
 				}
 			}
 			else

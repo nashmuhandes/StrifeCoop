@@ -32,6 +32,18 @@
 
 class StrifeCoopTalkIcon : Actor
 {
+	// the player that is talked to
+	PlayerPawn pmoTalkedTo;
+
+	// the NPC who owns this chat bubble
+	Actor npc;
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
 	Default
 	{
 		Scale 0.66;
@@ -48,33 +60,31 @@ class StrifeCoopTalkIcon : Actor
 	//
 	//===========================================================================
 
+	/*
+	override void PostBeginPlay(void)
+	{
+		Super.PostBeginPlay();
+		if (pmoTalkedTo && npc)
+		{
+			Console.Printf("%s is talking to %s", npc.GetTag(), pmoTalkedTo.player.GetUserName());
+		}
+	}
+	*/
+
 	override void Tick(void)
 	{
 		Super.Tick();
 
-		for (int i = 0; i < MAXPLAYERS; i++)
+		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
+		if (eh && pmoTalkedTo && pmoTalkedTo.player)
 		{
-			if (playeringame[i])
+			if (eh.GetCachedCVar(pmoTalkedTo.player, "strifecoop_chatbubble", eh.cvChatBubble).GetBool())
 			{
-				let pmo = players[i].mo;
-				if (pmo && pmo.player.ConversationNPC)
-				{
-					if (players[consoleplayer].camera && players[consoleplayer].camera == pmo.player.ConversationPC)
-					{
-						bInvisible = true;
-					}
-					else
-					{
-						let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
-						if (eh && !eh.GetCachedCVar(pmo.player, "strifecoop_chatbubble", eh.cvChatBubble).GetBool())
-						{
-							bInvisible = true;
-							continue;
-						}
-
-						bInvisible = false;
-					}
-				}
+				bInvisible = pmoTalkedTo.CheckLocalView();
+			}
+			else
+			{
+				bInvisible = true;
 			}
 		}
 	}
