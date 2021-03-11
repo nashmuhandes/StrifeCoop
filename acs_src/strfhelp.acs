@@ -6,6 +6,8 @@
 #define VDOORWAIT   150
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+world bool	 1: isFrontBaseAccessible;
+
 global int	55: map28PointOfNoReturn;
 global int	56: map28PointOfNoReturn2SpawnTIDs[];
 global int	57: map28PointOfNoReturn1SpawnTIDs[];
@@ -490,6 +492,52 @@ script "StrifeCoop_SendToCommunicatorNoLog" (int voc_id, int front_only, int ide
 {
 	int nolog = 1;
 	SendToCommunicator(voc_id, front_only, identify, nolog);
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+script "StrifeCoop_MAP02FrontBaseExitLineScriptOpen" OPEN
+{
+	ModifyFrontBaseExitLine();
+}
+
+script "StrifeCoop_MAP02FrontBaseExitLineScriptReopen" REOPEN
+{
+	ModifyFrontBaseExitLine();
+}
+
+script "StrifeCoop_MAP02OpenFrontBaseScript" (void)
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) == 2)
+	{
+		if (!isFrontBaseAccessible)
+		{
+			isFrontBaseAccessible = TRUE;
+			Generic_Stairs(28, 16, 16, 0, 0);
+			ModifyFrontBaseExitLine();
+			ClearLineSpecial();
+		}
+	}
+}
+
+function void ModifyFrontBaseExitLine(void)
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 2) return;
+
+	if (!isFrontBaseAccessible)
+	{
+		// front base isn't accessible yet; clear the exit line special
+		SetLineSpecial(55555, 0);
+	}
+	else
+	{
+		//front base is now accessible; restore the exit line special
+		SetLineSpecial(55555, ACS_ExecuteAlways, 0, 0, 145, 301);
+	}
 }
 
 //===========================================================================

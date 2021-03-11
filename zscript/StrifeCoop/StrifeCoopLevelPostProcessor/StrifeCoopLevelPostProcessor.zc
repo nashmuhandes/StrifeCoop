@@ -269,6 +269,23 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			t = AddThing(3, (3264, 5656, 0), 270); SetThingArgument(t, 0, 10);
 			t = AddThing(4, (3224, 5632, 0), 270); SetThingArgument(t, 0, 10);
 
+			// Rework the scripting on the exit line to the Front Base.
+			// Due to how we've setup exit lines to now block players and have
+			// a "player bumps" special, this exit line can be triggered
+			// even before pressing the switch that lowers the stairs to the
+			// Front's base.
+			// The exit special is now reassigned via ACS, when pressing the switch.
+			// To do this, it is necessary to add a new line ID to it, because its
+			// existing ID is 301, which is also shared by the line that triggers
+			// Blackbird's voice transmission when crossing the bridge. Not giving it
+			// a new line ID would be problematic as there's no way to separate between
+			// the two lines.
+			AddLineID(2088, 55555);
+
+			// Reassign the Font Base switch special to a script that does additional work to
+			// make the scripting for the above issue work correctly.
+			SetLineSpecial(2095, ACS_ExecuteAlways, -int('StrifeCoop_MAP02OpenFrontBaseScript'), 0, 0, 0, 0);
+
 			break;
 
 		case '20C20E1FC803F192613A52A62872BCDE': // strife1.wad map03 - Front Base
