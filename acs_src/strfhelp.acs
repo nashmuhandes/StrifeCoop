@@ -9,6 +9,7 @@
 #define MAXPLAYERS 4
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+world bool	245: map29PlayerIsDead[];
 world bool	246: map29PointOfNoReturn;
 world int	247: map29PointOfNoReturnSpawnTIDs[];
 world bool	248: isFrontBaseAccessible;
@@ -850,7 +851,86 @@ script "StrifeCoop_MAP29PointOfNoReturnPlayerRespawnScript" RESPAWN
 	{
 		if (GameType() == GAME_NET_COOPERATIVE && map29PointOfNoReturn == TRUE)
 		{
-			Thing_Move(0, map29PointOfNoReturnSpawnTIDs[PlayerNumber()], FALSE);
+			if (!GetCVar("strifecoop_badending"))
+			{
+				Thing_Move(0, map29PointOfNoReturnSpawnTIDs[PlayerNumber()], FALSE);
+			}
+			else
+			{
+				// Force death on the bad ending. You can no longer resurrect...
+				Thing_Damage(0, 0x7FFFFFFF, MOD_UNKNOWN);
+			}
 		}
 	}
+}
+
+script "StrifeCoop_MAP29DeathScript" DEATH
+{
+	// Keep track of which player was killed by the Entity
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) == 29)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE && map29PointOfNoReturn == TRUE)
+		{
+			if (GetCVar("strifecoop_badending"))
+			{
+				map29PlayerIsDead[PlayerNumber()] = TRUE;
+			}
+		}
+	}
+}
+
+script "StrifeCoop_BadEndingScript" OPEN
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 29)
+	{
+		// Kill this script in other maps as it's rather pointless and potentially wasting CPU cycles
+		Terminate;
+	}
+
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) == 29)
+	{
+		if (GetCVar("strifecoop_badending"))
+		{
+			// If all players are killed by the Entity, trigger the bad ending...
+
+			// First, check how many players are actually online
+			int i = 0;
+			int onlinePlayers = 0;
+			for (i = 0; i < MAXPLAYERS; i++)
+			{
+				if (PlayerInGame(i))
+				{
+					onlinePlayers++;
+				}
+			}
+
+			int deadPlayers = 0;
+			for (i = 0; i < MAXPLAYERS; i++)
+			{
+				if (PlayerInGame(i) && map29PlayerIsDead[i])
+				{
+					deadPlayers++;
+				}
+			}
+
+			if (deadPlayers == onlinePlayers)
+			{
+				// The Entity wins... game over!
+				ScriptCall("StrifeCoopHandler", "PlayBadEndingSlideshow");
+			}
+		}
+		else
+		{
+			// Not sure if this is a good idea, but if the bad ending option is disabled,
+			// just mark all players as not dead?
+			for (i = 0; i < MAXPLAYERS; i++)
+			{
+				map29PlayerIsDead[i] = FALSE;
+			}
+		}
+	}
+
+	// Repeat this script indefinitely...
+	Delay(1);
+	Restart;
 }

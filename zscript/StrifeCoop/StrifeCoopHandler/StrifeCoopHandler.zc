@@ -637,6 +637,22 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
+	static void PlayBadEndingSlideshow(void)
+	{
+		if (strifecoop_badending)
+		{
+			// hack to remove the scoreboard from the dead players' screens
+			for (int i = 0; i < MAXPLAYERS; i++)
+			{
+				if (playeringame[i] && players[i].mo && players[i].mo.Health <= 0)
+				{
+					players[i].Resurrect();
+				}
+			}
+			Level.StartIntermission(Level.deathsequence, FSTATE_EndingGame);
+		}
+	}
+
 	//===========================================================================
 	//
 	//
