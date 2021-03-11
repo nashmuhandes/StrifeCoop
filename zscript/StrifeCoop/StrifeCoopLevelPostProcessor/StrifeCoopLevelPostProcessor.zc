@@ -1677,6 +1677,9 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			p = AddThing(3, (-24384, 13849, 0), 0); SetThingArgument(p, 0, 1);
 			p = AddThing(4, (-24382, 13742, 0), 0); SetThingArgument(p, 0, 1);
 
+			// Handle point of no return
+			SetLineSpecial(107, ACS_ExecuteAlways, -int('StrifeCoop_MAP29PointOfNoReturnScript'), 0, 0, 0, 0);
+
 			break;
 
 		case '252AF75417C87B680AD2CA48E52DC716': // strife1.wad map30 - Abandoned Front Base

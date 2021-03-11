@@ -5,7 +5,12 @@
 #define VDOORSPEED  16
 #define VDOORWAIT   150
 
+// [Nash] why doesn't ACC have this defined internally?!
+#define MAXPLAYERS 4
+
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+world bool	246: map29PointOfNoReturn;
+world int	247: map29PointOfNoReturnSpawnTIDs[];
 world bool	248: isFrontBaseAccessible;
 world int	249: map28PointOfNoReturn;
 world int	250: map28PointOfNoReturn2SpawnTIDs[];
@@ -760,6 +765,92 @@ script "StrifeCoop_MAP28PointOfNoReturnPlayerRespawnScript" RESPAWN
 					Thing_Move(0, map28PointOfNoReturn2SpawnTIDs[PlayerNumber()], FALSE);
 				}
 			}
+		}
+	}
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+script "StrifeCoop_MAP29PointOfNoReturnScript" (void)
+{
+	ClearLineSpecial();
+	ACS_ExecuteAlways(0, 0, 197, 8);
+
+	if (!map29PointOfNoReturn)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE)
+		{
+			// Spawn the new map spots for the resurrecting players to teleport to.
+			int tid = 0;
+
+			// Player 1
+			tid = UniqueTID();
+			map29PointOfNoReturnSpawnTIDs[0] = tid;
+			SpawnForced("MapSpotGravity", -21528.0, 13792.0, -552.0, tid, 0);
+
+			// Player 2
+			tid = UniqueTID();
+			map29PointOfNoReturnSpawnTIDs[1] = tid;
+			SpawnForced("MapSpotGravity", -21584.0, 13792.0, -552.0, tid, 0);
+
+			// Player 3
+			tid = UniqueTID();
+			map29PointOfNoReturnSpawnTIDs[2] = tid;
+			SpawnForced("MapSpotGravity", -21536.0, 13856.0, -552.0, tid, 0);
+
+			// Player 4
+			tid = UniqueTID();
+			map29PointOfNoReturnSpawnTIDs[3] = tid;
+			SpawnForced("MapSpotGravity", -21536.0, 13728.0, -552.0, tid, 0);
+		}
+
+		map29PointOfNoReturn = TRUE;
+
+		// force teleport other players into the Entity's room
+		int activatingPlayerNumber = PlayerNumber();
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (PlayerInGame(i))
+			{
+				if (SetActivator(0, AAPTR_PLAYER1 << i))
+				{
+					// skip the player who activated the line
+					if (PlayerNumber() == activatingPlayerNumber)
+					{
+						continue;
+					}
+
+					// save original player TID (if they have one)
+					int otid = ActivatorTID();
+
+					// generate a temporary unique TID
+					int ntid = UniqueTID();
+
+					// change player TID to the temporary unique TID
+					Thing_ChangeTID(otid, ntid);
+
+					// teleport the player
+					TeleportOther(ntid, map29PointOfNoReturnSpawnTIDs[PlayerNumber()], TRUE);
+
+					// restore original player TID
+					Thing_ChangeTID(ntid, otid);
+				}
+			}
+		}
+	}
+}
+
+script "StrifeCoop_MAP29PointOfNoReturnPlayerRespawnScript" RESPAWN
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) == 29)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE && map29PointOfNoReturn == TRUE)
+		{
+			Thing_Move(0, map29PointOfNoReturnSpawnTIDs[PlayerNumber()], FALSE);
 		}
 	}
 }
