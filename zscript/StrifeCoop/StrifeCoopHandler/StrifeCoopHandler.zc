@@ -155,6 +155,32 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
+	override bool InputProcess(InputEvent e)
+	{
+		if (strifecoop_badending)
+		{
+			// Eat the +use key for the bad ending in MAP29 so that you can't resurrect
+			// (But only after the point of no return)
+			if (players[consoleplayer].mo != NULL &&
+				players[consoleplayer].mo.Health <= 0 &&
+				players[consoleplayer].mo.CountInv("StrifeCoopMAP29PointOfNoReturn") > 0)
+			{
+				if (Level.LevelNum == 29 && gamestate == GS_LEVEL)
+				{
+					Array<int> mapkeys;
+					Bindings.GetAllKeysForCommand(mapkeys, "+use");
+					if (mapkeys.Find(e.KeyScan) != mapkeys.Size())
+					{
+						return true;
+					}
+					return false;
+				}
+			}
+		}
+
+		return Super.InputProcess(e);
+	}
+
 	//===========================================================================
 	//
 	//

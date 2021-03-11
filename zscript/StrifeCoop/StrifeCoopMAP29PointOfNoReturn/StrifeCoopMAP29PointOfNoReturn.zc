@@ -1,5 +1,3 @@
-version "4.5.0"
-
 // Copyright 2021 Nash Muhandes
 // All rights reserved.
 //
@@ -28,33 +26,23 @@ version "4.5.0"
 
 //===========================================================================
 //
-// Core
+// StrifeCoopMAP29PointOfNoReturn
+// This simply marks the point where the point of no return has been
+// crossed in the final boss map.
+//
+// Used by StrifeCoopHandler::InputProcess to know exactly when to eat
+// the +use key
 //
 //===========================================================================
 
-#include "zscript/StrifeCoop/StrifeCoopDebugText/StrifeCoopDebugText.zc"
-#include "zscript/StrifeCoop/StrifeCoopCampaign/StrifeCoopCampaign.zc"
-#include "zscript/StrifeCoop/StrifeCoopHandler/StrifeCoopHandler.zc"
-#include "zscript/StrifeCoop/StrifeCoopLoadSaveHandler/StrifeCoopLoadSaveHandler.zc"
-#include "zscript/StrifeCoop/StrifeCoopLevelPostProcessor/StrifeCoopLevelPostProcessor.zc"
-#include "zscript/StrifeCoop/StrifeCoopNPCPlugin/StrifeCoopNPCPlugin.zc"
-#include "zscript/StrifeCoop/StrifeCoopPlayerPlugin/StrifeCoopPlayerPlugin.zc"
-#include "zscript/StrifeCoop/StrifeCoopTalkIcon/StrifeCoopTalkIcon.zc"
-#include "zscript/StrifeCoop/StrifeCoopProgLevelEnder/StrifeCoopProgLevelEnder.zc"
-#include "zscript/StrifeCoop/StrifeCoopMAP29PointOfNoReturn/StrifeCoopMAP29PointOfNoReturn.zc"
-
-//===========================================================================
-//
-// Conversation Menu
-//
-//===========================================================================
-
-#include "zscript/StrifeCoop/StrifeCoopConversationMenu/StrifeCoopConversationMenu.zc"
-
-//===========================================================================
-//
-// Option Menu
-//
-//===========================================================================
-
-#include "zscript/StrifeCoop/StrifeCoopOptionMenu/StrifeCoopOptionMenu.zc"
+class StrifeCoopMAP29PointOfNoReturn : Inventory
+{
+	Default
+	{
+		Inventory.MaxAmount 1;
+		+Inventory.UNDROPPABLE
+		+Inventory.UNTOSSABLE
+		+Inventory.AUTOACTIVATE
+		-Inventory.INVBAR
+	}
+}

@@ -819,6 +819,10 @@ script "StrifeCoop_MAP29PointOfNoReturnScript" (void)
 			{
 				if (SetActivator(0, AAPTR_PLAYER1 << i))
 				{
+					// Tell StrifeCoopHandler::InputProcess that the +use key
+					// can now be eaten from this point onwards
+					GiveInventory("StrifeCoopMAP29PointOfNoReturn", 1);
+
 					// skip the player who activated the line
 					if (PlayerNumber() == activatingPlayerNumber)
 					{
@@ -855,11 +859,16 @@ script "StrifeCoop_MAP29PointOfNoReturnPlayerRespawnScript" RESPAWN
 			{
 				Thing_Move(0, map29PointOfNoReturnSpawnTIDs[PlayerNumber()], FALSE);
 			}
+			/*
 			else
 			{
 				// Force death on the bad ending. You can no longer resurrect...
+				// Commented out because we're able to eat the +use key in
+				// StrifeCoopHandler::InputProcess.
+				// But leaving this here for referencial purposes.
 				Thing_Damage(0, 0x7FFFFFFF, MOD_UNKNOWN);
 			}
+			*/
 		}
 	}
 }
