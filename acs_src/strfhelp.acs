@@ -6,15 +6,15 @@
 #define VDOORWAIT   150
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
-world bool	 1: isFrontBaseAccessible;
+world bool	248: isFrontBaseAccessible;
+world int	249: map28PointOfNoReturn;
+world int	250: map28PointOfNoReturn2SpawnTIDs[];
+world int	251: map28PointOfNoReturn1SpawnTIDs[];
+world bool	252: map25PointOfNoReturn;
+world int	253: map25PointOfNoReturnSpawnTIDs[];
+world bool	254: map09PointOfNoReturn;
+world int	255: map09PointOfNoReturnSpawnTIDs[];
 
-global int	55: map28PointOfNoReturn;
-global int	56: map28PointOfNoReturn2SpawnTIDs[];
-global int	57: map28PointOfNoReturn1SpawnTIDs[];
-global bool	58: map25PointOfNoReturn;
-global int	59: map25PointOfNoReturnSpawnTIDs[];
-global bool	60: map09PointOfNoReturn;
-global int	61: map09PointOfNoReturnSpawnTIDs[];
 global int	62: travelCooldown;
 global int	63: GYPCooldown;
 
