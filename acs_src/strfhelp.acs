@@ -9,6 +9,7 @@
 #define MAXPLAYERS 4
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+world int	244: sewageDrainCounter;
 world bool	245: map29PlayerIsDead[];
 world bool	246: map29PointOfNoReturn;
 world int	247: map29PointOfNoReturnSpawnTIDs[];
@@ -541,8 +542,61 @@ function void ModifyFrontBaseExitLine(void)
 	}
 	else
 	{
-		//front base is now accessible; restore the exit line special
+		// front base is now accessible; restore the exit line special
 		SetLineSpecial(55555, ACS_ExecuteAlways, 0, 0, 145, 301);
+	}
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+script "StrifeCoop_MAP07SewerExitLineScriptOpen" OPEN
+{
+	ModifySewerExitLine();
+}
+
+script "StrifeCoop_MAP07SewerExitLineScriptReopen" REOPEN
+{
+	ModifySewerExitLine();
+}
+
+script "StrifeCoop_MAP07DrainReclamationTankScript" (void)
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) == 7)
+	{
+		if (sewageDrainCounter == 0)
+		{
+			Floor_LowerToLowest(6, 8);
+			ClearLineSpecial();
+
+			// takes about 9 seconds for the sewage to lower completely
+			while (sewageDrainCounter < (35 * 9))
+			{
+				sewageDrainCounter++;
+				Delay(1);
+			}
+
+			ModifySewerExitLine();
+		}
+	}
+}
+
+function void ModifySewerExitLine(void)
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 7) return;
+
+	if (sewageDrainCounter == 0)
+	{
+		// sewage tank isn't drained yet; clear the exit line special
+		SetLineSpecial(603, 0);
+	}
+	else if (sewageDrainCounter >= (35 * 9))
+	{
+		// sewage tank is now drained; restore the exit line special
+		SetLineSpecial(603, ACS_ExecuteAlways, 0, 0, 145, 603);
 	}
 }
 

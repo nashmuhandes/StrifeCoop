@@ -282,7 +282,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// the two lines.
 			AddLineID(2088, 55555);
 
-			// Reassign the Font Base switch special to a script that does additional work to
+			// Reassign the Front Base switch special to a script that does additional work to
 			// make the scripting for the above issue work correctly.
 			SetLineSpecial(2095, ACS_ExecuteAlways, -int('StrifeCoop_MAP02OpenFrontBaseScript'), 0, 0, 0, 0);
 
@@ -527,6 +527,10 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			t = AddThing(2, (2560, 2288, 0), 225); SetThingArgument(t, 0, 5);
 			t = AddThing(3, (2512, 2336, 0), 225); SetThingArgument(t, 0, 5);
 			t = AddThing(4, (2512, 2288, 0), 225); SetThingArgument(t, 0, 5);
+
+			// Reassign the sewage valve script to prevent prematurely triggering a level exit
+			// before actually turning the valve
+			SetLineSpecial(2832, ACS_ExecuteAlways, -int('StrifeCoop_MAP07DrainReclamationTankScript'), 0, 0, 0, 0);
 
 			break;
 
