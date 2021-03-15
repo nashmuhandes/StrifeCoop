@@ -93,11 +93,11 @@ class OptionMenuItemStrifeCoopSafeCommand : OptionMenuItemSafeCommand
 
 //===========================================================================
 //
-// StrifeCoop Menu
+// StrifeCoopOptionMenu
 //
 //===========================================================================
 
-class StrifeCoopMenu : OptionMenu
+class StrifeCoopOptionMenu : OptionMenu
 {
 	const START_TIME = 85;
 	const END_TIME = 120;
