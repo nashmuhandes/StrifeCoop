@@ -1,14 +1,14 @@
 AddOptionMenu "OptionsMenu"
 {
 	StaticText ""
-	StaticText "Strife Coop Patch Project v0.9 beta (hotfix)"
+	StaticText "Strife Coop Patch Project v1.0"
 	Submenu "$OPTMNU_STRIFECOOP", "StrifeCoopOptionMenu"
 }
 
 AddOptionMenu "OptionsMenuSimple"
 {
 	StaticText ""
-	StaticText "Strife Coop Patch Project v0.9 beta (hotfix)"
+	StaticText "Strife Coop Patch Project v1.0"
 	Submenu "$OPTMNU_STRIFECOOP", "StrifeCoopOptionMenu"
 }
 
