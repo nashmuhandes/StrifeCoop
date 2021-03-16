@@ -22,6 +22,7 @@ OptionMenu "StrifeCoopOptionMenu"
 
 	StaticText "$STRIFECOOPMNU_GAMEPLAY_TITLE", 1
 	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_GROUPEXIT", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_GROUPEXIT", "strifecoop_gatherparty", "OnOff"
+	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_DISGUISE", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_DISGUISE", "strifecoop_disguise", "OnOff"
 	StrifeCoopOption "$STRIFECOOPMNU_GAMEPLAY_BADENDING", "$STRIFECOOPMNU_HELPTEXT_GAMEPLAY_BADENDING", "strifecoop_badending", "OnOff"
 
 	StaticText ""

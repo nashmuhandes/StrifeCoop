@@ -104,6 +104,12 @@ class StrifeCoopPlayerPlugin : Inventory
 		Super.DoEffect();
 	}
 
+	override void Tick(void)
+	{
+		UpdateDisguise();
+		Super.Tick();
+	}
+
 	//===========================================================================
 	//
 	//
@@ -328,6 +334,28 @@ class StrifeCoopPlayerPlugin : Inventory
 			// update the globally tracked stats
 			campaign.maxStamina = newStamina;
 			campaign.maxAccuracy = newAccuracy;
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void UpdateDisguise(void)
+	{
+		if (!strifecoop_disguise) return;
+		if (!Owner) return;
+		if (Owner && !(Owner is "PlayerPawn")) return;
+		let pmo = PlayerPawn(Owner);
+		if (pmo)
+		{
+			let uniform = pmo.FindInventory("OfficersUniform", true);
+			if (uniform)
+			{
+				pmo.sprite = GetSpriteIndex('AGRD');
+			}
 		}
 	}
 

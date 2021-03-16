@@ -5,3 +5,4 @@ server bool strifecoop_scaleenemies = false;
 server bool strifecoop_extraammo = false;
 server bool strifecoop_enemiesdropgold = false;
 server bool strifecoop_badending = false;
+server bool strifecoop_disguise = false;
