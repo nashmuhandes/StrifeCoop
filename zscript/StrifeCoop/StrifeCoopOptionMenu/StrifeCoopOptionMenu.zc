@@ -153,7 +153,7 @@ class StrifeCoopOptionMenu : OptionMenu
 		}
 
 		optFnt = OptionFont();
-		fHeight = optFnt.GetHeight() * CleanYFac_1;
+		fHeight = optFnt.GetHeight() * CleanYfac_1;
 		padding = fHeight << 1;
 
 		if (prevSelected != mDesc.mSelectedItem)
@@ -177,7 +177,7 @@ class StrifeCoopOptionMenu : OptionMenu
 			textBoxWidth = int(width * 3 / 4.);
 			textBoxStart = width / 8 + (realWidth - width) / 2;
 
-			txtLength = optFnt.StringWidth(mToolTip) * CleanXFac_1;
+			txtLength = optFnt.StringWidth(mToolTip) * CleanXfac_1;
 			xOfs = (realWidth - txtLength) / 2;
 			if (txtLength > textBoxWidth)
 			{
@@ -199,7 +199,7 @@ class StrifeCoopOptionMenu : OptionMenu
 
 				if (endTimer <= 0)
 				{
-					textBoxWidth -= optFnt.StringWidth("...") * CleanXFac_1;
+					textBoxWidth -= optFnt.StringWidth("...") * CleanXfac_1;
 				}
 			}
 		}
@@ -241,7 +241,7 @@ class StrifeCoopOptionMenu : OptionMenu
 							DTA_CleanNoMove_1, true);
 		}
 
-		int shift = -padding / CleanYFac_1;
+		int shift = -padding / CleanYfac_1;
 		if (shift > mDefaultPosition)
 			shift = mDefaultPosition;
 
