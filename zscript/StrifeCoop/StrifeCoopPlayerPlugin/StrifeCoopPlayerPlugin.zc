@@ -174,7 +174,7 @@ class StrifeCoopPlayerPlugin : Inventory
 		if (pmo)
 		{
 			// Don't run this at the start of the campaign
-			if (level.totaltime == 0)
+			if (Level.totaltime == 0)
 			{
 				oldLogText = newLogText = pmo.player.LogText;
 				campaign.latestLogText = newLogText;
@@ -245,7 +245,7 @@ class StrifeCoopPlayerPlugin : Inventory
 		if (pmo)
 		{
 			// the game just started, no point in continuing the check
-			if (level.totaltime == 0)
+			if (Level.totaltime == 0)
 			{
 				oldStamina = newStamina = pmo.Stamina;
 				oldAccuracy = newAccuracy = pmo.Accuracy;
@@ -468,7 +468,7 @@ class StrifeCoopPlayerPlugin : Inventory
 
 	void HandleProgrammerDeathFade(void)
 	{
-		if (level.levelnum != 9 && level.levelnum != 10) return;
+		if (Level.levelnum != 9 && Level.levelnum != 10) return;
 		if (!Owner) return;
 
 		let a = Owner.FindInventory("ProgLevelEnder", false);

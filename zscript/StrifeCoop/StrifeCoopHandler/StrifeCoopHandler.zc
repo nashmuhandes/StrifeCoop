@@ -457,7 +457,7 @@ class StrifeCoopHandler : EventHandler
 		if (!multiplayer) return;
 
 		// Wake the Acolytes up in the first room immediately, targetting a random player
-		if (level.totaltime == 0 && level.levelnum == 2)
+		if (Level.totaltime == 0 && Level.levelnum == 2)
 		{
 			int totalPlayers = 0;
 			for (int i = 0; i < MAXPLAYERS; i++)
@@ -594,7 +594,7 @@ class StrifeCoopHandler : EventHandler
 					if (is211)
 					{
 						// Print it 10 times so that I won't miss it. :P
-						for (int i = 0; i < 10; i++) { Console.Printf("MYSTERY LINE TYPE 211 FOUND!!!!!\nLine number %d in %s", ln.Index(), level.MapName); }
+						for (int i = 0; i < 10; i++) { Console.Printf("MYSTERY LINE TYPE 211 FOUND!!!!!\nLine number %d in %s", ln.Index(), Level.MapName); }
 
 						// Turn it into an ACS line
 						ln.special = ACS_ExecuteAlways;
