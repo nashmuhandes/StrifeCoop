@@ -345,15 +345,23 @@ class StrifeCoopPlayerPlugin : Inventory
 
 	void UpdateDisguise(void)
 	{
+		if (!multiplayer) return;
+		if (deathmatch) return;
 		if (!strifecoop_disguise) return;
 		if (!Owner) return;
 		if (Owner && !(Owner is "PlayerPawn")) return;
 		let pmo = PlayerPawn(Owner);
-		if (pmo)
+		if (pmo && pmo.Health > 0)
 		{
 			let uniform = pmo.FindInventory("OfficersUniform", true);
 			if (uniform)
 			{
+				// rubbish...
+				if (pmo.frame == 16)
+				{
+					pmo.frame = 14;
+				}
+
 				pmo.sprite = GetSpriteIndex('AGRD');
 			}
 		}
