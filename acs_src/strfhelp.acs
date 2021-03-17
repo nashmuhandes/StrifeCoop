@@ -9,6 +9,7 @@
 #define MAXPLAYERS 4
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+world bool	243: freedPrisoners;
 world int	244: sewageDrainCounter;
 world bool	245: map29PlayerIsDead[];
 world bool	246: map29PointOfNoReturn;
@@ -344,6 +345,11 @@ script << 0 >> (int type, int tag)
 		{
 			printbold (l:"TXT_FREED_PRISONERS");
 			GiveInventory ("QuestItem13", 1);
+			if (!freedPrisoners)
+			{
+				freedPrisoners = TRUE;
+				ModifyPrisonerTeleporterLines();
+			}
 		}
 		else
 		{
@@ -544,6 +550,74 @@ function void ModifyFrontBaseExitLine(void)
 	{
 		// front base is now accessible; restore the exit line special
 		SetLineSpecial(55555, ACS_ExecuteAlways, 0, 0, 145, 301);
+	}
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+script "StrifeCoop_MAP05PrisonerTeleporterLinesScriptOpen" OPEN
+{
+	ModifyPrisonerTeleporterLines();
+}
+
+script "StrifeCoop_MAP05PrisonerTeleporterLinesScriptReopen" REOPEN
+{
+	ModifyPrisonerTeleporterLines();
+}
+
+function void ModifyPrisonerTeleporterLines(void)
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 5) return;
+
+	if (!freedPrisoners)
+	{
+		// teleporter to the front base isn't accessible yet; clear the exit line special
+		SetLineSpecial(55555, 0);
+		SetLineSpecial(55556, 0);
+		SetLineSpecial(55557, 0);
+		SetLineSpecial(55558, 0);
+
+		SetLineSpecial(55559, 0);
+		SetLineSpecial(55560, 0);
+		SetLineSpecial(55561, 0);
+		SetLineSpecial(55562, 0);
+
+		SetLineSpecial(55563, 0);
+		SetLineSpecial(55564, 0);
+		SetLineSpecial(55565, 0);
+		SetLineSpecial(55566, 0);
+
+		SetLineSpecial(55567, 0);
+		SetLineSpecial(55568, 0);
+		SetLineSpecial(55569, 0);
+		SetLineSpecial(55570, 0);
+	}
+	else
+	{
+		// teleporter to the front base is now accessible; restore the exit line special
+		SetLineSpecial(55555, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55556, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55557, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55558, ACS_ExecuteAlways, 0, 0, 145, 302);
+
+		SetLineSpecial(55559, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55560, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55561, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55562, ACS_ExecuteAlways, 0, 0, 145, 302);
+
+		SetLineSpecial(55563, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55564, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55565, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55566, ACS_ExecuteAlways, 0, 0, 145, 302);
+
+		SetLineSpecial(55567, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55568, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55569, ACS_ExecuteAlways, 0, 0, 145, 302);
+		SetLineSpecial(55570, ACS_ExecuteAlways, 0, 0, 145, 302);
 	}
 }
 

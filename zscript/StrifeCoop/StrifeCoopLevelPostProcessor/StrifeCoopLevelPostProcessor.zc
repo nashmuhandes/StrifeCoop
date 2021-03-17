@@ -401,6 +401,27 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingXY(195, 1039, -778);
 			SetThingXY(196, 1024, -738);
 
+			// Disable the prisoner teleporter pads until they have actually been freed
+			AddLineID(1813, 55555);
+			AddLineID(1814, 55556);
+			AddLineID(1815, 55557);
+			AddLineID(1816, 55558);
+
+			AddLineID(1784, 55559);
+			AddLineID(1785, 55560);
+			AddLineID(1786, 55561);
+			AddLineID(1787, 55562);
+
+			AddLineID(1795, 55563);
+			AddLineID(1796, 55564);
+			AddLineID(1797, 55565);
+			AddLineID(1798, 55566);
+
+			AddLineID(1826, 55567);
+			AddLineID(1827, 55568);
+			AddLineID(1828, 55569);
+			AddLineID(1829, 55570);
+
 			break;
 
 		case 'ED6BA7CD9388DBC9F30363EF24DBACDF': // strife1.wad map06 - Sewers
