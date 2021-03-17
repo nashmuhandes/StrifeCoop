@@ -96,11 +96,14 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			Line ln = Level.Lines[i];
 
 			// Change the walk-over exit lines to block the player, so that the party gathering function can run properly
-			if ((ln.activation & SPAC_Cross) && ln.special == ACS_ExecuteAlways && ln.args[2] == 145)
+			if ((ln.activation & SPAC_Cross) && ln.special == ACS_ExecuteAlways && (ln.args[2] == 145 || ln.args[2] == 186))
 			{
-				ln.flags |= Line.ML_BLOCK_PLAYERS;
-				ln.activation |= (SPAC_Push | SPAC_UseBack);
-				ln.activation &= ~SPAC_Cross;
+				if (ln.args[2] == 145)
+				{
+					ln.flags |= Line.ML_BLOCK_PLAYERS;
+					ln.activation |= (SPAC_Push | SPAC_UseBack);
+					ln.activation &= ~SPAC_Cross;
+				}
 			}
 		}
 	}
