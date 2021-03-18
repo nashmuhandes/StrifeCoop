@@ -1,0 +1,9 @@
+// Create matching pain sprites for the disguise
+Sprite AGRDQ1, 35, 59 { Offset 19, 54 Patch AGRDO1, 0, 0 {} }
+Sprite AGRDQ2, 34, 58 { Offset 13, 54 Patch AGRDO2, 0, 0 {} }
+Sprite AGRDQ3, 38, 57 { Offset 17, 54 Patch AGRDO3, 0, 0 {} }
+Sprite AGRDQ4, 37, 58 { Offset 19, 54 Patch AGRDO4, 0, 0 {} }
+Sprite AGRDQ5, 35, 59 { Offset 14, 54 Patch AGRDO5, 0, 0 {} }
+Sprite AGRDQ6, 39, 59 { Offset 19, 54 Patch AGRDO6, 0, 0 {} }
+Sprite AGRDQ7, 34, 58 { Offset 19, 54 Patch AGRDO7, 0, 0 {} }
+Sprite AGRDQ8, 35, 59 { Offset 19, 54 Patch AGRDO8, 0, 0 {} }

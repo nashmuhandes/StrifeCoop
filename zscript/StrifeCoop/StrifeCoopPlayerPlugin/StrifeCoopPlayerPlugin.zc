@@ -98,7 +98,6 @@ class StrifeCoopPlayerPlugin : Inventory
 		UpdateLogText();
 		UpdateStats();
 		CheckForTalkableNPCs();
-
 		HandleProgrammerDeathFade();
 
 		Super.DoEffect();
@@ -356,12 +355,6 @@ class StrifeCoopPlayerPlugin : Inventory
 			let uniform = pmo.FindInventory("OfficersUniform", true);
 			if (uniform)
 			{
-				// rubbish...
-				if (pmo.frame == 16)
-				{
-					pmo.frame = 14;
-				}
-
 				pmo.sprite = GetSpriteIndex('AGRD');
 			}
 		}
