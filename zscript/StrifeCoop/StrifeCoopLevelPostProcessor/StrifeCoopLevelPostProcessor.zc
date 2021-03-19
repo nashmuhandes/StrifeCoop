@@ -40,7 +40,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		FixMapStuff(checksum, mapname);
 		FixExitLines(checksum, mapname);
 		//FixMapStuffVE(checksum, mapname);
-    }
+	}
 
 	//===========================================================================
 	//
@@ -946,7 +946,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 
 			t = 0;
 
-			//  Factory: Receiving entrance
+			// Factory: Receiving entrance
 			// (Teleport New Map Spot 2)
 			SetThingEdNum(38, 0);
 			t = AddThing(1, (2592, -576, 0), 180); SetThingArgument(t, 0, 2);
@@ -1522,7 +1522,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 
 			// Factory: Manufacturing entrance
 
-			// Remove Teleport New Map Spot 1  because there are proper player starts already
+			// Remove Teleport New Map Spot 1 because there are proper player starts already
 			SetThingEdNum(333, 0);
 
 			// Existing player starts need to be given the proper args

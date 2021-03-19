@@ -165,7 +165,7 @@ class StrifeCoopHandler : EventHandler
 				players[consoleplayer].mo.Health <= 0 &&
 				players[consoleplayer].mo.CountInv("StrifeCoopMAP29PointOfNoReturn") > 0)
 			{
-				if (Level.LevelNum == 29 && gamestate == GS_LEVEL)
+				if (Level.levelnum == 29 && gamestate == GS_LEVEL)
 				{
 					Array<int> mapkeys;
 					Bindings.GetAllKeysForCommand(mapkeys, "+use");
@@ -511,7 +511,7 @@ class StrifeCoopHandler : EventHandler
 		{
 			int pcount = StrifeCoopHandler.GetPlayerCount();
 
-			int lvl = Level.LevelNum;
+			int lvl = Level.levelnum;
 
 			// Sanctuary and Town amounts need to be swapped because of the weird level numbering
 			if (lvl == 1) lvl = 2;
