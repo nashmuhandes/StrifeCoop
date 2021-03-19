@@ -283,6 +283,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			// Blackbird's voice transmission when crossing the bridge. Not giving it
 			// a new line ID would be problematic as there's no way to separate between
 			// the two lines.
+			SetLineSpecial(2088, 0);
 			AddLineID(2088, 55555);
 
 			// Reassign the Front Base switch special to a script that does additional work to
@@ -402,6 +403,26 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			SetThingXY(196, 1024, -738);
 
 			// Disable the prisoner teleporter pads until they have actually been freed
+			SetLineSpecial(1813, 0);
+			SetLineSpecial(1814, 0);
+			SetLineSpecial(1815, 0);
+			SetLineSpecial(1816, 0);
+
+			SetLineSpecial(1784, 0);
+			SetLineSpecial(1785, 0);
+			SetLineSpecial(1786, 0);
+			SetLineSpecial(1787, 0);
+
+			SetLineSpecial(1795, 0);
+			SetLineSpecial(1796, 0);
+			SetLineSpecial(1797, 0);
+			SetLineSpecial(1798, 0);
+
+			SetLineSpecial(1826, 0);
+			SetLineSpecial(1827, 0);
+			SetLineSpecial(1828, 0);
+			SetLineSpecial(1829, 0);
+
 			AddLineID(1813, 55555);
 			AddLineID(1814, 55556);
 			AddLineID(1815, 55557);
@@ -551,6 +572,13 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			t = AddThing(2, (2560, 2288, 0), 225); SetThingArgument(t, 0, 5);
 			t = AddThing(3, (2512, 2336, 0), 225); SetThingArgument(t, 0, 5);
 			t = AddThing(4, (2512, 2288, 0), 225); SetThingArgument(t, 0, 5);
+
+			// Initially disable the reclamation tank sewer exit until after the valve has been turned
+			SetLineSpecial(234, 0);
+			SetLineSpecial(235, 0);
+			AddLineID(234, 55555);
+			AddLineID(235, 55556);
+
 
 			// Reassign the sewage valve script to prevent prematurely triggering a level exit
 			// before actually turning the valve

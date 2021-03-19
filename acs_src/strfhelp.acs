@@ -8,6 +8,8 @@
 // [Nash] why doesn't ACC have this defined internally?!
 #define MAXPLAYERS 4
 
+#define SEWAGE_DRAIN_DURATION (35 * 9)
+
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
 world bool	243: freedPrisoners;
 world int	244: sewageDrainCounter;
@@ -515,11 +517,13 @@ script "StrifeCoop_SendToCommunicatorNoLog" (int voc_id, int front_only, int ide
 
 script "StrifeCoop_MAP02FrontBaseExitLineScriptOpen" OPEN
 {
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 2) Terminate;
 	ModifyFrontBaseExitLine();
 }
 
 script "StrifeCoop_MAP02FrontBaseExitLineScriptReopen" REOPEN
 {
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 2) Terminate;
 	ModifyFrontBaseExitLine();
 }
 
@@ -561,11 +565,13 @@ function void ModifyFrontBaseExitLine(void)
 
 script "StrifeCoop_MAP05PrisonerTeleporterLinesScriptOpen" OPEN
 {
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 5) Terminate;
 	ModifyPrisonerTeleporterLines();
 }
 
 script "StrifeCoop_MAP05PrisonerTeleporterLinesScriptReopen" REOPEN
 {
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 5) Terminate;
 	ModifyPrisonerTeleporterLines();
 }
 
@@ -629,11 +635,13 @@ function void ModifyPrisonerTeleporterLines(void)
 
 script "StrifeCoop_MAP07SewerExitLineScriptOpen" OPEN
 {
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 7) Terminate;
 	ModifySewerExitLine();
 }
 
 script "StrifeCoop_MAP07SewerExitLineScriptReopen" REOPEN
 {
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 7) Terminate;
 	ModifySewerExitLine();
 }
 
@@ -647,7 +655,7 @@ script "StrifeCoop_MAP07DrainReclamationTankScript" (void)
 			ClearLineSpecial();
 
 			// takes about 9 seconds for the sewage to lower completely
-			while (sewageDrainCounter < (35 * 9))
+			while (sewageDrainCounter < SEWAGE_DRAIN_DURATION)
 			{
 				sewageDrainCounter++;
 				Delay(1);
@@ -662,15 +670,17 @@ function void ModifySewerExitLine(void)
 {
 	if (GetLevelInfo(LEVELINFO_LEVELNUM) != 7) return;
 
-	if (sewageDrainCounter == 0)
+	if (sewageDrainCounter < SEWAGE_DRAIN_DURATION)
 	{
 		// sewage tank isn't drained yet; clear the exit line special
-		SetLineSpecial(603, 0);
+		SetLineSpecial(55555, 0);
+		SetLineSpecial(55556, 0);
 	}
-	else if (sewageDrainCounter >= (35 * 9))
+	else if (sewageDrainCounter >= SEWAGE_DRAIN_DURATION)
 	{
 		// sewage tank is now drained; restore the exit line special
-		SetLineSpecial(603, ACS_ExecuteAlways, 0, 0, 145, 603);
+		SetLineSpecial(55555, ACS_ExecuteAlways, 0, 0, 145, 603);
+		SetLineSpecial(55556, ACS_ExecuteAlways, 0, 0, 145, 603);
 	}
 }
 
