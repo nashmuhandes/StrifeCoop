@@ -34,14 +34,37 @@ class StrifeCoopDebugText ui
 {
 	static clearscope void DrawDebugText(PlayerInfo plr, int debugMode)
 	{
-		int vw = 512,
-			vh = 384;
-
 		String debugText = GetDebugText(plr, debugMode);
-		Screen.DrawText(NewConsoleFont, Font.CR_WHITE,
-			0, 0,
-			debugText,
-			DTA_Clean, true, DTA_VirtualWidth, vw, DTA_VirtualHeight, vh);
+
+		if (debugText.Length() > 0)
+		{
+			int padding = NewConsoleFont.StringWidth(" ") * 2.0;
+
+			// draw dim
+			BrokenLines dtbl = NewConsoleFont.BreakLines(debugText, Screen.GetWidth());
+			int largestWidth = 0;
+			for (int i = 0; i < dtbl.Count(); i++)
+			{
+				String t = dtbl.StringAt(i);
+				if (NewConsoleFont.StringWidth(t) > largestWidth)
+				{
+					largestWidth = NewConsoleFont.StringWidth(t);
+				}
+			}
+			Screen.Dim(Color(0, 0, 0),
+				0.7,
+				0,
+				0,
+				(padding * 2) + (largestWidth * 2.0),
+				(padding * 2) + (NewConsoleFont.GetHeight() * (dtbl.Count() + 1)) * 2.0);
+
+			// draw text
+			Screen.DrawText(NewConsoleFont, Font.CR_WHITE,
+				padding, padding,
+				debugText,
+				DTA_ScaleX, 2.0,
+				DTA_ScaleY, 2.0);
+		}
 	}
 
 	static clearscope String GetDebugText(PlayerInfo plr, int debugTextMode)
