@@ -38,7 +38,7 @@ class StrifeCoopDebugText ui
 
 		if (debugText.Length() > 0)
 		{
-			int padding = NewConsoleFont.StringWidth(" ") * 2.0;
+			int padding = NewConsoleFont.StringWidth(" ") * 2;
 
 			// draw dim
 			BrokenLines dtbl = NewConsoleFont.BreakLines(debugText, Screen.GetWidth());
@@ -55,8 +55,8 @@ class StrifeCoopDebugText ui
 				0.7,
 				0,
 				0,
-				(padding * 2) + (largestWidth * 2.0),
-				(padding * 2) + (NewConsoleFont.GetHeight() * (dtbl.Count() + 1)) * 2.0);
+				(padding * 2) + (largestWidth * 2),
+				(padding * 2) + (NewConsoleFont.GetHeight() * (dtbl.Count() + 1)) * 2);
 
 			// draw text
 			Screen.DrawText(NewConsoleFont, Font.CR_WHITE,
