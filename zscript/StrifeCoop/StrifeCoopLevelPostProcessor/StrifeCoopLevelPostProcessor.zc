@@ -196,7 +196,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			t = AddThing(1, (-224, 7536, 0), 270); SetThingArgument(t, 0, 1);
 			t = AddThing(2, (-288, 7472, 0), 270); SetThingArgument(t, 0, 1);
 			t = AddThing(3, (-160, 7472, 0), 270); SetThingArgument(t, 0, 1);
-			t = AddThing(4, (224, 7408, 0), 270); SetThingArgument(t, 0, 1);
+			t = AddThing(4, (-224, 7408, 0), 270); SetThingArgument(t, 0, 1);
 
 			// Prison entrance
 			// (Teleport New Map Spot 2)
