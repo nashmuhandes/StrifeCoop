@@ -173,7 +173,7 @@ class StrifeCoopNPCPlugin : Inventory
 		//
 		//===========================================================================
 		int osh = me.GetMaxHealth(true);
-		int nsh = osh;
+		double nsh = double(osh);
 
 		// keep track of original health percentage scaling
 		int originalHealthPercent = 100 * me.Health / me.GetMaxHealth(true);
@@ -185,8 +185,8 @@ class StrifeCoopNPCPlugin : Inventory
 			// no additional health on the 0th player
 			if (i > 0)
 			{
-				// 50% additional health for every player from player 2 and beyond
-				nsh = nsh + (nsh / 2);
+				// 25% additional health for every player from player 2 and beyond
+				nsh *= 1.25;
 			}
 		}
 
@@ -195,7 +195,7 @@ class StrifeCoopNPCPlugin : Inventory
 		{
 			if (strifecoop_uberentity)
 			{
-				nsh *= 4;
+				nsh *= 4.;
 				Owner.bAlwaysFast = true;
 			}
 			else
@@ -205,7 +205,7 @@ class StrifeCoopNPCPlugin : Inventory
 		}
 
 		// you can't write to SpawnHealth, but apparently StartHealth does it
-		me.StartHealth = strifecoop_scaleenemies ? nsh : me.Default.GetMaxHealth(true);
+		me.StartHealth = strifecoop_scaleenemies ? int(floor(nsh)) : me.Default.GetMaxHealth(true);
 
 		// now set the health percentage back to what it originally was
 		int newHealth = me.GetMaxHealth(true) * originalHealthPercent / 100;

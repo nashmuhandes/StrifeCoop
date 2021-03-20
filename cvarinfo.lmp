@@ -7,3 +7,4 @@ server bool strifecoop_enemiesdropgold = false;
 server bool strifecoop_badending = false;
 server bool strifecoop_disguise = false;
 server bool strifecoop_uberentity = false;
+server cheat int strifecoop_simulateplayercount = 0;

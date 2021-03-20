@@ -345,6 +345,8 @@ class StrifeCoopHandler : EventHandler
 
 	static clearscope int GetPlayerCount(void)
 	{
+		if (strifecoop_simulateplayercount > 0)
+			return strifecoop_simulateplayercount;
 		int p = 0;
 		for (int i = 0; i < MAXPLAYERS; i++)
 		{
