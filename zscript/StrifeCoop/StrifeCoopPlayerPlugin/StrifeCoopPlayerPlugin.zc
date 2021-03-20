@@ -193,6 +193,12 @@ class StrifeCoopPlayerPlugin : Inventory
 
 						if (playerToUpdate)
 						{
+							// get the log number
+							String txt = newLogText;
+							int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
+
+							campaign.latestLogNum = num;
+
 							// skip self
 							if (playerToUpdate == pmo)
 							{
@@ -203,10 +209,6 @@ class StrifeCoopPlayerPlugin : Inventory
 
 								continue;
 							}
-
-							// get the log number
-							String txt = newLogText;
-							int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
 
 							if (playerToUpdate == players[consoleplayer].mo)
 							{

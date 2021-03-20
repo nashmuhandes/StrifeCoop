@@ -51,6 +51,7 @@ class StrifeCoopCampaign : Thinker
 	int maxStamina, maxAccuracy;
 
 	// store log text globally
+	int latestLogNum;
 	String latestLogText;
 
 	// keep a global record of QuestItems acquired throughout the journey
