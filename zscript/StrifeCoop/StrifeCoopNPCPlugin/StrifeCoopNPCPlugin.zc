@@ -190,6 +190,20 @@ class StrifeCoopNPCPlugin : Inventory
 			}
 		}
 
+		// Uber Entity!!!!
+		if (Owner is "EntityBoss")
+		{
+			if (strifecoop_uberentity)
+			{
+				nsh *= 4;
+				Owner.bAlwaysFast = true;
+			}
+			else
+			{
+				Owner.bAlwaysFast = Owner.Default.bAlwaysFast;
+			}
+		}
+
 		// you can't write to SpawnHealth, but apparently StartHealth does it
 		me.StartHealth = strifecoop_scaleenemies ? nsh : me.Default.GetMaxHealth(true);
 
