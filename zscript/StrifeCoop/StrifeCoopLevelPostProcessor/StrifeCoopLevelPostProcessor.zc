@@ -853,6 +853,20 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			t = AddThing(3, (-1200, 5440, 0), 270); SetThingArgument(t, 0, 4);
 			t = AddThing(4, (-1296, 5344, 0), 0); SetThingArgument(t, 0, 4);
 
+			// Set the inner pit in the platforming area (no enemy path) to insta-kill.
+			// Players can normally survive the fall, but cannot get through the
+			// gaps in the walls to escape. Might as well just kill them.
+			// Special number currently found in p_lnspec.h - there are no constants
+			// exported to ZScript at the time of this writing.
+			OffsetSectorPlane(332, Sector.ceiling, -128);
+			OffsetSectorPlane(315, Sector.ceiling, -128);
+			SetSectorSpecial(308, 115);
+			SetSectorSpecial(316, 115);
+			//SetSectorTexture(332, Sector.floor, "F_CAVE01");
+			//SetSectorTexture(315, Sector.floor, "F_CAVE01");
+			//SetSectorTexture(308, Sector.floor, "F_CAVE01");
+			//SetSectorTexture(316, Sector.floor, "F_CAVE01");
+
 			break;
 
 		case 'FB1FAC7C198518B892EE6A6CD8113548': // strife1.wad map13 - Catacombs
