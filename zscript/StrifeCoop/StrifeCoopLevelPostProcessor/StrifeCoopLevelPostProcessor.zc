@@ -37,8 +37,8 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		bool isCoop = (multiplayer && !deathmatch);
 		if (!isCoop) return;
 		RemoveUnwantedThings(checksum, mapname);
-		FixMapStuff(checksum, mapname);
 		FixExitLines(checksum, mapname);
+		FixMapStuff(checksum, mapname);
 		//FixMapStuffVE(checksum, mapname);
 	}
 
