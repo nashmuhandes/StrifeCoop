@@ -35,6 +35,7 @@ extend class StrifeCoopLevelPostProcessor
 	void FixSVEMaps(Name checksum, String mapname)
 	{
 		int t;
+		int p;
 
 		switch (checksum)
 		{
