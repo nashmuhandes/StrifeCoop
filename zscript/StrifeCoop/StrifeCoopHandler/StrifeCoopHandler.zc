@@ -196,11 +196,17 @@ class StrifeCoopHandler : EventHandler
 		}
 		if (!plr) return;
 
+		// draw debug text
 		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
-		if (!eh) return;
-		int debugMode = eh.GetCachedCVar(plr, "strifecoop_debug", eh.cvDebug).GetInt();
+		if (eh)
+		{
+			int debugMode = eh.GetCachedCVar(plr, "strifecoop_debug", eh.cvDebug).GetInt();
 
-		StrifeCoopDebugText.DrawDebugText(plr, debugMode);
+			if (debugMode > 0)
+			{
+				StrifeCoopDebugText.DrawDebugText(plr, debugMode);
+			}
+		}
 	}
 
 	//===========================================================================
