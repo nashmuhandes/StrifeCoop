@@ -554,6 +554,8 @@ function void ModifyFrontBaseExitLine(void)
 	{
 		// front base is now accessible; restore the exit line special
 		SetLineSpecial(55555, ACS_ExecuteAlways, 0, 0, 145, 301);
+		Line_SetBlocking(55555, BLOCKF_PLAYERS, 0);
+		SetLineActivation(55555, (SPAC_Push | SPAC_UseBack));
 	}
 }
 
@@ -624,6 +626,46 @@ function void ModifyPrisonerTeleporterLines(void)
 		SetLineSpecial(55568, ACS_ExecuteAlways, 0, 0, 145, 302);
 		SetLineSpecial(55569, ACS_ExecuteAlways, 0, 0, 145, 302);
 		SetLineSpecial(55570, ACS_ExecuteAlways, 0, 0, 145, 302);
+
+		Line_SetBlocking(55555, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55556, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55557, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55558, BLOCKF_PLAYERS, 0);
+
+		Line_SetBlocking(55559, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55560, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55561, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55562, BLOCKF_PLAYERS, 0);
+
+		Line_SetBlocking(55563, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55564, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55565, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55566, BLOCKF_PLAYERS, 0);
+
+		Line_SetBlocking(55567, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55568, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55569, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55570, BLOCKF_PLAYERS, 0);
+
+		SetLineActivation(55555, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55556, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55557, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55558, (SPAC_Push | SPAC_UseBack));
+
+		SetLineActivation(55559, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55560, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55561, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55562, (SPAC_Push | SPAC_UseBack));
+
+		SetLineActivation(55563, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55564, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55565, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55566, (SPAC_Push | SPAC_UseBack));
+
+		SetLineActivation(55567, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55568, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55569, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55570, (SPAC_Push | SPAC_UseBack));
 	}
 }
 
@@ -681,6 +723,10 @@ function void ModifySewerExitLine(void)
 		// sewage tank is now drained; restore the exit line special
 		SetLineSpecial(55555, ACS_ExecuteAlways, 0, 0, 145, 603);
 		SetLineSpecial(55556, ACS_ExecuteAlways, 0, 0, 145, 603);
+		Line_SetBlocking(55555, BLOCKF_PLAYERS, 0);
+		Line_SetBlocking(55556, BLOCKF_PLAYERS, 0);
+		SetLineActivation(55555, (SPAC_Push | SPAC_UseBack));
+		SetLineActivation(55556, (SPAC_Push | SPAC_UseBack));
 	}
 }
 
