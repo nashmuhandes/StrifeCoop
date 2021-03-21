@@ -579,7 +579,6 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			AddLineID(234, 55555);
 			AddLineID(235, 55556);
 
-
 			// Reassign the sewage valve script to prevent prematurely triggering a level exit
 			// before actually turning the valve
 			SetLineSpecial(2832, ACS_ExecuteAlways, -int('StrifeCoop_MAP07DrainReclamationTankScript'), 0, 0, 0, 0);
@@ -768,7 +767,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			t = AddThing(3, (-1278, 4110, 0), 225); SetThingArgument(t, 0, 4);
 			t = AddThing(4, (-1342, 3972, 0), 90); SetThingArgument(t, 0, 4);
 
-			// Commons entrance
+			// Order Commons entrance
 			// (Teleport New Map Spot 5)
 			SetThingEdNum(66, 0);
 			t = AddThing(1, (2556, 3015, 0), 180); SetThingArgument(t, 0, 5);
@@ -837,7 +836,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 			t = AddThing(3, (1672, 24, 0), 90); SetThingArgument(t, 0, 2);
 			t = AddThing(4, (1648, 64, 0), 90); SetThingArgument(t, 0, 2);
 
-			// Borderlands teleporter entrance
+			// Borderlands stairway entrance
 			// (Teleport New Map Spot 3)
 			SetThingEdNum(459, 0);
 			t = AddThing(1, (-352, 5088, 0), 135); SetThingArgument(t, 0, 3);
