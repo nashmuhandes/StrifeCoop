@@ -39,7 +39,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		RemoveUnwantedThings(checksum, mapname);
 		FixExitLines(checksum, mapname);
 		FixStrifeMaps(checksum, mapname);
-		//FixSVEMaps(checksum, mapname);
+		FixSVEMaps(checksum, mapname);
 	}
 
 	//===========================================================================
