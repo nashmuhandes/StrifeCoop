@@ -1,0 +1,160 @@
+// Copyright 2021 Nash Muhandes
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+//
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice, this list of conditions and the following disclaimer in the
+//    documentation and/or other materials provided with the distribution.
+// 3. The name of the author may not be used to endorse or promote products
+//    derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+//===========================================================================
+//
+// Map-Specific Fixes - Strife: Veteran Edition
+//
+//===========================================================================
+
+extend class StrifeCoopLevelPostProcessor
+{
+	void FixSVEMaps(Name checksum, String mapname)
+	{
+		int t;
+
+		switch (checksum)
+		{
+		default:
+		case 'none':
+			return;
+
+		case 'E80503C91F1304142FFDF51EEA7A9653': // sve.wad map01 - Sanctuary
+			break;
+
+		case 'A4ABA612A8FE682787DEBEAF70637836': // sve.wad map02 - Town
+			break;
+
+		case '53C6581CB9BC334D6FF0B2E7DAA16944': // sve.wad map03 - Front Base
+			break;
+
+		case '4BA20A2DAE4D52196E6B06B142EAE9EB': // sve.wad map04 - Power Station
+			break;
+
+		case 'F46DEB7B2ABEDB9677269B1539F7ABB8': // sve.wad map05 - Prison
+			break;
+
+		case '3F2BC1BA58B80E4CDF1DB031CA454F79': // sve.wad map06 - Sewers
+			break;
+
+		case 'ECB3421D4C79C67EBC9342E0579F8804': // sve.wad map07 - Castle
+			break;
+
+		case '5ED7AE938A486878E87690A436E451FB': // sve.wad map08 - Audience Chamber
+			break;
+
+		case '6CEEF63FBBE4459BA8A0E73DF308E196': // sve.wad map09 - Castle: Programmer's Keep
+			break;
+
+		case '0A9721C0CF54FF6224FE7D326A2B9B85': // sve.wad map10 - New Front Base
+			break;
+
+		case '1097B8706E00273294389D1FEB5E94A5': // sve.wad map11 - Borderlands
+			break;
+
+		case 'C40C878D00E0BC8F7CF3D08DBDDBC36A': // sve.wad map12 - The Temple of the Oracle
+			break;
+
+		case '9AD30A0C668A0106AA827E7F716295E8': // sve.wad map13 - Catacombs
+			break;
+
+		case 'B60C0A9027557B2B982EAE60940ED95F': // sve.wad map14 - Mines
+			break;
+
+		case '6F9569FFFF0C1405DC04385CDB3436E6': // sve.wad map15 - Fortress: Administration
+			break;
+
+		case '900B1CAC3AB7DF6C2FFB5C429C523FB7': // sve.wad map16 - Fortress: Bishop's Tower
+			break;
+
+		case '8317A4026000931CAC5CB185582B4EDC': // sve.wad map17 - Fortress: The Bailey
+			break;
+
+		case '936649C98740996C05BE961AA9058A67': // sve.wad map18 - Fortress: Stores
+			break;
+
+		case '5215723CBF14B74A0CB901473434576B': // sve.wad map19 - Fortress: Security Complex
+			break;
+
+		case 'C6BFC4A41F739A30A4AC09DEE895DCE3': // sve.wad map20 - Factory: Receiving
+			break;
+
+		case 'B368A6D674B81B650DC37C8643BC9AA4': // sve.wad map21 - Factory: Manufacturing
+			break;
+
+		case '07B8629DEAE50991B3B372911EDC99D3': // sve.wad map22 - Factory: Forge
+			break;
+
+		case '13BDF7D41E33E302D21234316A600BBA': // sve.wad map23 - Order Commons
+			break;
+
+		case 'A1306ABECD39680421808E3FEE89A58E': // sve.wad map24 - Factory: Conversion Chapel
+			break;
+
+		case 'A35CD1D869B0473249E7F23FA925517A': // sve.wad map25 - Catacombs: Ruined Temple
+			break;
+
+		case '27F31A6F186F2C928EF6E5450D1B891D': // sve.wad map26 - Proving Grounds
+			break;
+
+		case '455893D08E0AF4C0A8D50FE8A4B865A3': // sve.wad map27 - The Lab
+			break;
+
+		case '43320A6C4547B8D4A5F3BAD28B00EA25': // sve.wad map28 - Alien Ship
+			break;
+
+		case 'A75099ACB622C7013EE737480FCB0D67': // sve.wad map29 - Entity's Lair
+			break;
+
+		case 'C45DCE904B6D4F9AC76B025499D9281E': // sve.wad map30 - Abandoned Front Base
+			break;
+
+		case 'F023F94C61827861776C63288BB93649': // sve.wad map31 - Training Facility
+			break;
+
+		case 'F8E6B612A87A052F3FA298DBD792E269': // sve.wad map32 - Sanctuary (demo version)
+			break;
+
+		case 'F307864E6E8114454F3FD9C0699F28D2': // sve.wad map33 - Town (demo version)
+			break;
+
+		case 'C53801BD1C6EAC80C2DCDDBF2DBDF980': // sve.wad map34 - Movement Base (demo version)
+			break;
+
+		case 'F78F92E830CF340E6D2277E8D5D74081': // sve.wad map35 - Factory: Production (super secret level)
+			break;
+
+		case 'A906E617E2032090BD71A936F9DB016E': // sve.wad map36 - Castle Clash (Capture the Chalice)
+			break;
+
+		case '51A68D41E73CCB8EDC70A939AC01C6F5': // sve.wad map37 - Killing Grounds (Capture the Chalice)
+			break;
+
+		case 'DD84AED7C0AA55BE10090399486AC3F8': // sve.wad map38 - Ordered Chaos (Capture the Chalice)
+			break;
+		}
+	}
+}
