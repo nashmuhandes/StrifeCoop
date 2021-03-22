@@ -33,8 +33,8 @@
 class StrifeCoopNPCPlugin : Inventory
 {
 	uint8 talkingWasInterrupted;
-
 	StrifeCoopTalkIcon talkIcon;
+	bool oldUberEntity, newUberEntity;
 
 	//===========================================================================
 	//
@@ -118,10 +118,15 @@ class StrifeCoopNPCPlugin : Inventory
 		}
 
 		// Hack to make Uber Entity faster
-		if (Owner is "EntityBoss" && Owner.target && Owner.Health > 0 && strifecoop_uberentity)
+		if (Owner is "EntityBoss" && Owner.target && Owner.Health > 0 )
 		{
-			// Fortunately most of the Entity's states last for 4 tics...
-			Owner.tics = tics / 2;
+			CheckUberEntitySettings();
+
+			if (strifecoop_uberentity)
+			{
+				// Fortunately most of the Entity's states last for 4 tics...
+				Owner.tics = tics / 2;
+			}
 		}
 
 		Super.DoEffect();
@@ -163,6 +168,22 @@ class StrifeCoopNPCPlugin : Inventory
 	//
 	//
 	//===========================================================================
+
+	void CheckUberEntitySettings(void)
+	{
+		if (!(Owner is "EntityBoss")) return;
+
+		newUberEntity = strifecoop_uberentity;
+		if (oldUberEntity != newUberEntity)
+		{
+			// Reset the Entity's health to default, before scaling it
+			// (this is intentional; to prevent abuse from repeatedly toggling the value mid-play)
+			Owner.StartHealth = Owner.Default.GetMaxHealth(true);
+			Owner.A_SetHealth(Owner.GetMaxHealth(true));
+			ScaleStats();
+			oldUberEntity = newUberEntity;
+		}
+	}
 
 	void ScaleStats(void)
 	{
