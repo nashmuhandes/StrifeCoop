@@ -40,6 +40,9 @@ class StrifeCoopHandler : EventHandler
 	transient CVar cvDebug;
 	transient CVar cvChatBubble;
 
+	ui transient CVar cvUberEntity;
+	ui bool newScaleEnemies, oldScaleEnemies;
+
 	//===========================================================================
 	//
 	//
@@ -205,6 +208,29 @@ class StrifeCoopHandler : EventHandler
 			if (debugMode > 0)
 			{
 				StrifeCoopDebugText.DrawDebugText(plr, debugMode);
+			}
+		}
+	}
+
+	override void UITick(void)
+	{
+		if (!cvUberEntity)
+		{
+			cvUberEntity = CVar.FindCVar("strifecoop_uberentity");
+		}
+
+		// Check if enemy scale setting has changed, and force Uber Entity to off
+		// if enemy scale is turned off
+		if (consoleplayer == Net_Arbitrator)
+		{
+			newScaleEnemies = strifecoop_scaleenemies;
+			if (oldScaleEnemies != newScaleEnemies)
+			{
+				if (!strifecoop_scaleenemies && cvUberEntity)
+				{
+					cvUberEntity.SetInt(0);
+				}
+				oldScaleEnemies = newScaleEnemies;
 			}
 		}
 	}
