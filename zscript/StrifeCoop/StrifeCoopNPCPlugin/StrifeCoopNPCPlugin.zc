@@ -117,6 +117,13 @@ class StrifeCoopNPCPlugin : Inventory
 			talkingWasInterrupted--;
 		}
 
+		// Hack to make Uber Entity faster
+		if (Owner is "EntityBoss" && Owner.target && Owner.Health > 0 && strifecoop_uberentity)
+		{
+			// Fortunately most of the Entity's states last for 4 tics...
+			Owner.tics = tics / 2;
+		}
+
 		Super.DoEffect();
 	}
 
@@ -195,11 +202,15 @@ class StrifeCoopNPCPlugin : Inventory
 		{
 			if (strifecoop_uberentity)
 			{
-				nsh *= 4.;
-				Owner.bAlwaysFast = true;
+				nsh *= 20.;
+				Owner.PainChance = 0;
+				Owner.bNoPain = true;
+				Owner.bAlwaysFast = true; // doesn't really work because none of the Entity's state definitions have the Fast qualifier...
 			}
 			else
 			{
+				Owner.PainChance = Owner.Default.PainChance;
+				Owner.bNoPain = Owner.Default.bNoPain;
 				Owner.bAlwaysFast = Owner.Default.bAlwaysFast;
 			}
 		}
