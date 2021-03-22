@@ -54,7 +54,6 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 		{
 			int ednum = GetThingEdNum(t);
 
-
 			// remove horribly unbalanced items meant for deathmatch
 			int thingFlags = GetThingFlags(t);
 			if (thingFlags & MTF_SINGLE)
