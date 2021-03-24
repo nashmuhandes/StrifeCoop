@@ -1078,16 +1078,11 @@ script "StrifeCoop_MAP29PointOfNoReturnPlayerRespawnScript" RESPAWN
 			{
 				Thing_Move(0, map29PointOfNoReturnSpawnTIDs[PlayerNumber()], FALSE);
 			}
-			/*
 			else
 			{
 				// Force death on the bad ending. You can no longer resurrect...
-				// Commented out because we're able to eat the +use key in
-				// StrifeCoopHandler::InputProcess.
-				// But leaving this here for referencial purposes.
 				Thing_Damage(0, 0x7FFFFFFF, MOD_UNKNOWN);
 			}
-			*/
 		}
 	}
 }
