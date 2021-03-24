@@ -921,6 +921,41 @@ script "StrifeCoop_MAP28PointOfNoReturn2Script" (void)
 			tid = UniqueTID();
 			map28PointOfNoReturn2SpawnTIDs[3] = tid;
 			SpawnForced("MapSpotGravity", 3168.0, -992.0, -48.0, tid, 64);
+
+			// Immediately teleport any players who are still left behind
+			int activatingPlayerNumber = PlayerNumber();
+			for (int i = 0; i < MAXPLAYERS; i++)
+			{
+				if (PlayerInGame(i))
+				{
+					if (SetActivator(0, AAPTR_PLAYER1 << i))
+					{
+						// skip the player who activated the line
+						if (PlayerNumber() == activatingPlayerNumber)
+						{
+							continue;
+						}
+
+						// save original player TID (if they have one)
+						int otid = ActivatorTID();
+
+						// generate a temporary unique TID
+						int ntid = UniqueTID();
+
+						// change player TID to the temporary unique TID
+						Thing_ChangeTID(otid, ntid);
+
+						// teleport the player (if left behind)
+						if (GetActorY(ntid) < -1440.0)
+						{
+							TeleportOther(ntid, map28PointOfNoReturn2SpawnTIDs[PlayerNumber()], TRUE);
+						}
+
+						// restore original player TID
+						Thing_ChangeTID(ntid, otid);
+					}
+				}
+			}
 		}
 
 		map28PointOfNoReturn = 2;
