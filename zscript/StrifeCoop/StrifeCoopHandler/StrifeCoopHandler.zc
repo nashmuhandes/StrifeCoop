@@ -91,6 +91,7 @@ class StrifeCoopHandler : EventHandler
 	{
 		CacheCVars();
 		GetCampaign();
+		ScaleEnemiesIfNeeded();
 		WakeStartingEnemiesInTown();
 	}
 
@@ -422,6 +423,11 @@ class StrifeCoopHandler : EventHandler
 				plugin.ScaleStats();
 			}
 		}
+	}
+
+	void ScaleEnemiesIfNeeded(void)
+	{
+		campaign.DoScaleEnemies();
 	}
 
 	//===========================================================================

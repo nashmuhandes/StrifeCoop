@@ -57,6 +57,7 @@ class StrifeCoopLoadSaveHandler : StaticEventHandler
 				// all good, continue to load the game
 				eh.CacheCVars();
 				eh.HandlePlayersOnLoadedGame();
+				eh.ScaleEnemiesIfNeeded();
 			}
 		}
 	}
