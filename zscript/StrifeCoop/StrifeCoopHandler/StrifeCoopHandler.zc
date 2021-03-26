@@ -63,6 +63,15 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
+	override void PlayerSpawned(PlayerEvent e)
+	{
+		let pmo = players[e.PlayerNumber].mo;
+		if (pmo)
+		{
+			SetupPlayer(pmo);
+		}
+	}
+
 	override void PlayerRespawned(PlayerEvent e)
 	{
 		let pmo = players[e.PlayerNumber].mo;
