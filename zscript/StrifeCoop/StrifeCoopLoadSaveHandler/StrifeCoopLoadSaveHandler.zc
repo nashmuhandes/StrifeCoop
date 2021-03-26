@@ -56,7 +56,75 @@ class StrifeCoopLoadSaveHandler : StaticEventHandler
 
 				// all good, continue to load the game
 				eh.CacheCVars();
-				eh.HandlePlayersOnLoadedGame();
+				HandlePlayersOnLoadedGame(eh);
+			}
+		}
+	}
+
+	void HandlePlayersOnLoadedGame(StrifeCoopHandler eh)
+	{
+		// TO DO: this can probably be done in a more robust way...
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				let pmo = players[i].mo;
+				if (pmo)
+				{
+					//Console.Printf("Handling a loaded save game for player %d", pmo.PlayerNumber() + 1);
+
+					// the game was saved while in conversation, so it's time to clear it
+					if (pmo.player.ConversationNPC)
+					{
+						let plugin = StrifeCoopPlayerPlugin.Find(pmo);
+						if (plugin)
+						{
+							if (gameaction != ga_slideshow)
+							{
+								plugin.ClearConversationStuff(pmo.player);
+							}
+						}
+					}
+
+					// the player doesn't have a plugin, so we can assume it's a newly-added player
+					let plugin = StrifeCoopPlayerPlugin.Find(pmo);
+					if (!plugin)
+					{
+						eh.SetupPlayer(pmo);
+						plugin = StrifeCoopPlayerPlugin.Find(pmo);
+						plugin.isNewJoiningPlayer = true;
+					}
+					else
+					{
+						if (eh.campaign && plugin)
+						{
+							// check if data is dirty somehow and clean them up
+
+							// stats aren't synched?
+							if (pmo.Stamina != eh.campaign.maxStamina)
+							{
+								pmo.Stamina = eh.campaign.maxStamina;
+								plugin.oldStamina = plugin.newStamina = eh.campaign.maxStamina;
+								pmo.GiveBody(-100);
+							}
+							if (pmo.Accuracy != eh.campaign.maxAccuracy)
+							{
+								pmo.Accuracy = eh.campaign.maxAccuracy;
+								plugin.oldAccuracy = plugin.newAccuracy = eh.campaign.maxAccuracy;
+							}
+
+							// log text isn't synched?
+							String latestTxt = eh.campaign.latestLogText;
+							String playerTxt = pmo.player.LogText;
+							if (!(playerTxt ~== latestTxt))
+							{
+								plugin.oldLogText = plugin.newLogText = eh.campaign.latestLogText;
+								int num = latestTxt.Mid("\$TXT_ILOG".Length()).ToInt();
+								pmo.player.SetLogNumber(num);
+							}
+						}
+					}
+				}
 			}
 		}
 	}

@@ -336,45 +336,6 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
-	void HandlePlayersOnLoadedGame(void)
-	{
-		// TO DO: this can probably be done in a more robust way...
-		for (int i = 0; i < MAXPLAYERS; i++)
-		{
-			if (playeringame[i])
-			{
-				let pmo = players[i].mo;
-				if (pmo)
-				{
-					//Console.Printf("Handling a loaded save game for player %d", pmo.PlayerNumber() + 1);
-
-					// the game was saved while in conversation, so it's time to clear it
-					if (pmo.player.ConversationNPC)
-					{
-						let plugin = StrifeCoopPlayerPlugin.Find(pmo);
-						if (plugin)
-						{
-							if (gameaction != ga_slideshow)
-							{
-								plugin.ClearConversationStuff(pmo.player);
-							}
-						}
-					}
-
-					// the player doesn't have a plugin, so we can assume it's a newly-added player
-					let plugin = StrifeCoopPlayerPlugin.Find(pmo);
-					if (!plugin)
-					{
-						SetupPlayer(pmo);
-						plugin = StrifeCoopPlayerPlugin.Find(pmo);
-						plugin.isNewJoiningPlayer = true;
-					}
-
-				}
-			}
-		}
-	}
-
 	static clearscope int GetPlayerCount(void)
 	{
 		if (strifecoop_simulateplayercount > 0)

@@ -129,23 +129,25 @@ class StrifeCoopPlayerPlugin : Inventory
 
 	void HandleNewPlayer(void)
 	{
-		// handle just-joined players
-		// set the stats to the saved data on the campaign
-		if (isNewJoiningPlayer)
+		let pmo = PlayerPawn(Owner);
+		if (pmo)
 		{
-			let pmo = PlayerPawn(Owner);
-			if (pmo)
+			// handle just-joined players
+			if (isNewJoiningPlayer)
 			{
 				//Console.Printf("Player %d is a noob", pmo.PlayerNumber() + 1);
+
+				// set the stats to the saved data on the campaign
 				pmo.Stamina = campaign.maxStamina;
 				pmo.Accuracy = campaign.maxAccuracy;
 				oldStamina = newStamina = campaign.maxStamina; pmo.GiveBody(-100);
 				oldAccuracy = newAccuracy = campaign.maxAccuracy;
+
+				// sychronize quest log
 				oldLogText = newLogText = campaign.latestLogText;
 				String txt = campaign.latestLogText;
 				int num = txt.Mid("\$TXT_ILOG".Length()).ToInt();
 				pmo.player.SetLogNumber(num);
-				isNewJoiningPlayer = false;
 
 				// rescale enemies
 				if (strifecoop_scaleenemies)
@@ -156,6 +158,8 @@ class StrifeCoopPlayerPlugin : Inventory
 						eh.campaign.DoScaleEnemies();
 					}
 				}
+
+				isNewJoiningPlayer = false;
 			}
 		}
 	}
