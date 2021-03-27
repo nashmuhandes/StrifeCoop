@@ -1033,6 +1033,10 @@ script "StrifeCoop_MAP29PointOfNoReturnScript" (void)
 
 		map29PointOfNoReturn = TRUE;
 
+		// Tell StrifeCoopHandler::InputProcess that the +use key
+		// can now be eaten from this point onwards
+		ScriptCall("StrifeCoopCampaign", "SetIsFightingEntity", TRUE);
+
 		// force teleport other players into the Entity's room
 		int activatingPlayerNumber = PlayerNumber();
 		for (int i = 0; i < MAXPLAYERS; i++)
@@ -1041,10 +1045,6 @@ script "StrifeCoop_MAP29PointOfNoReturnScript" (void)
 			{
 				if (SetActivator(0, AAPTR_PLAYER1 << i))
 				{
-					// Tell StrifeCoopHandler::InputProcess that the +use key
-					// can now be eaten from this point onwards
-					GiveInventory("StrifeCoopMAP29PointOfNoReturn", 1);
-
 					// skip the player who activated the line
 					if (PlayerNumber() == activatingPlayerNumber)
 					{

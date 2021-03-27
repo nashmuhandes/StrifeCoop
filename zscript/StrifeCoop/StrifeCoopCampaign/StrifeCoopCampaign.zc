@@ -60,6 +60,9 @@ class StrifeCoopCampaign : Thinker
 	// enemy scaling
 	bool oldScaleEnemies, newScaleEnemies;
 
+	// about to fight the Entity. +use key may now be eaten, if the band ending is enabled
+	bool isFightingEntity;
+
 	//===========================================================================
 	//
 	//
@@ -313,5 +316,25 @@ class StrifeCoopCampaign : Thinker
 				plugin.ScaleStats();
 			}
 		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	static void SetIsFightingEntity(Actor activator, bool i)
+	{
+		let campaign = StrifeCoopCampaign.GetInstance();
+		if (campaign)
+		{
+			campaign.isFightingEntity = i;
+		}
+	}
+
+	clearscope bool GetIsFightingEntity(void)
+	{
+		return isFightingEntity;
 	}
 }

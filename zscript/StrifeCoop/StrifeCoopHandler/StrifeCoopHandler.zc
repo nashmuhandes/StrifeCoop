@@ -169,13 +169,12 @@ class StrifeCoopHandler : EventHandler
 
 	override bool InputProcess(InputEvent e)
 	{
-		if (strifecoop_badending)
+		if (strifecoop_badending && (campaign && campaign.GetIsFightingEntity()))
 		{
 			// Eat the +use key for the bad ending in MAP29 so that you can't resurrect
 			// (But only after the point of no return)
 			if (players[consoleplayer].mo != NULL &&
-				players[consoleplayer].mo.Health <= 0 &&
-				players[consoleplayer].mo.CountInv("StrifeCoopMAP29PointOfNoReturn") > 0)
+				players[consoleplayer].mo.Health <= 0)
 			{
 				if (Level.levelnum == 29 && gamestate == GS_LEVEL)
 				{

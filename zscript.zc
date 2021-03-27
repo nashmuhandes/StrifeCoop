@@ -43,7 +43,6 @@ version "4.5.0"
 #include "zscript/StrifeCoop/StrifeCoopPlayerPlugin/StrifeCoopPlayerPlugin.zc"
 #include "zscript/StrifeCoop/StrifeCoopTalkIcon/StrifeCoopTalkIcon.zc"
 #include "zscript/StrifeCoop/StrifeCoopProgLevelEnder/StrifeCoopProgLevelEnder.zc"
-#include "zscript/StrifeCoop/StrifeCoopMAP29PointOfNoReturn/StrifeCoopMAP29PointOfNoReturn.zc"
 
 //===========================================================================
 //
