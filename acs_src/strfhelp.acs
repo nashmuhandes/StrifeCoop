@@ -962,11 +962,14 @@ script "StrifeCoop_MAP28PointOfNoReturn2Script" (void)
 	}
 }
 
+/*
+// I don't remember why this script exists LOL
 script "StrifeCoop_MAP28ExitToEntityLairScript" (void)
 {
 	map28PointOfNoReturn = 3;
 	ACS_ExecuteAlways(0, 0, 145, 2901);
 }
+*/
 
 script "StrifeCoop_MAP28PointOfNoReturnPlayerRespawnScript" RESPAWN
 {
