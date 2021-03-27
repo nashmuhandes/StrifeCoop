@@ -1611,7 +1611,7 @@ extend class StrifeCoopLevelPostProcessor
 			SetLineSpecial(1088, ACS_ExecuteAlways, -int('StrifeCoop_MAP28PointOfNoReturn1Script'), 0, 0, 0, 0);
 			SetLineSpecial(1089, ACS_ExecuteAlways, -int('StrifeCoop_MAP28PointOfNoReturn1Script'), 0, 0, 0, 0);
 			SetLineSpecial(69, ACS_ExecuteAlways, -int('StrifeCoop_MAP28PointOfNoReturn2Script'), 0, 0, 0, 0);
-			SetLineSpecial(1002, ACS_ExecuteAlways, -int('StrifeCoop_MAP28ExitToEntityLairScript'), 0, 0, 0, 0);
+			//SetLineSpecial(1002, ACS_ExecuteAlways, -int('StrifeCoop_MAP28ExitToEntityLairScript'), 0, 0, 0, 0);
 
 			//===========================================================================
 			//
