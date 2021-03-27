@@ -426,7 +426,7 @@ class StrifeCoopHandler : EventHandler
 		if (e.Thing && e.Thing is "Ammo")
 		{
 			let ammo = Ammo(e.Thing);
-			if (ammo && ammo.bDropped)
+			if (ammo && ammo.bDropped && ammo.bSpecial && !ammo.InStateSequence(ammo.CurState, ammo.ResolveState('Held')))
 			{
 				int pcount = StrifeCoopHandler.GetPlayerCount();
 				for (int i = 1; i < pcount; i++)
