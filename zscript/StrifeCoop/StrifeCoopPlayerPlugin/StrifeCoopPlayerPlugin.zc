@@ -47,6 +47,10 @@ class StrifeCoopPlayerPlugin : Inventory
 
 	bool exitedLevel;
 
+	// picking up an officer's uniform should give all players the uniform, but only just once.
+	// if they drop it, it's their responsibility to get it back
+	bool hasOfficersUniform;
+
 	//===========================================================================
 	//
 	//

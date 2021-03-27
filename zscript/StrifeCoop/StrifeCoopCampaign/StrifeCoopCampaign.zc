@@ -57,10 +57,6 @@ class StrifeCoopCampaign : Thinker
 	// keep a global record of QuestItems acquired throughout the journey
 	Array< class<Inventory> > retrievedQuestItems;
 
-	// picking up an officer's uniform should give all players the uniform, but only just once.
-	// if they drop it, it's their responsibility to get it back
-	bool playerHasOfficersUniform[MAXPLAYERS];
-
 	// enemy scaling
 	bool oldScaleEnemies, newScaleEnemies;
 
@@ -144,8 +140,9 @@ class StrifeCoopCampaign : Thinker
 			{
 				PlayerInfo plr = players[i];
 				let pmo = players[i].mo;
+				let plugin = StrifeCoopPlayerPlugin.Find(pmo);
 
-				if (pmo && plr)
+				if (pmo && plr && plugin)
 				{
 					for (Inventory item = pmo.Inv; item != NULL; item = item.Inv)
 					{
@@ -166,9 +163,9 @@ class StrifeCoopCampaign : Thinker
 								if (retrievedQuestItems.Find(cls) == retrievedQuestItems.Size())
 								{
 									// special handling for the officer's uniform
-									if (item is "OfficersUniform" && !playerHasOfficersUniform[i])
+									if (item is "OfficersUniform" && !plugin.hasOfficersUniform)
 									{
-										playerHasOfficersUniform[i] = true;
+										plugin.hasOfficersUniform = true;
 									}
 
 									//Console.Printf("Found %s on player %d", cls.GetClassName(), pmo.PlayerNumber() + 1);
@@ -188,8 +185,9 @@ class StrifeCoopCampaign : Thinker
 			{
 				PlayerInfo plr = players[i];
 				let pmo = players[i].mo;
+				let plugin = StrifeCoopPlayerPlugin.Find(pmo);
 
-				if (pmo && plr)
+				if (pmo && plr && plugin)
 				{
 					for (int j = 0; j < retrievedQuestItems.Size(); j++)
 					{
@@ -203,10 +201,10 @@ class StrifeCoopCampaign : Thinker
 								pmo.A_GiveInventory(itemToGive, 1);
 							}
 							// officer's uniform needs special handling so that it is only given once per player
-							else if (itemToGive is "OfficersUniform" && !playerHasOfficersUniform[i])
+							else if (itemToGive is "OfficersUniform" && !plugin.hasOfficersUniform)
 							{
 								pmo.A_GiveInventory(itemToGive, 1);
-								playerHasOfficersUniform[i] = true;
+								plugin.hasOfficersUniform = true;
 							}
 						}
 					}
