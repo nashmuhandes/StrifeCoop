@@ -318,6 +318,21 @@ class StrifeCoopCampaign : Thinker
 		}
 	}
 
+	void RescaleEnemies(void)
+	{
+		ThinkerIterator it = ThinkerIterator.Create("Actor");
+		Actor mo;
+		while (mo = Actor(it.Next()))
+		{
+			let plugin = StrifeCoopNPCPlugin.Find(mo);
+			if (plugin)
+			{
+				plugin.ResetStats();
+				plugin.ScaleStats();
+			}
+		}
+	}
+
 	//===========================================================================
 	//
 	//

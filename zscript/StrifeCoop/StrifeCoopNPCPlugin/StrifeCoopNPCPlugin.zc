@@ -185,6 +185,27 @@ class StrifeCoopNPCPlugin : Inventory
 		}
 	}
 
+	void ResetStats(void)
+	{
+		if (!Owner) return;
+		let me = Owner;
+
+		if (StrifeCoopHandler.IsMerchant(me)) return;
+		if (me.Health <= 0) return;
+
+		int osh = me.GetMaxHealth(true);
+		double nsh = double(osh);
+
+		// keep track of original health percentage
+		double originalHealthPercent = ceil(100. * double(me.Health) / double(me.GetMaxHealth(true)));
+
+		me.StartHealth = me.Default.GetMaxHealth(true);
+
+		// now set the health percentage back to what it originally was
+		double newHealth = ceil(double(me.GetMaxHealth(true)) * originalHealthPercent / 100.);
+		me.A_SetHealth(int(newHealth));
+	}
+
 	void ScaleStats(void)
 	{
 		if (!Owner) return;
@@ -204,7 +225,7 @@ class StrifeCoopNPCPlugin : Inventory
 		double nsh = double(osh);
 
 		// keep track of original health percentage scaling
-		int originalHealthPercent = 100 * me.Health / me.GetMaxHealth(true);
+		double originalHealthPercent = ceil(100. * double(me.Health) / double(me.GetMaxHealth(true)));
 
 		//Console.Printf("%s's health is at %d%% before scaling", me.GetTag(), originalHealthPercent);
 
@@ -240,9 +261,9 @@ class StrifeCoopNPCPlugin : Inventory
 		me.StartHealth = strifecoop_scaleenemies ? int(floor(nsh)) : me.Default.GetMaxHealth(true);
 
 		// now set the health percentage back to what it originally was
-		int newHealth = me.GetMaxHealth(true) * originalHealthPercent / 100;
+		double newHealth = ceil(double(me.GetMaxHealth(true)) * originalHealthPercent / 100.);
 		//Console.Printf("%s's new health is %d after scaling", me.GetTag(), newHealth);
-		me.A_SetHealth(newHealth);
+		me.A_SetHealth(int(newHealth));
 	}
 
 	void RandomlyTargetOtherPlayers(void)

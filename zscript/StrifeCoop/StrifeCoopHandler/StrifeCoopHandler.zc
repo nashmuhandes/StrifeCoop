@@ -43,6 +43,8 @@ class StrifeCoopHandler : EventHandler
 	ui transient CVar cvUberEntity;
 	ui bool newScaleEnemies, oldScaleEnemies;
 
+	int playersInLevel;
+
 	//===========================================================================
 	//
 	//
@@ -52,6 +54,7 @@ class StrifeCoopHandler : EventHandler
 	override void NewGame(void)
 	{
 		CreateCampaign();
+		UpdatePlayerCount();
 	}
 
 	override void PlayerEntered(PlayerEvent e)
@@ -100,6 +103,8 @@ class StrifeCoopHandler : EventHandler
 	{
 		CacheCVars();
 		GetCampaign();
+		UpdatePlayerCount();
+		RescaleEnemies();
 		WakeStartingEnemiesInTown();
 	}
 
@@ -112,6 +117,8 @@ class StrifeCoopHandler : EventHandler
 		}
 
 		campaign.Tick();
+
+		CheckPlayerCount();
 	}
 
 	override void WorldUnloaded(WorldEvent e)
@@ -124,7 +131,7 @@ class StrifeCoopHandler : EventHandler
 	override void WorldThingSpawned(WorldEvent e)
 	{
 		SetupNPC(e);
-		ScaleNPCStats(e);
+		ScaleEnemyStatsOnSpawn(e);
 		SpawnExtraDroppedAmmo(e);
 	}
 
@@ -359,6 +366,33 @@ class StrifeCoopHandler : EventHandler
 		return p;
 	}
 
+	void CheckPlayerCount(void)
+	{
+		bool less = playersInLevel > GetPlayerCount() + strifecoop_simulateplayercount;
+		bool more = playersInLevel < GetPlayerCount() + strifecoop_simulateplayercount;
+		if (playersInLevel != GetPlayerCount() + strifecoop_simulateplayercount)
+		{
+			if (less)
+			{
+				Console.Printf(StringTable.Localize("$TXT_LESSPLAYERS"));
+			}
+			else if (more)
+			{
+				Console.Printf(StringTable.Localize("$TXT_MOREPLAYERS"));
+			}
+
+			UpdatePlayerCount();
+
+			// rescale enemies if player count changed
+			RescaleEnemies();
+		}
+	}
+
+	void UpdatePlayerCount(void)
+	{
+		playersInLevel = GetPlayerCount() + strifecoop_simulateplayercount;
+	}
+
 	//===========================================================================
 	//
 	//
@@ -378,7 +412,7 @@ class StrifeCoopHandler : EventHandler
 		}
 	}
 
-	void ScaleNPCStats(WorldEvent e)
+	void ScaleEnemyStatsOnSpawn(WorldEvent e)
 	{
 		if (!strifecoop_scaleenemies) return;
 
@@ -391,6 +425,11 @@ class StrifeCoopHandler : EventHandler
 				plugin.ScaleStats();
 			}
 		}
+	}
+
+	void RescaleEnemies(void)
+	{
+		campaign.RescaleEnemies();
 	}
 
 	//===========================================================================
