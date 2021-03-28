@@ -11,6 +11,8 @@
 #define SEWAGE_DRAIN_DURATION (35 * 9)
 
 // [Nash] it's impossible to not clash with other mods... all I can say is, don't play gameplay mods that use ACS libraries. :P
+world bool	241: map35PointOfNoReturn;
+world int	242: map35PointOfNoReturnSpawnTIDs[];
 world bool	243: freedPrisoners;
 world int	244: sewageDrainCounter;
 world bool	245: map29PlayerIsDead[];
@@ -1194,4 +1196,93 @@ script "StrifeCoop_BadEndingScript" OPEN
 	// Repeat this script indefinitely...
 	Delay(1);
 	Restart;
+}
+
+//===========================================================================
+//
+//
+//
+//===========================================================================
+
+script "StrifeCoop_MAP35PointOfNoReturnScript" (void)
+{
+	ClearLineSpecial();
+	Ceiling_LowerAndCrushDist(9, 200, 0x7FFFFFFF, 0, 1);
+
+	if (!map35PointOfNoReturn)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE)
+		{
+			// Spawn the new map spots for the resurrecting players to teleport to.
+			int tid = 0;
+
+			// Player 1
+			tid = UniqueTID();
+			map35PointOfNoReturnSpawnTIDs[0] = tid;
+			SpawnForced("MapSpotGravity", 2256.0, 120.0, 96.0, tid, 128);
+
+			// Player 2
+			tid = UniqueTID();
+			map35PointOfNoReturnSpawnTIDs[1] = tid;
+			SpawnForced("MapSpotGravity", 2280.0, 72.0, 96.0, tid, 128);
+
+			// Player 3
+			tid = UniqueTID();
+			map35PointOfNoReturnSpawnTIDs[2] = tid;
+			SpawnForced("MapSpotGravity", 2280.0, 168.0, 96.0, tid, 128);
+
+			// Player 4
+			tid = UniqueTID();
+			map35PointOfNoReturnSpawnTIDs[3] = tid;
+			SpawnForced("MapSpotGravity", 2304.0, 120.0, 96.0, tid, 128);
+
+			// Immediately teleport any players who are still left behind
+			int activatingPlayerNumber = PlayerNumber();
+			for (int i = 0; i < MAXPLAYERS; i++)
+			{
+				if (PlayerInGame(i))
+				{
+					if (SetActivator(0, AAPTR_PLAYER1 << i))
+					{
+						// skip the player who activated the line
+						if (PlayerNumber() == activatingPlayerNumber)
+						{
+							continue;
+						}
+
+						// save original player TID (if they have one)
+						int otid = ActivatorTID();
+
+						// generate a temporary unique TID
+						int ntid = UniqueTID();
+
+						// change player TID to the temporary unique TID
+						Thing_ChangeTID(otid, ntid);
+
+						// teleport the player (if left behind)
+						if (GetActorX(ntid) > 2496.0)
+						{
+							TeleportOther(ntid, map35PointOfNoReturnSpawnTIDs[PlayerNumber()], TRUE);
+						}
+
+						// restore original player TID
+						Thing_ChangeTID(ntid, otid);
+					}
+				}
+			}
+		}
+
+		map35PointOfNoReturn = TRUE;
+	}
+}
+
+script "StrifeCoop_MAP35PointOfNoReturnPlayerRespawnScript" RESPAWN
+{
+	if (GetLevelInfo(LEVELINFO_LEVELNUM) == 35)
+	{
+		if (GameType() == GAME_NET_COOPERATIVE && map35PointOfNoReturn == TRUE)
+		{
+			Thing_Move(0, map35PointOfNoReturnSpawnTIDs[PlayerNumber()], FALSE);
+		}
+	}
 }

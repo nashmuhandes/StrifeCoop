@@ -1804,6 +1804,9 @@ extend class StrifeCoopLevelPostProcessor
 			p = AddThing(3, (2592, 240, 0), 270); SetThingArgument(p, 0, 1);
 			p = AddThing(4, (2576, -16, 0), 135); SetThingArgument(p, 0, 1);
 
+			// Point of no return
+			SetLineSpecial(2275, ACS_ExecuteAlways, -int('StrifeCoop_MAP35PointOfNoReturnScript'), 0, 0, 0, 0);
+
 			break;
 
 		case 'A906E617E2032090BD71A936F9DB016E': // sve.wad map36 - Castle Clash (Capture the Chalice)
