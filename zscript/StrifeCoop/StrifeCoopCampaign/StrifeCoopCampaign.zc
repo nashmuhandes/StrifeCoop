@@ -155,7 +155,8 @@ class StrifeCoopCampaign : Thinker
 							item is "Communicator"		||
 							item is "StrifeKey"			||
 							item is "OfficersUniform"	||
-							item is "Sigil"
+							item is "Sigil"				||
+							item is "SVETalismanPowerup"
 						);
 
 						if (isValidItem)
@@ -202,6 +203,12 @@ class StrifeCoopCampaign : Thinker
 							if (!(itemToGive is "OfficersUniform"))
 							{
 								pmo.A_GiveInventory(itemToGive, 1);
+
+								// Print the talisman powerup message for all players
+								if (itemToGive is "SVETalismanPowerup")
+								{
+									pmo.A_Print("$MSG_TALISMANPOWER");
+								}
 							}
 							// officer's uniform needs special handling so that it is only given once per player
 							else if (itemToGive is "OfficersUniform" && !plugin.hasOfficersUniform)
