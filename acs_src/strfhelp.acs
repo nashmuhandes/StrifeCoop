@@ -802,7 +802,7 @@ script "StrifeCoop_MAP09ProgrammerTrapScript" (void)
 script "StrifeCoop_MAP25PointOfNoReturnScript" (void)
 {
 	ClearLineSpecial();
-	Floor_RaiseToLowestCeiling(999, 8);
+	Floor_RaiseToLowestCeiling(999, 128);
 
 	if (!map25PointOfNoReturn)
 	{
@@ -830,6 +830,41 @@ script "StrifeCoop_MAP25PointOfNoReturnScript" (void)
 			tid = UniqueTID();
 			map25PointOfNoReturnSpawnTIDs[3] = tid;
 			SpawnForced("MapSpotGravity", 3352.0, 1784.0, 24.0, tid, 160);
+
+			// Immediately teleport any players who are still left behind
+			int activatingPlayerNumber = PlayerNumber();
+			for (int i = 0; i < MAXPLAYERS; i++)
+			{
+				if (PlayerInGame(i))
+				{
+					if (SetActivator(0, AAPTR_PLAYER1 << i))
+					{
+						// skip the player who activated the line
+						if (PlayerNumber() == activatingPlayerNumber)
+						{
+							continue;
+						}
+
+						// save original player TID (if they have one)
+						int otid = ActivatorTID();
+
+						// generate a temporary unique TID
+						int ntid = UniqueTID();
+
+						// change player TID to the temporary unique TID
+						Thing_ChangeTID(otid, ntid);
+
+						// teleport the player (if left behind)
+						if (GetActorX(ntid) > 3632.0 && GetActorY(ntid) > 2064.0)
+						{
+							TeleportOther(ntid, map25PointOfNoReturnSpawnTIDs[PlayerNumber()], TRUE);
+						}
+
+						// restore original player TID
+						Thing_ChangeTID(ntid, otid);
+					}
+				}
+			}
 		}
 
 		map25PointOfNoReturn = TRUE;
