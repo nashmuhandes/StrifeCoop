@@ -116,6 +116,10 @@ class StrifeCoopLoadSaveHandler : StaticEventHandler
 							// log text isn't synched?
 							String latestTxt = eh.campaign.latestLogText;
 							String playerTxt = pmo.player.LogText;
+							if (pmo.player.LogText.Length() == 0)
+							{
+								playerTxt = pmo.player.LogText = "$TXT_FINDHELP";
+							}
 							if (!(playerTxt ~== latestTxt))
 							{
 								plugin.oldLogText = plugin.newLogText = eh.campaign.latestLogText;
