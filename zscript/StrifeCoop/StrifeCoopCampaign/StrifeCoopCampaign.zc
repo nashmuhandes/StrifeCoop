@@ -60,7 +60,7 @@ class StrifeCoopCampaign : Thinker
 	// enemy scaling
 	bool oldScaleEnemies, newScaleEnemies;
 
-	// about to fight the Entity. +use key may now be eaten, if the band ending is enabled
+	// about to fight the Entity. +use key may now be eaten, if the bad ending is enabled
 	bool isFightingEntity;
 
 	//===========================================================================
