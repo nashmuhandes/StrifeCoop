@@ -458,7 +458,7 @@ class StrifeCoopHandler : EventHandler
 	}
 	*/
 
-	void SpawnExtraDroppedammo(WorldEvent e)
+	void SpawnExtraDroppedAmmo(WorldEvent e)
 	{
 		if (!strifecoop_extraammo) return;
 
