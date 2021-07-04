@@ -78,7 +78,7 @@ class StrifeCoopTalkIcon : Actor
 		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
 		if (eh && pmoTalkedTo && pmoTalkedTo.player)
 		{
-			if (eh.GetCachedCVar(pmoTalkedTo.player, "strifecoop_chatbubble", eh.cvChatBubble).GetBool())
+			if (eh.cvChatBubble.GetBool())
 			{
 				bInvisible = pmoTalkedTo.CheckLocalView();
 			}

@@ -218,7 +218,7 @@ class StrifeCoopHandler : EventHandler
 		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
 		if (eh)
 		{
-			int debugMode = eh.GetCachedCVar(plr, "strifecoop_debug", eh.cvDebug).GetInt();
+			int debugMode = eh.cvDebug.GetInt();
 
 			if (debugMode > 0)
 			{
@@ -260,15 +260,11 @@ class StrifeCoopHandler : EventHandler
 	{
 		cvDebug = CVar.GetCVar("strifecoop_debug", players[consoleplayer]);
 		cvChatBubble = CVar.GetCVar("strifecoop_chatbubble", players[consoleplayer]);
-	}
 
-	clearscope CVar GetCachedCVar(PlayerInfo p, Name cvn, CVar cv)
-	{
-		if (!cv)
+		if (!cvDebug || !cvChatBubble)
 		{
-			ThrowAbortException("CVar %s was not cached", cvn);
+			ThrowAbortException("StrifeCoopHandler failed to cached CVars!");
 		}
-		return cv;
 	}
 
 	//===========================================================================
