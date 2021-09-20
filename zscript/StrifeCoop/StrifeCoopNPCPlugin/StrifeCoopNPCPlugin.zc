@@ -285,7 +285,7 @@ class StrifeCoopNPCPlugin : Inventory
 			}
 
 			// random player has been picked
-			int p = random[RNG_TargetRandomPlayer](0, totalPlayers - 1);
+			int p = random[rnd_TargetRandomPlayer](0, totalPlayers - 1);
 
 			newTarg = players[p].mo;
 

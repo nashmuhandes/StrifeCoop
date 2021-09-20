@@ -473,8 +473,8 @@ class StrifeCoopHandler : EventHandler
 						Inventory(newAmmo).ModifyDropAmount(ammo.DropAmount);
 						Vector3 sVel =
 						(
-							frandom(-1.0, 1.0),
-							frandom(-1.0, 1.0),
+							frandom[rnd_extra_ammo](-1.0, 1.0),
+							frandom[rnd_extra_ammo](-1.0, 1.0),
 							ammo.Vel.Z
 						);
 						newAmmo.Vel = sVel;
@@ -503,7 +503,7 @@ class StrifeCoopHandler : EventHandler
 				if (playeringame[i]) totalPlayers++;
 			}
 
-			int p = random[RNG_TargetRandomPlayer](0, totalPlayers - 1);
+			int p = random[rnd_TargetRandomPlayer](0, totalPlayers - 1);
 
 			players[p].mo.SoundAlert(players[p].mo, false);
 		}
