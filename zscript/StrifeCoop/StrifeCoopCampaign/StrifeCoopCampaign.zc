@@ -95,8 +95,12 @@ class StrifeCoopCampaign : Thinker
 	{
 		ThinkerIterator it = ThinkerIterator.Create("StrifeCoopCampaign", STAT_STATIC);
 		let p = StrifeCoopCampaign(it.Next());
-		if (p) return p;
-		else return NULL;
+		if (p)
+		{
+			return p;
+		}
+
+		return NULL;
 	}
 
 	clearscope int GetTimeInSeconds(void)
@@ -130,7 +134,8 @@ class StrifeCoopCampaign : Thinker
 
 	void SyncQuestItems(void)
 	{
-		if (!multiplayer) return;
+		if (!multiplayer)
+			return;
 
 		// No, there really isn't a better way to do this for the vanilla quest items.
 		// Actor replacement doesn't work because too many parts of the game check for the
@@ -231,7 +236,8 @@ class StrifeCoopCampaign : Thinker
 
 	void SyncSigilPieces(void)
 	{
-		if (!multiplayer || deathmatch) return;
+		if (!multiplayer || deathmatch)
+			return;
 
 		int sigilLevel = 0;
 

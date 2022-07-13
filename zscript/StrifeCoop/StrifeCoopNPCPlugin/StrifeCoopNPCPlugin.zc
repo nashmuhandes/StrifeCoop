@@ -136,7 +136,8 @@ class StrifeCoopNPCPlugin : Inventory
 	{
 		Super.AbsorbDamage(damage, damageType, newdamage, inflictor, source, flags);
 
-		if (!multiplayer) return;
+		if (!multiplayer)
+			return;
 
 		if (newdamage > 0)
 		{
@@ -171,7 +172,8 @@ class StrifeCoopNPCPlugin : Inventory
 
 	void CheckUberEntitySettings(void)
 	{
-		if (!(Owner is "EntityBoss")) return;
+		if (!(Owner is "EntityBoss"))
+			return;
 
 		newUberEntity = strifecoop_uberentity;
 		if (oldUberEntity != newUberEntity)
@@ -187,11 +189,15 @@ class StrifeCoopNPCPlugin : Inventory
 
 	void ResetStats(void)
 	{
-		if (!Owner) return;
+		if (!Owner)
+			return;
 		let me = Owner;
 
-		if (StrifeCoopHandler.IsMerchant(me)) return;
-		if (me.Health <= 0) return;
+		if (StrifeCoopHandler.IsMerchant(me))
+			return;
+
+		if (me.Health <= 0)
+			return;
 
 		int osh = me.GetMaxHealth(true);
 		double nsh = double(osh);
@@ -208,11 +214,16 @@ class StrifeCoopNPCPlugin : Inventory
 
 	void ScaleStats(void)
 	{
-		if (!Owner) return;
+		if (!Owner)
+			return;
+
 		let me = Owner;
 
-		if (StrifeCoopHandler.IsMerchant(me)) return;
-		if (me.Health <= 0) return;
+		if (StrifeCoopHandler.IsMerchant(me))
+			return;
+
+		if (me.Health <= 0)
+			return;
 
 		int pcount = StrifeCoopHandler.GetPlayerCount();
 
@@ -269,7 +280,8 @@ class StrifeCoopNPCPlugin : Inventory
 	void RandomlyTargetOtherPlayers(void)
 	{
 		PlayerPawn targ = PlayerPawn(Owner.target);
-		if (!targ) return;
+		if (!targ)
+			return;
 
 		PlayerPawn newTarg = NULL;
 
@@ -289,10 +301,12 @@ class StrifeCoopNPCPlugin : Inventory
 
 			newTarg = players[p].mo;
 
-			if (!newTarg || !targ) return;
+			if (!newTarg || !targ)
+				return;
 
 			// randomly chosen player was the same as before, so abort
-			if (newTarg == targ) return;
+			if (newTarg == targ)
+				return;
 
 			// check if newly chosen player is within distance and visibility
 			if (me.Distance3D(newTarg) < 1000.0 && me.CheckSight(newTarg, SF_SEEPASTBLOCKEVERYTHING | SF_SEEPASTSHOOTABLELINES))

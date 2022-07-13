@@ -44,8 +44,9 @@ class StrifeCoopProgLevelEnder : ProgLevelEnder
 	override void Tick(void)
 	{
 		if (special2 == 0)
-		{ // fade out over .66 second
-			special1 += 255 / (TICRATE*2/3);
+		{
+			// fade out over .66 second
+			special1 += 255 / (TICRATE * 2 / 3);
 			if (++special1 >= 255)
 			{
 				special1 = 255;
@@ -53,8 +54,9 @@ class StrifeCoopProgLevelEnder : ProgLevelEnder
 			}
 		}
 		else
-		{ // fade in over two seconds
-			special1 -= 255 / (TICRATE*2);
+		{
+			// fade in over two seconds
+			special1 -= 255 / (TICRATE * 2);
 			if (special1 <= 0)
 			{
 				Destroy ();

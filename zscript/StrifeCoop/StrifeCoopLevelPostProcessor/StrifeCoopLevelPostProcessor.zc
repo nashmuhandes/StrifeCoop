@@ -35,7 +35,8 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 	protected void Apply(Name checksum, String mapname)
 	{
 		bool isCoop = (multiplayer && !deathmatch);
-		if (!isCoop) return;
+		if (!isCoop)
+			return;
 		RemoveUnwantedThings(checksum, mapname);
 		FixExitLines(checksum, mapname);
 		FixStrifeMaps(checksum, mapname);

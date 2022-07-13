@@ -105,11 +105,14 @@ class StrifeCoopConversationMenu : ConversationMenu
 		Super.Drawer();
 
 		// draw debug text
-		if (!plr) return;
+		if (!plr)
+			return;
 		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
-		if (!eh) return;
+		if (!eh)
+			return;
 		int debugMode = eh.cvDebug.GetInt();
-		if (debugMode <= 0) return;
+		if (debugMode <= 0)
+			return;
 		StrifeCoopDebugText.DrawDebugText(plr, debugMode);
 	}
 }

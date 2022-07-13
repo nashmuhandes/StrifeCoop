@@ -80,15 +80,19 @@ class StrifeCoopPlayerPlugin : Inventory
 			return false;
 		}
 
-		if (!campaign) campaign = StrifeCoopCampaign.GetInstance();
+		if (!campaign)
+			campaign = StrifeCoopCampaign.GetInstance();
 
 		return Super.TryPickup(toucher);
 	}
 
 	override void DoEffect(void)
 	{
-		if (!Owner) return;
-		if (Owner && !(Owner is "PlayerPawn")) return;
+		if (!Owner)
+			return;
+
+		if (Owner && !(Owner is "PlayerPawn"))
+			return;
 
 		// must have a valid campaign reference
 		if (!campaign)
@@ -265,9 +269,12 @@ class StrifeCoopPlayerPlugin : Inventory
 			if (pmo == players[consoleplayer].mo && (upgradedStamina || upgradedAccuracy))
 			{
 				String txt = "";
-				if		(upgradedStamina && !upgradedAccuracy)	txt = "$TXT_UPGRADEDSTAMINA";
-				else if	(upgradedAccuracy && !upgradedStamina)	txt = "$TXT_UPGRADEDACCURACY";
-				else if	(upgradedStamina && upgradedAccuracy)	txt = "$TXT_UPGRADEDBOTH";
+				if (upgradedStamina && !upgradedAccuracy)
+					txt = "$TXT_UPGRADEDSTAMINA";
+				else if	(upgradedAccuracy && !upgradedStamina)
+					txt = "$TXT_UPGRADEDACCURACY";
+				else if	(upgradedStamina && upgradedAccuracy)
+					txt = "$TXT_UPGRADEDBOTH";
 				Console.MidPrint(NULL, txt);
 			}
 
@@ -288,7 +295,8 @@ class StrifeCoopPlayerPlugin : Inventory
 						if (playerToUpdate)
 						{
 							// skip this player
-							if (playerToUpdate == pmo) continue;
+							if (playerToUpdate == pmo)
+								continue;
 
 							// update stamina on the other player
 							// make sure to update all the variables properly so that
@@ -321,7 +329,8 @@ class StrifeCoopPlayerPlugin : Inventory
 						if (playerToUpdate)
 						{
 							// skip this player
-							if (playerToUpdate == pmo) continue;
+							if (playerToUpdate == pmo)
+								continue;
 
 							// update accuracy on the other player
 							// make sure to update all the variables properly so that
@@ -354,11 +363,16 @@ class StrifeCoopPlayerPlugin : Inventory
 
 	void UpdateDisguise(void)
 	{
-		if (!multiplayer) return;
-		if (deathmatch) return;
-		if (!strifecoop_disguise) return;
-		if (!Owner) return;
-		if (Owner && !(Owner is "PlayerPawn")) return;
+		if (!multiplayer)
+			return;
+		if (deathmatch)
+			return;
+		if (!strifecoop_disguise)
+			return;
+		if (!Owner)
+			return;
+		if (Owner && !(Owner is "PlayerPawn"))
+			return;
 		let pmo = PlayerPawn(Owner);
 		if (pmo && pmo.Health > 0)
 		{
@@ -471,8 +485,11 @@ class StrifeCoopPlayerPlugin : Inventory
 
 	void HandleProgrammerDeathFade(void)
 	{
-		if (Level.levelnum != 9 && Level.levelnum != 10) return;
-		if (!Owner) return;
+		if (Level.levelnum != 9 && Level.levelnum != 10)
+			return;
+
+		if (!Owner)
+			return;
 
 		let a = Owner.FindInventory("ProgLevelEnder", false);
 		if (a)

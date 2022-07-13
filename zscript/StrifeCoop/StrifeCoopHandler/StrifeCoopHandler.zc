@@ -155,8 +155,11 @@ class StrifeCoopHandler : EventHandler
 	override void NetworkProcess(ConsoleEvent e)
 	{
 		PlayerPawn pmo = PlayerPawn(players[e.Player].mo);
-		if (!pmo) return;
-		if (pmo && !pmo.player) return;
+		if (!pmo)
+			return;
+		if (pmo && !pmo.player)
+			return;
+
 		bool isConsolePlayer = (pmo == PlayerPawn(players[consoleplayer].mo));
 
 		//===========================================================================
@@ -212,7 +215,8 @@ class StrifeCoopHandler : EventHandler
 		{
 			plr = e.Camera.player;
 		}
-		if (!plr) return;
+		if (!plr)
+			return;
 
 		// draw debug text
 		let eh = StrifeCoopHandler(StrifeCoopHandler.Find("StrifeCoopHandler"));
@@ -308,7 +312,8 @@ class StrifeCoopHandler : EventHandler
 
 	void SetupPlayer(PlayerPawn pmo)
 	{
-		if (!pmo) return;
+		if (!pmo)
+			return;
 
 		//Console.Printf("SetupPlayer() running for player %d", pmo.PlayerNumber() + 1);
 
@@ -330,7 +335,8 @@ class StrifeCoopHandler : EventHandler
 
 	void ResurrectPlayer(PlayerPawn pmo)
 	{
-		if (!pmo) return;
+		if (!pmo)
+			return;
 
 		//Console.Printf("ResurrectPlayer() running for player %d", pmo.PlayerNumber() + 1);
 
@@ -410,7 +416,8 @@ class StrifeCoopHandler : EventHandler
 
 	void ScaleEnemyStatsOnSpawn(WorldEvent e)
 	{
-		if (!strifecoop_scaleenemies) return;
+		if (!strifecoop_scaleenemies)
+			return;
 
 		if (e.Thing && StrifeCoopHandler.IsEnemy(e.Thing))
 		{
@@ -456,7 +463,8 @@ class StrifeCoopHandler : EventHandler
 
 	void SpawnExtraDroppedAmmo(WorldEvent e)
 	{
-		if (!strifecoop_extraammo) return;
+		if (!strifecoop_extraammo)
+			return;
 
 		if (e.Thing && e.Thing is "Ammo")
 		{
@@ -492,7 +500,8 @@ class StrifeCoopHandler : EventHandler
 
 	void WakeStartingEnemiesInTown(void)
 	{
-		if (!multiplayer) return;
+		if (!multiplayer)
+			return;
 
 		// Wake the Acolytes up in the first room immediately, targetting a random player
 		if (Level.totaltime == 0 && Level.levelnum == 2)
@@ -529,8 +538,11 @@ class StrifeCoopHandler : EventHandler
 
 	void DropGold(WorldEvent e)
 	{
-		if (!multiplayer) return;
-		if (!strifecoop_enemiesdropgold) return;
+		if (!multiplayer)
+			return;
+
+		if (!strifecoop_enemiesdropgold)
+			return;
 
 		let mo = e.Thing;
 
@@ -543,7 +555,8 @@ class StrifeCoopHandler : EventHandler
 			mo is "SpectralMonster"
 		);
 
-		if (isBoss) return;
+		if (isBoss)
+			return;
 
 		if (mo && mo.bIsMonster && !mo.bFriendly)
 		{
@@ -552,8 +565,10 @@ class StrifeCoopHandler : EventHandler
 			int lvl = Level.levelnum;
 
 			// Sanctuary and Town amounts need to be swapped because of the weird level numbering
-			if (lvl == 1) lvl = 2;
-			else if (lvl == 2) lvl = 1;
+			if (lvl == 1)
+				lvl = 2;
+			else if (lvl == 2)
+				lvl = 1;
 
 			int amt = lvl * pcount / 10;
 			if (amt == 0) amt = 1;
@@ -567,7 +582,8 @@ class StrifeCoopHandler : EventHandler
 
 	void HandleAlienSpectre5Death(WorldEvent e)
 	{
-		if (!multiplayer) return;
+		if (!multiplayer)
+			return;
 
 		// AlienSpectre5 (the Loremaster's spectre) is hardcoded to only give upgrades when killed in single player.
 		// We deal with that here.
@@ -604,7 +620,8 @@ class StrifeCoopHandler : EventHandler
 		if (e.Thing is "PlayerPawn")
 		{
 			PlayerPawn pmo = PlayerPawn(e.Thing);
-			if (!pmo) return;
+			if (!pmo)
+				return;
 
 			// According to Strife's XLAT in gzdoom.pk3, there are 3 "walk" uses and 1 "pressed use" uses.
 			if (e.ActivationType == SPAC_Cross || e.ActivationType == SPAC_Use)
@@ -691,8 +708,10 @@ class StrifeCoopHandler : EventHandler
 					if (snd) pmo.A_StartSound(snd, CHAN_AUTO, CHANF_UI, attenuation: ATTN_NONE);
 
 					// remove these when PR gets merged
-					if (soundToPlay == "svox/voc130") pmo.player.SetSubTitleNumber(130, "svox/voc130");
-					else if (soundToPlay == "svox/voc128") pmo.player.SetSubTitleNumber(128, "svox/voc128");
+					if (soundToPlay == "svox/voc130")
+						pmo.player.SetSubTitleNumber(130, "svox/voc130");
+					else if (soundToPlay == "svox/voc128")
+						pmo.player.SetSubTitleNumber(128, "svox/voc128");
 
 					// use this when PR gets merged
 					//pmo.A_GiveInventory("EntityGreetingSubtitles");
@@ -737,7 +756,8 @@ class StrifeCoopHandler : EventHandler
 
 	static clearscope bool IsEnemy(Actor mo)
 	{
-		if (!mo.bIsMonster || (mo.bIsMonster && mo.bFriendly)) return false;
+		if (!mo.bIsMonster || (mo.bIsMonster && mo.bFriendly))
+			return false;
 
 		return
 		(
@@ -820,7 +840,8 @@ class StrifeCoopHandler : EventHandler
 
 	static bool PartyGathered(void)
 	{
-		if (!strifecoop_gatherparty) return true;
+		if (!strifecoop_gatherparty)
+			return true;
 
 		bool gathered = true;
 
