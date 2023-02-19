@@ -66,7 +66,7 @@ class StrifeCoopNPCPlugin : Inventory
 
 		if (multiplayer)
 		{
-			if (Owner.Health > 0 && Owner.target && Owner.target is "PlayerPawn" && Owner.bInCombat && !Owner.bFriendly && !StrifeCoopHandler.IsMerchant(Owner))
+			if (Owner.Health > 0 && Owner.Target && Owner.Target is "PlayerPawn" && Owner.bInCombat && !Owner.bFriendly && !StrifeCoopHandler.IsMerchant(Owner))
 			{
 				State meleeState = Owner.ResolveState('Melee');
 				State missileState = Owner.ResolveState('Missile');
@@ -118,7 +118,7 @@ class StrifeCoopNPCPlugin : Inventory
 		}
 
 		// Hack to make Uber Entity faster
-		if (Owner is "EntityBoss" && Owner.target && Owner.Health > 0 )
+		if (Owner is "EntityBoss" && Owner.Target && Owner.Health > 0 )
 		{
 			CheckUberEntitySettings();
 
@@ -279,7 +279,7 @@ class StrifeCoopNPCPlugin : Inventory
 
 	void RandomlyTargetOtherPlayers(void)
 	{
-		PlayerPawn targ = PlayerPawn(Owner.target);
+		PlayerPawn targ = PlayerPawn(Owner.Target);
 		if (!targ)
 			return;
 
@@ -311,12 +311,12 @@ class StrifeCoopNPCPlugin : Inventory
 			// check if newly chosen player is within distance and visibility
 			if (me.Distance3D(newTarg) < 1000.0 && me.CheckSight(newTarg, SF_SEEPASTBLOCKEVERYTHING | SF_SEEPASTSHOOTABLELINES))
 			{
-				me.target =
-				me.lastheard =
-				me.lastenemy = newTarg;
+				me.Target =
+				me.LastHeard =
+				me.LastEnemy = newTarg;
 			}
 		}
 
-		//Console.Printf("%s is currently targetting Player %d", Owner.GetTag(), targ.PlayerNumber() + 1);
+		//Console.Printf("%s is currently Targetting Player %d", Owner.GetTag(), targ.PlayerNumber() + 1);
 	}
 }
