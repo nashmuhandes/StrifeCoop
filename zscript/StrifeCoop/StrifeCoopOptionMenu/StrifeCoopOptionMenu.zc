@@ -131,6 +131,8 @@ class StrifeCoopOptionMenu : OptionMenu
 	{
 		Super.Init(parent, desc);
 
+		optFnt = OptionFont();
+
 		mDefaultPosition = mDesc.mPosition;
 		prevSelected = -1;
 	}
@@ -158,7 +160,6 @@ class StrifeCoopOptionMenu : OptionMenu
 			}
 		}
 
-		optFnt = OptionFont();
 		fHeight = optFnt.GetHeight() * CleanYFac_1;
 		padding = fHeight << 1;
 
