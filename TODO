@@ -1,0 +1,126 @@
+Repair Phase:
+  ✔ QuestItems, keys and the Communicator are not given simultaneously to all players @done(21-02-24 01:24)
+  ✔ Quest log is not updated for all players @done(21-02-24 01:23)
+  ✔ Communicator output should be heard by all players simultaneously @done(21-02-24 01:23)
+  ✔ Fix all of the duplicate messages and triggering of the text logs and communicator broadcasts @done(21-02-24 01:23)
+  ✔ All players must be trained simultaneously. @done(21-02-24 01:25)
+  ✔ Send PR to make NPC voice dialog emit as world sounds so that they can be heard by everyone @done(21-02-24 17:52)
+  ✔ Finish up player start placement in LevelPostProcessor!!!!! @done(21-02-26 04:29)
+  ✔ Fix desyncs with slideshows that alter the timings (like the Russian translation pack) @done(21-02-26 18:01)
+  ✔ Fix case 228 (Entity greeting script) in strfhelp.acs so that all players can hear it @done(21-02-25 21:43)
+  ✔ Fix player stats resetting when respawning @done(21-02-28 18:21)
+  ☐ Transfer droppable quest items (ring, broken coupling, etc) to the next online player if a player who has those items disconnects
+  ✔ NPC's angle is not restored and permanently altered if another player exited the level while an NPC was still taking to a player @done(21-03-03 15:44)
+  ✔ Programmer fadeout doesn't work with all players @done(21-03-01 19:10)
+  ✔ Fix erroneous "this person is busy" message when you are initiating speech with an NPC @done(21-02-26 18:23)
+  ✔ Sigil pieces aren't synched for newly-joining players @done(21-03-04 01:58)
+  ☐ After getting killed by Acolytes in town (from setting off the alarms), upon resurrecting and returning to the guard that killed you, they will ignore you
+  ✔ Even though GZDoom doesn't support in-game joining yet, try to handle it (where? PlayerEntered?) @done(21-03-04 01:59)
+  ✔ Officer's uniform (Borderlands) not synced @done(21-03-05 04:01)
+  ✔ Possible to drop Sigil and go back to the non-abandoned versions of the castle or Front base @done(21-03-07 19:41)
+  ☐ First voice of ending is silent (https://forum.zdoom.org/viewtopic.php?f=2&t=71359)
+  ☐ Desync when a player quits while enemies are targetting them (verify that this doesn't happen unmodded. Try Hexen or Doom?)
+  ☐ Temple of the Oracle inner sanctum (MAP12) teleporter is difficult to trigger
+  ✔ Sigil weapon can be dropped infinitely with GZDoom's built-in weapon drop keybind (weapdrop) @done(21-03-07 19:41)
+  ✔ At the point where you can choose to kill the Oracle or Macil, the inner sanctum teleporter closes. Make that ceiling a lethal, fast crushing one. (case 197) @done(21-03-05 22:18)
+  ✔ Proving Grounds extra player 1 start is spawned on the inner sanctum teleporter entrance @done(21-03-05 16:16)
+  ✔ MAP28 (Alien ship) - you are meant to be sealed from the start (point of no return) after moving forward. @done(21-03-05 23:44)
+  ✔ MAP25 (Ruined Temple) has a point of no return just at the start (must defeat Alien Spectre to lower the barrier) @done(21-03-05 22:47)
+  ✔ Subtitle for Entity's greeting in the good ending path is wrong @done(21-03-05 21:58)
+  ☐ Scale enemy stats stops working correctly if turned on and off rapidly
+  ☐ Scale enemy stats causes monsters to actually lose current health when turned on and off repeatedly. Don't use percentage, but exact values
+  ✔ Chat bubble appears on your own screen if another player is in conversation @done(21-03-11 21:53)
+  ✔ Merchants have no chat bubble @done(21-03-11 01:50)
+  ✔ Line to Front Base can be bumped into/activated even before the switch has been pressed @done(21-03-11 15:26)
+  ✔ Close all conversations when a save is made in MP @done(21-03-11 01:42)
+  ✔ Do this properly https://github.com/coelckers/gzdoom/pull/1317 @done(21-03-10 18:22)
+  ✔ Force all players into the Entity room when the line is crossed. Move respawn points in there too @done(21-03-11 16:13)
+  ✔ Reclamation tank exit is triggerable before actually lowering the pool @done(21-03-16 02:03)
+  ✔ Teleporters in the Prison that go back to the Front base can be bumped into prematurely @done(21-03-17 20:03)
+  ✔ Console-resurrecting is still possible despite Entity permadeath option @done(21-03-26 20:17)
+  ☐ Pick up 2 metal armor, 1 disappears?
+  ✔ Move playerHasOfficersUniform to the player plugin, it has no place being in the campaign @done(21-03-28 02:50)
+  ✔ Get rid of StrifeCoopMAP29PointOfNoReturn item and store the data on the campaign instead (export ACS-callable setter/getter if needed) @done(21-03-28 05:06)
+  ✔ Bought items appear at [0, 0] when extra ammo is enabled @done(21-03-28 06:03)
+  ☐ Why is log text always being set upon loading a game?
+  ☐ Newly-joining player code is still janky
+  ☐ Enemy health scaling doesn't properly update if the player count changes (by disconnecting, or loading a saved game with different playercounts)
+  ☐ Sometimes line 215 (Blackbird transmission) will fail to fire. Examples: bridge in MAP02, line after accepting Richter's quest in MAP23
+  ☐ Prison Pass spawns at player's feet when given repeatedly (bug exists even when unmodded) https://forum.zdoom.org/viewtopic.php?f=2&t=71863
+  ☐ Enemies' health will slowly increase when repeatedly re-entering a level due to precision errors with enemy health scaling
+  ☐ Point of no return needs to be handled at MAP35 (super secret map SVE)
+
+SOFT LOCKS:
+  ☐ Power coupling quest might be broken if players stand near both couplings
+  ☐ Training Facility - you will get locked out of the first switch (the one with the Sentinel ambush) if you die before reopening the room
+  ✔ Temple Ruins - pillars that block the player start @done(21-03-28 18:51)
+
+ENHANCEMENT PHASE:
+  ✔ Uber Entity!!!! @done(21-03-20 18:14)
+  ✔ Simulate player count (fake player count CVar) @done(21-03-28 06:06)
+  ☐ Rewrite to revert strfhelp.acs to stock, and instead inject a new ACS library
+  ☐ Redirect modified line actions to the new ACS library (LevelPostProcessor? XLAT?)
+  ✔ Enemies drop gold in coop @done(21-03-20 16:19)
+  ✔ Scale monster health for coop @done(21-03-02 18:58)
+  ✔ Extra ammo drops for coop @done(21-03-09 02:33)
+  ✔ Cache all user CVars @done(21-03-01 19:40)
+  ☐ Gold reward from quests probably need to be tweaked to be MP-friendly
+  ☐ Show a non-interactive conversation screen when coop-spying an in-conversation player?
+  ☐ Give gold to all players when picking up HealthTraining
+  ✔ Chat icon on NPCs head when they are talking (only visible to other players, not local consoleplayer) @done(21-03-01 12:43)
+  ✔ Make players face the player start directions @done(21-03-01 20:58)
+  ✔ Clear all HUDMessages when travelling, so that players won't return to a map with floating messages @done(21-03-02 02:51)
+  ✔ Consider stopping all dialog voices from talking NPCs when travelling, too @done(21-03-02 03:47)
+  ☐ When town alert phase ends, the game will eventually run out of Acolytes to spawn in. Replenish the Acolytes?
+  ☐ Allow soft "reset quest" in case of dead ends (like making a bad choice that blocks the main quest)
+    Transition to a new hub to flush the cluster data, clear all player data and inventory then warp back to MAP02
+  ✔ If a talked-to NPC is attacked mid-conversation, the dialog should close (equivalent of pressing Esc/Goodbye) @done(21-02-24 01:23)
+  ✔ Make Acolytes attack players immediately at the start of the game @done(21-02-25 12:34)
+  ✔ If only one player provokes enemies, they don’t attack the other ones. Look into making the enemies periodically switch targets? @done(21-02-25 13:34)
+  ✔ Add cooldown when traveling between maps because there's a tendency for players to accidentally travel back to the previous map, due to confused orientation @done(21-02-26 04:40)
+  ☐ Allow shorter alert phases so that shops can reopen faster?
+  ✔ Add a "this person is busy" message when activating in-conversation NPCs. @done(21-02-25 12:34)
+  ✔ Optional bad ending - if a player is killed by the Entity, don't allow them to resurrect. If all players are dead, trigger the bad ending @done(21-03-11 16:53)
+  ✔ Visible officer's uniform on player sprites @done(21-03-16 22:42)
+
+MISC THOUGHTS AND ISSUES:
+  ☐ Finish documenting the entirety of strfhelp.acs
+  ☐ Read up on documented sequence breaking: https://doomwiki.org/wiki/Strife_sequence_breaks
+
+BETTER STRIFE:
+  ✔ Add MapMarkers to exit lines @done(21-03-17 00:55)
+  ✔ Add billboarding to various actors that need them @done(21-03-17 21:12)
+  ☐ Add "Blackbird is listening..." to conversations that need them
+  ☐ Add "training available" icons to the top right of the screen
+  ✔ Fix splashing noise with the water actors at The Castle's fountain @done(21-03-18 03:54)
+  ☐ Optional poison bolts can wake up enemies (copy DaggerAlert code)
+  ☐ Rework KlaxonWarningLight sound behavior to make more sense
+  ☐ Infinite Acolytes in town before killing Programmer
+  ☐ Protect quest items from being crushable by doors
+  ✔ Fix missing texture in Bishop's Tower, near the 2 side pullchains @done(21-03-29 05:37)
+  ☐ Add ambient sounds
+  ☐ 3D model Sentinel laser beams
+  ☐ Add explosion sound, screen shake and particle FX to computer core (MAP15)
+  ☐ Add screen shake and particle FX when destroying degnin ore, and also to the forcefields when blowing the ore up beside them
+  ☐ Add enhanced explosion/destruction FX to the computer core (MAP15) and sewer gate control (MAP06)
+  ☐ Modern weapons (animated using GZAnimTools, camera animations, better VFX, particle FX, sound, etc)
+  ☐ Ammo pickup conservation system
+  ☐ Item buying merchant (to sell your excess stuff)
+  ☐ Enhanced skybox?
+  ☐ Replace the janky-looking teleport fog sprites?
+  ✔ Replace the flowing river texture @done(21-03-28 06:07)
+  ☐ Implement dead end fixes of SVE as described here: https://doomwiki.org/wiki/Strife_dead_ends
+  ✔ Fix MAP19 dead end (leave Administration early) @done(21-03-17 01:25)
+  ✔ Fix missing textures on the platform in MAP07 near the entrace to The Programmer's Keep @done(21-03-19 03:41)
+  ✔ Fix New Front Base teleporter floor texture in MAP11 (Borderlands) @done(21-03-19 03:41)
+  ✔ Add quest markers like in Strife VE + optional quest marker on viewport (like Skyrim) @done(21-03-28 06:08)
+  ☐ Difficulty-based quest markers?
+  ☐ Fix arms dealer 50 bullet exploit
+    I suggest the Arms Dealers either fully refilling your bullet ammo
+    Or requiring a voucher like with accuracy and strength upgrades
+    So you can only do it once per mission and not generate infinite ammo
+  ☐ Fix enemies stuck in walls
+  ☐ Crusaders still triggering an alert despite being killed with dagger
+    https://github.com/coelckers/gzdoom/blob/master/wadsrc/static/zscript/actors/strife/crusader.zs#L52
+  ☐ Buy/sell menu
+  ☐ Toggleable Sigil modes
