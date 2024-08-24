@@ -158,7 +158,6 @@ class StrifeCoopCampaign : Thinker
 						(
 							item is "QuestItem"			||
 							item is "Communicator"		||
-							item is "StrifeKey"			||
 							item is "OfficersUniform"	||
 							item is "Sigil"				||
 							item is "SVETalismanPowerup"
