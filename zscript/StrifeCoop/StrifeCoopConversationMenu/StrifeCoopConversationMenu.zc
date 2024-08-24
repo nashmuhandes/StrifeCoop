@@ -79,6 +79,10 @@ class StrifeCoopConversationMenu : ConversationMenu
 				}
 			}
 
+			// player died while talking
+			if (plr.playerstate == PST_DEAD)
+				forceCloseConversation = true;
+
 			// close the conversation if someone triggered a level exit
 			let pplugin = StrifeCoopPlayerPlugin.Find(pmo);
 			if (pplugin)
