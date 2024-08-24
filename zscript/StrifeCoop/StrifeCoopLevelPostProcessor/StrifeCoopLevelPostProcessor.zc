@@ -51,7 +51,7 @@ class StrifeCoopLevelPostProcessor : LevelPostProcessor
 
 	void RemoveUnwantedThings(Name checksum, String mapname)
 	{
-		for (int t = 0; t < GetThingCount(); t++)
+		for (uint t = 0; t < GetThingCount(); t++)
 		{
 			int ednum = GetThingEdNum(t);
 
