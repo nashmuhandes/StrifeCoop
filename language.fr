@@ -23,5 +23,5 @@ STRIFECOOPMNU_BALANCE_EXTRAAMMO = "Munitions supplémentaires sur ennemis";
 STRIFECOOPMNU_UI_CHATBUBBLE = "Bulle de chat";
 STRIFECOOPMNU_HELPTEXT_GAMEPLAY_GROUPEXIT = "ON/OFF: Les joueurs doivent se regrouper pour changer de niveau.";
 STRIFECOOPMNU_HELPTEXT_BALANCE_ENEMYSCALING = "Mise à l'échelle de la santé des ennemis selon le nombre de joueurs.";
-STRIFECOOPMNU_HELPTEXT_BALANCE_EXTRAAMMO = "Mise à l'échelle des munitions récupérées selon le nombre de joueurs.";
+//STRIFECOOPMNU_HELPTEXT_BALANCE_EXTRAAMMO = "Mise à l'échelle des munitions récupérées selon le nombre de joueurs.";
 STRIFECOOPMNU_HELPTEXT_UI_CHATBUBBLE = "Affiche une bulle au dessus des PNJ si ils sont en train de parler.";

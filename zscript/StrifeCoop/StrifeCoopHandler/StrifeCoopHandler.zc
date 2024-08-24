@@ -135,7 +135,7 @@ class StrifeCoopHandler : EventHandler
 	{
 		SetupNPC(e);
 		ScaleEnemyStatsOnSpawn(e);
-		SpawnExtraDroppedAmmo(e);
+		//SpawnExtraDroppedAmmo(e);
 	}
 
 	override void WorldThingDied(WorldEvent e)
@@ -492,6 +492,7 @@ class StrifeCoopHandler : EventHandler
 	}
 	*/
 
+	/*
 	void SpawnExtraDroppedAmmo(WorldEvent e)
 	{
 		if (!strifecoop_extraammo)
@@ -522,6 +523,7 @@ class StrifeCoopHandler : EventHandler
 			}
 		}
 	}
+	*/
 
 	//===========================================================================
 	//
