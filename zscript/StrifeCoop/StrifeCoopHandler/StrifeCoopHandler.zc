@@ -53,6 +53,7 @@ class StrifeCoopHandler : EventHandler
 
 	override void NewGame(void)
 	{
+		CheckServerSettings();
 		CreateCampaign();
 		UpdatePlayerCount();
 	}
@@ -115,6 +116,8 @@ class StrifeCoopHandler : EventHandler
 			ThrowAbortException("StrifeCoopHandler::WorldTick could not find a valid campaign object!");
 			return;
 		}
+
+		CheckServerSettings();
 
 		campaign.Tick();
 
@@ -251,6 +254,34 @@ class StrifeCoopHandler : EventHandler
 				}
 				oldScaleEnemies = newScaleEnemies;
 			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void CheckServerSettings(void)
+	{
+		if (!sv_nocrouch || !sv_noplayerclip || !sv_nothingspawn || !sv_coopsharekeys || !sv_localitems)
+		{
+			String txt = "\n\n\c[RED]StrifeCoop fatal error! Host/server did not set the following CVars correctly:\c-\n\n";
+			if (!sv_nocrouch)
+				txt = txt .. "\c[CYAN]" .. "sv_nocrouch" .. "\c-\n";
+			if (!sv_noplayerclip)
+				txt = txt .. "\c[CYAN]" .. "sv_noplayerclip" .. "\c-\n";
+			if (!sv_nothingspawn)
+				txt = txt .. "\c[CYAN]" .. "sv_nothingspawn" .. "\c-\n";
+			if (!sv_coopsharekeys)
+				txt = txt .. "\c[CYAN]" .. "sv_coopsharekeys" .. "\c-\n";
+			if (!sv_localitems)
+				txt = txt .. "\c[CYAN]" .. "sv_localitems" .. "\c-\n";
+
+			txt = txt .. "\n\n\c[RED]StrifeCoop must be played with the above CVars set to 1!\c-\n\n";
+
+			ThrowAbortException(txt);
 		}
 	}
 
