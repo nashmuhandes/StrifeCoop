@@ -245,8 +245,8 @@ class StrifeCoopNPCPlugin : Inventory
 			// no additional health on the 0th player
 			if (i > 0)
 			{
-				// 25% additional health for every player from player 2 and beyond
-				nsh *= 1.25;
+				// additional health for every player from player 2 and beyond
+				nsh *= 1.125;
 			}
 		}
 
