@@ -39,4 +39,4 @@ goto success
 echo.
 echo %playername% will join a coop game at %netaddress%...
 echo.
-gzdoom.exe -iwad STRIFE1.WAD -config .\config\StrifeCoop.ini -file StrifeCoop.pk3 %morefiles% -join %netaddress% +name %playername%
+.\engine\gzdoom.exe -iwad ..\STRIFE1.WAD -config .\engine\config\StrifeCoop.ini -file ..\StrifeCoop.pk3 %morefiles% -join %netaddress% +name %playername%
