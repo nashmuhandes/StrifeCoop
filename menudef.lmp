@@ -31,9 +31,9 @@ OptionMenu "StrifeCoopOptionMenu"
 	StaticText "$STRIFECOOPMNU_BALANCE_WARNING1", 1
 	StaticText "$STRIFECOOPMNU_BALANCE_WARNING2", 1
 	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_ENEMYSCALING", "$STRIFECOOPMNU_HELPTEXT_BALANCE_ENEMYSCALING", "strifecoop_scaleenemies", "OnOff"
-	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_UBERENTITY", "$STRIFECOOPMNU_HELPTEXT_BALANCE_UBERENTITY", "strifecoop_uberentity", "OnOff", "strifecoop_scaleenemies"
-	//StrifeCoopOption "$STRIFECOOPMNU_BALANCE_EXTRAAMMO", "$STRIFECOOPMNU_HELPTEXT_BALANCE_EXTRAAMMO", "strifecoop_extraammo", "OnOff"
 	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_DROPGOLD", "$STRIFECOOPMNU_HELPTEXT_BALANCE_DROPGOLD", "strifecoop_enemiesdropgold", "OnOff"
+	//StrifeCoopOption "$STRIFECOOPMNU_BALANCE_EXTRAAMMO", "$STRIFECOOPMNU_HELPTEXT_BALANCE_EXTRAAMMO", "strifecoop_extraammo", "OnOff"
+	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_UBERENTITY", "$STRIFECOOPMNU_HELPTEXT_BALANCE_UBERENTITY", "strifecoop_uberentity", "OnOff", "strifecoop_scaleenemies"
 
 	StaticText ""
 
