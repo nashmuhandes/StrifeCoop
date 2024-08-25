@@ -90,6 +90,7 @@ MISC THOUGHTS AND ISSUES:
 BETTER STRIFE:
   ✔ Add MapMarkers to exit lines @done(21-03-17 00:55)
   ✔ Add billboarding to various actors that need them @done(21-03-17 21:12)
+  ☐ Sequence breaking Blackbird's dialog before the Town Hall is possible if you skip the bridge and approach from the sewers instead
   ☐ Add "Blackbird is listening..." to conversations that need them
   ☐ Add "training available" icons to the top right of the screen
   ✔ Fix splashing noise with the water actors at The Castle's fountain @done(21-03-18 03:54)
