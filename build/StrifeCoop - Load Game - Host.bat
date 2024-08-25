@@ -25,4 +25,4 @@ goto success
 echo.
 echo Loading %savefilename%...
 echo.
-gzdoom -iwad strife1.wad -file StrifeCoop.pk3 %morefiles% -host %playercount% -loadgame Save/%savefilename% +sv_nocrouch 1
+gzdoom.exe -iwad STRIFE1.WAD -config .\config\StrifeCoop.ini -file StrifeCoop.pk3 %morefiles% -host %playercount% -loadgame %savefilename% +sv_nocrouch 1 +sv_noplayerclip 1 +sv_nothingspawn 1 +sv_coopsharekeys 1 +sv_localitems 1

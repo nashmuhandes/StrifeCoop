@@ -39,4 +39,4 @@ goto success
 echo.
 echo Loading %savefilename%... will join a coop game at %netaddress%...
 echo.
-gzdoom -iwad strife1.wad -file StrifeCoop.pk3 %morefiles% -join %netaddress% -loadgame Save/%savefilename%
+gzdoom.exe -iwad STRIFE1.WAD -config .\config\StrifeCoop.ini -file StrifeCoop.pk3 %morefiles% -join %netaddress% -loadgame %savefilename%
