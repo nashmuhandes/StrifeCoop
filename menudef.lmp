@@ -33,10 +33,20 @@ OptionMenu "StrifeCoopOptionMenu"
 	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_ENEMYSCALING", "$STRIFECOOPMNU_HELPTEXT_BALANCE_ENEMYSCALING", "strifecoop_scaleenemies", "OnOff"
 	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_DROPGOLD", "$STRIFECOOPMNU_HELPTEXT_BALANCE_DROPGOLD", "strifecoop_enemiesdropgold", "OnOff"
 	//StrifeCoopOption "$STRIFECOOPMNU_BALANCE_EXTRAAMMO", "$STRIFECOOPMNU_HELPTEXT_BALANCE_EXTRAAMMO", "strifecoop_extraammo", "OnOff"
+	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_GOLDPENALTYDEAD", "$STRIFECOOPMNU_HELPTEXT_BALANCE_GOLDPENALTYDEAD", "strifecoop_losegold", "GoldPenaltyDeadOptions"
 	StrifeCoopOption "$STRIFECOOPMNU_BALANCE_UBERENTITY", "$STRIFECOOPMNU_HELPTEXT_BALANCE_UBERENTITY", "strifecoop_uberentity", "OnOff", "strifecoop_scaleenemies"
 
 	StaticText ""
 
 	StaticText "$STRIFECOOPMNU_UI_TITLE", 1
 	StrifeCoopOption "$STRIFECOOPMNU_UI_CHATBUBBLE", "$STRIFECOOPMNU_HELPTEXT_UI_CHATBUBBLE", "strifecoop_chatbubble", "OnOff"
+}
+
+OptionValue GoldPenaltyDeadOptions
+{
+	5, "5%"
+	10, "10%"
+	25, "25%"
+	50, "50%"
+	100, "100%"
 }

@@ -1286,3 +1286,118 @@ script "StrifeCoop_MAP35PointOfNoReturnPlayerRespawnScript" RESPAWN
 		}
 	}
 }
+
+//===========================================================================
+//
+// DEATH MESSAGE STUFF
+//
+//===========================================================================
+
+int playerLostGold[MAXPLAYERS];
+bool playerJustRespawned[MAXPLAYERS];
+int deathMessageDelay;
+
+function int MakeHUDMessageID(int a, int b, int c, int d)
+{
+	// MAKE_ID
+	return (a << 24) | ( b << 16) | (c << 8) | d;
+}
+
+function void ClearDeathMessage(void)
+{
+	int hudmsgTic = 1.0 / 35 + 1;
+	int id = MakeHUDMessageID('D', 'E', 'A', 'D');
+	for (int i = 0; i < MAXPLAYERS; i++)
+	{
+		if (PlayerInGame(i))
+		{
+			if (SetActivator(0, AAPTR_PLAYER1 << i))
+			{
+				HudMessage(s: ""; HUDMSG_FADEOUT, id, CR_UNTRANSLATED, 0, 0, hudmsgTic, 0);
+			}
+		}
+	}
+}
+
+script "StrifeCoop_DrawMessageDelayOpen" OPEN
+{
+	deathMessageDelay++;
+
+	if (deathMessageDelay <= 3)
+	{
+		Delay(1);
+		Restart;
+	}
+}
+
+script "StrifeCoop_DrawMessageDelayReopen" REOPEN
+{
+	deathMessageDelay = 0;
+	ACS_NamedExecute(0, "StrifeCoop_DrawMessageDelayOpen");
+}
+
+script "StrifeCoop_DrawDeathMessage" ENTER
+{
+	int hudmsgTic = 1.0 / 35 + 1;
+	int xPos = 160.4;
+	int yPos = 140.0;
+	int fadeOutDuration = 1.25;
+	int id = MakeHUDMessageID('D', 'E', 'A', 'D');
+	int msgColor = CR_ORANGE;
+
+	while (1)
+	{
+		SetHudSize(320, 200, TRUE);
+		SetFont("BIGFONT");
+
+		if (GetCVar("strifecoop_losegold") > 0)
+		{
+			str txt = StrParam(l: "TXT_LOSTGOLD1", l: "TXT_LOSTGOLD2", d: playerLostGold[PlayerNumber()]);
+
+			if (GetActorProperty(0, APROP_HEALTH) < 0)
+				HudMessage(s: txt; HUDMSG_PLAIN, id, msgColor, xPos, yPos, hudmsgTic);
+
+			if (playerJustRespawned[PlayerNumber()] && deathMessageDelay > 3)
+			{
+				HudMessage(s: txt; HUDMSG_FADEOUT, id, msgColor, xPos, yPos,hudmsgTic, fadeOutDuration);
+				playerJustRespawned[PlayerNumber()] = FALSE;
+				playerLostGold[MAXPLAYERS] = 0;
+			}
+		}
+
+		Delay(1);
+	}
+}
+
+script "StrifeCoop_DeathMessageSetLostGold" DEATH
+{
+	int pcnt = GetCVar("strifecoop_losegold");
+	if (pcnt < 0)
+		pcnt = 0;
+	else if (pcnt > 100)
+		pcnt = 100;
+	int curGold = CheckInventory("Coin");
+	int lostGold = FixedMul(curGold, FixedDiv(pcnt, 100));
+	TakeInventory("Coin", lostGold);
+	playerLostGold[PlayerNumber()] = lostGold;
+}
+
+script "StrifeCoop_DeathMessageMarkForRespawn" RESPAWN
+{
+	playerJustRespawned[PlayerNumber()] = TRUE;
+}
+
+script "StrifeCoop_DeathMessageOpen" OPEN
+{
+	ClearDeathMessage();
+}
+
+script "StrifeCoop_DeathMessageReopen" REOPEN
+{
+	ClearDeathMessage();
+}
+
+script "StrifeCoop_DeathMessageUnload" UNLOADING
+{
+	ClearDeathMessage();
+}

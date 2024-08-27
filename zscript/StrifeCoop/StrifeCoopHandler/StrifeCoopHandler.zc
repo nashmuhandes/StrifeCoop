@@ -87,6 +87,15 @@ class StrifeCoopHandler : EventHandler
 
 	override void PlayerDied(PlayerEvent e)
 	{
+		/*
+		let pmo = players[e.PlayerNumber].mo;
+		int pcnt = clamp(strifecoop_losegold, 0, 100);
+		int curGold = pmo.CountInv("Coin");
+		int lostGold = curGold * pcnt / 100;
+		pmo.A_TakeInventory("Coin", lostGold);
+		String txt = String.Format(StringTable.Localize("$TXT_LOSTGOLD"), lostGold);
+		Console.Printf(txt);
+		*/
 	}
 
 	override void PlayerDisconnected(PlayerEvent e)
