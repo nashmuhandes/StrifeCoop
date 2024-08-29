@@ -213,3 +213,11 @@ Intermission Inter_Strife_MAP10
 		Time = 63113904
 	}
 }
+
+// A special map that restarts the entire game
+Map RESTART ""
+{
+	Music = ""
+	Cluster = 99
+}
+Cluster 99 {}

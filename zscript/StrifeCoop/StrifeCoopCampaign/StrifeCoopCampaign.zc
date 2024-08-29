@@ -85,6 +85,15 @@ class StrifeCoopCampaign : Thinker
 		return self;
 	}
 
+	void Reset(void)
+	{
+		String txt = StringTable.Localize("$TXT_FINDHELP");
+		latestLogNum = 0;
+		latestLogText = txt;
+		retrievedQuestItems.Clear();
+		isFightingEntity = false;
+	}
+
 	//===========================================================================
 	//
 	//
@@ -364,5 +373,32 @@ class StrifeCoopCampaign : Thinker
 	clearscope bool GetIsFightingEntity(void)
 	{
 		return isFightingEntity;
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	static void DoRestart(void)
+	{
+		String txt = StringTable.Localize("$TXT_FINDHELP");
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (playeringame[i])
+			{
+				let pmo = players[i].mo;
+				players[i].SetLogNumber(0);
+				players[i].SetLogText(txt);
+				pmo.MaxHealth = 100;
+				pmo.A_SetHealth(100);
+				pmo.Stamina = 0;
+				pmo.Accuracy = 0;
+			}
+		}
+
+		let campaign = StrifeCoopCampaign.GetInstance();
+		campaign.Reset();
 	}
 }
