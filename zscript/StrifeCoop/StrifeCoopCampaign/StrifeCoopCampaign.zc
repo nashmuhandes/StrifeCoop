@@ -92,6 +92,7 @@ class StrifeCoopCampaign : Thinker
 		latestLogText = txt;
 		retrievedQuestItems.Clear();
 		isFightingEntity = false;
+		maxStamina = maxAccuracy = 0;
 	}
 
 	//===========================================================================
@@ -395,6 +396,11 @@ class StrifeCoopCampaign : Thinker
 				pmo.A_SetHealth(100);
 				pmo.Stamina = 0;
 				pmo.Accuracy = 0;
+
+				let a = StrifeCoopPlayerPlugin.Find(pmo);
+				a.upgradedStamina = a.upgradedAccuracy = false;
+				a.oldStamina = a.newStamina = a.oldAccuracy = a.newAccuracy = 0;
+				a.hasOfficersUniform = false;
 			}
 		}
 
